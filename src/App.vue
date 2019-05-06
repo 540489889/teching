@@ -39,6 +39,9 @@ export default {
         case 'MeIndex':
               this.showBar = true
               break
+        case 'classroomIndex':
+          this.showBar = true
+          break
         default :
           this.showBar = false
       }

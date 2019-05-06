@@ -31,9 +31,9 @@
       width:100%;
       background-color:#eeeeee;
       text-align: left;
-      height:50px;
-      line-height:50px;
-      border-radius: 25px;
+      height:60px;
+      line-height:60px;
+      border-radius: 30px;
       padding-left:65px;
       padding-right:15px;
     }

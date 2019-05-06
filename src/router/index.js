@@ -9,7 +9,14 @@ var router =  new Router({
       path: '/',
       name: 'Home',
       component: resolve => require(['@/pages/home/home'], resolve) ,
-      meta:{index: 1, title: '首页', requireAuth: true}
+      meta:{index: 1, title: '首页', requireAuth: false}
+    },
+    //课堂
+    {
+      path: '/classroom/index',
+      name: 'classroomIndex',
+      component: resolve => require(['@/pages/classroom/index'], resolve) ,
+      meta:{index: 1, title: '课堂', requireAuth: false}
     },
     //登录
     {

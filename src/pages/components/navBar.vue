@@ -40,10 +40,10 @@
           label: '首页',
           icon: 'cubeic-home'
         }, {
-          label: '空中课堂',
+          label: '课堂',
           icon: 'cubeic-like'
         }, {
-          label: '社区',
+          label: '数据',
           icon: 'cubeic-vip'
         }, {
           label: '我的',
@@ -60,22 +60,19 @@
     methods: {
       clickHandler (label) {
         // if you clicked home tab, then print 'Home'
+        this.$store.commit('changeTitle',label)
         switch (label){
           case '首页':
             this.$router.push('/')
-            this.$store.commit('changeTitle',label)
                 break
           case '我的':
             this.$router.push('/me/index')
-            this.$store.commit('changeTitle',label)
                 break
-          case '社区':
-            let select = this.$route.query.select
-            if(select){
-              this.$router.push('/community/index?select='+select)
-            }else{
-              this.$router.push('/community/index')
-            }
+          case '课堂':
+            this.$router.push('/classroom/index')
+            break
+          case '数据':
+            this.$router.push('/community/index')
             break
         }
 

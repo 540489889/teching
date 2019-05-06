@@ -52,7 +52,7 @@
             label: '阅读社区',
           }, {
             label: '联盟社区',
-          }],
+          },],
         showTopic: true,
         showRead: false
         }
