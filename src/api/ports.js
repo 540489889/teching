@@ -4,7 +4,7 @@
 export default {
   //首页
   home: {
-    index: '/home/Index/index',//系统轮播图热点展示
+    index: '/home/Indexd/index',//系统轮播图热点展示
   },
   //信息化
   informatization: {
