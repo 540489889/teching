@@ -28,14 +28,14 @@
           <h5 class="flex-box"><img src="../../assets/img/res-b-3.png" alt=""> <p class="box-1 media_title">讲师：{{item.teacher}}老师</p></h5>
         </li>
         <!--<li>-->
-          <!--<span class="label">14:30</span>-->
-          <!--<h4 class="media_title">【学习方法】怎样学好高中数学怎样学好高中数学 高中数学学习......</h4>-->
-          <!--<h5 class="flex-box"><img src="../../assets/img/res-b-3.png" alt=""> <p class="box-1 media_title">讲师：美羊羊老师</p></h5>-->
+        <!--<span class="label">14:30</span>-->
+        <!--<h4 class="media_title">【学习方法】怎样学好高中数学怎样学好高中数学 高中数学学习......</h4>-->
+        <!--<h5 class="flex-box"><img src="../../assets/img/res-b-3.png" alt=""> <p class="box-1 media_title">讲师：美羊羊老师</p></h5>-->
         <!--</li>-->
         <!--<li>-->
-          <!--<span class="label">14:30</span>-->
-          <!--<h4 class="media_title">【学习方法】怎样学好高中数学怎样学好高中数学 高中数学学习......</h4>-->
-          <!--<h5 class="flex-box"><img src="../../assets/img/res-b-3.png" alt=""> <p class="box-1 media_title">讲师：美羊羊老师</p></h5>-->
+        <!--<span class="label">14:30</span>-->
+        <!--<h4 class="media_title">【学习方法】怎样学好高中数学怎样学好高中数学 高中数学学习......</h4>-->
+        <!--<h5 class="flex-box"><img src="../../assets/img/res-b-3.png" alt=""> <p class="box-1 media_title">讲师：美羊羊老师</p></h5>-->
         <!--</li>-->
       </ul>
     </div>
@@ -102,16 +102,16 @@
             </div>
           </router-link>
           <!--<li>-->
-            <!--<h4 class="media_title">在2018-2019学年第二学期开学典礼上的讲话</h4>-->
-            <!--<div class="leftText flex-box">-->
-              <!--<div class="box-1">-->
-                <!--<p class="media_desc">-->
-                  <!--学生可以下载优质的教学资源学习，记录自己的-->
-                  <!--学生可以下载优质的教学资源学习，记录自己的-->
-                  <!--学习笔记。系统会自动记录学生学习轨迹，帮-->
-                <!--</p>-->
-              <!--</div>-->
-            <!--</div>-->
+          <!--<h4 class="media_title">在2018-2019学年第二学期开学典礼上的讲话</h4>-->
+          <!--<div class="leftText flex-box">-->
+          <!--<div class="box-1">-->
+          <!--<p class="media_desc">-->
+          <!--学生可以下载优质的教学资源学习，记录自己的-->
+          <!--学生可以下载优质的教学资源学习，记录自己的-->
+          <!--学习笔记。系统会自动记录学生学习轨迹，帮-->
+          <!--</p>-->
+          <!--</div>-->
+          <!--</div>-->
           <!--</li>-->
         </ul>
       </div>
