@@ -44,7 +44,6 @@
           }, 1000)
           if(res.status==200){
             let data = res.data
-            // console.log(data)
             this.bannerList = data.banner
             this.recomdList = data.recomd
           }

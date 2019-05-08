@@ -1,92 +1,55 @@
 <template>
   <div class="roomIndex recommend-content">
-    <div class="title">
-        <div class="searchBox">
-          <search-bar></search-bar>
+    <div class="banner">
+      <bannerSwiper :list="bannerList"></bannerSwiper>
+        <div class="search">
+          <i class="cubeic-search"></i>
+          <input type="text" v-model="searchVal" placeholder="直播课堂">
         </div>
     </div>
     <!--直播预告-->
     <div class="newsVideo">
       <h3 class="text-left">直播预告</h3>
-      <a class="thisVideo flex-box">
+      <ul>
+        <li class="thisVideo flex-box" >
         <img class="leftImg" src="./../../assets/img/video-b-1.png" alt="">
         <div class="textCenter box-1">
-          <h4 class="media_title">京剧名家进校园 生旦...</h4>
+          <h4 class="media_title">京剧名家进校园 生旦.....</h4>
           <p class="flex-box"><span class="flex-box"><i></i>06:00</span> 讲师：暖洋洋呢</p>
         </div>
         <div class="right-ico"><i class="v-ico-1"></i></div>
-      </a>
+      </li>
+        <li v-for="item,index in willLive">
+          <a class="thisVideo flex-box" href="">
+            <img class="leftImg" :src="item.picture" alt="">
+            <div class="textCenter box-1">
+              <h4 class="media_title">{{item.title}}</h4>
+              <p class="flex-box"><span class="flex-box"><i></i>06:00</span>{{item.teacher}}</p>
+            </div>
+            <div class="right-ico"><i class="v-ico-1"></i></div>
+          </a>
+        </li>
+      </ul>
     </div>
+    <!--直播课堂-->
     <div class="roomContent">
-      <!--<div class="roomNav">-->
-        <!--<cube-scroll-nav-bar :current="current" :labels="labels" @change="changeHandler" />-->
-      <!--</div>-->
       <div class="infoList2">
         <h2 class="titleBox flex-box">
         <span class="left-ico flex-box">直播课堂</span>
-        <!--<span class="flex-box right-text">更多 <i class="cubeic-arrow"></i></span>-->
         </h2>
         <ul>
-          <li>
+          <li v-for="item,index in live" :key="item.id">
             <div class="leftText flex-box">
-              <img class="rightImg" src="./../../assets/img/th-b-2.png" alt="">
-              <div class="box-1">
-                <h4 class="flex-box">
-                  <p class="box-1 media_desc">人人课堂初高中生学业生涯规划指导
-                    人人课堂初高中生学业生涯规划指导公开课</p>
-                </h4>
-                <h6 class="flex-box">
-                  <span><i class="bf-ico-1"></i>
-                   04.23 10：00</span>
-                  <span><i class="cubeic-person"></i> 1314</span>
-                </h6>
+              <div class="img">
+                <img class="rightImg" :src="item.picture" alt="">
               </div>
-            </div>
-          </li>
-          <li>
-            <div class="leftText flex-box">
-              <img class="rightImg" src="./../../assets/img/th-b-2.png" alt="">
               <div class="box-1">
                 <h4 class="flex-box">
-                  <p class="box-1 media_desc">人人课堂初高中生学业生涯规划指导
-                    人人课堂初高中生学业生涯规划指导公开课</p>
+                  <p class="box-1 media_desc">{{item.title}}</p>
                 </h4>
                 <h6 class="flex-box">
-                  <span><i class="bf-ico-1"></i>
-                   04.23 10：00</span>
-                  <span><i class="cubeic-person"></i> 1314</span>
-                </h6>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="leftText flex-box">
-              <img class="rightImg" src="./../../assets/img/th-b-2.png" alt="">
-              <div class="box-1">
-                <h4 class="flex-box">
-                  <p class="box-1 media_desc">人人课堂初高中生学业生涯规划指导
-                    人人课堂初高中生学业生涯规划指导公开课</p>
-                </h4>
-                <h6 class="flex-box">
-                  <span><i class="bf-ico-1"></i>
-                   04.23 10：00</span>
-                  <span><i class="cubeic-person"></i> 1314</span>
-                </h6>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="leftText flex-box">
-              <img class="rightImg" src="./../../assets/img/th-b-2.png" alt="">
-              <div class="box-1">
-                <h4 class="flex-box">
-                  <p class="box-1 media_desc">人人课堂初高中生学业生涯规划指导
-                    人人课堂初高中生学业生涯规划指导公开课</p>
-                </h4>
-                <h6 class="flex-box">
-                  <span><i class="bf-ico-1"></i>
-                   04.23 10：00</span>
-                  <span><i class="cubeic-person"></i> 1314</span>
+                  <span><i class="bf-ico-1"></i></span>
+                  <span><i class="cubeic-person"></i>{{item.click}}</span>
                 </h6>
               </div>
             </div>
@@ -99,50 +62,113 @@
 <script>
   import './../../assets/style/cubeNews.css'
   import searchBar from '../components/searchBar.vue'
-  export default {
+  import bannerSwiper from '../classroom/BannerSwiper.vue'
+    export default {
     name: 'sayValue',
     data (){
       return{
-        current: '职业规划',
-        labels: [
-          '职业规划',
-          '学习方法',
-          '安全教育',
-          '国防教育',
-          '创客教育',
-        ]
+        bannerList:[],
+        searchVal:'',
+        live:[],
+        willLive:[]
       }
     },
     components: {
-      searchBar
+      searchBar,
+      bannerSwiper
     },
     methods: {
-      changeHandler(cur) {
-        this.current = cur
+      changeHandler(){
+        this.http.get(this.ports.home.Classroom, res =>{
+          setTimeout(() => {
+            this.isLoading = false
+          }, 1000)
+          if(res.status==200){
+            let data = res.data
+            this.bannerList = data.banner
+            this.live = data.live
+            this.checkWillLive()
+            this.formatTime()
+            console.log(this.live)
+          }
+        })
+      },
+      checkWillLive(){
+        this.live.map(function(val,index,arr){
+          val.picture="http://cqeic.swkj2014.com"+val.picture
+          if(val.begin_time>Date.now()){
+            this.willLive.push(val)
+            arr.splice(index,1)
+          }
+        })
+      },
+      formatTime(){
+        this.willLive.filter(function(val,index,arr){
+          return formatDate(val.begin_time)
+        })
+      },
+      formatDate(time){
+        var date = new Date(time);
+        var year = date.getFullYear(),
+          month = date.getMonth() + 1,//月份是从0开始的
+          day = date.getDate(),
+          hour = date.getHours(),
+          min = date.getMinutes(),
+          sec = date.getSeconds();
+        var newTime = year + '-' +
+          month + '-' +
+          day + ' ' +
+          hour + ':' +
+          min + ':' +
+          sec;
+        return newTime;
       }
     },
     mounted (){
-
+      this.changeHandler();
     }
   }
 </script>
 <style lang="less" scoped>
+  input::-webkit-input-placeholder {
+    color: #999;
+    font-size: 28px;
+  }
   .roomIndex{
     background-color:#f5f5f5;
     font-size:24px;
     margin-bottom:100px;
     min-height:100%;
-    .title{
-      width:750px;
-      height:330px;
-      background:url(./../../assets/ico/rm-banner.png) no-repeat center;
-      background-size:100%;
-      .searchBox{
-        .searchWrapper{
-          background-color:transparent;
-          input{
-            background: rgba(242, 242, 245, 0.6);
-          }
+    .banner {
+      width: 100%;
+      position: relative;
+      img {
+        width: 100%;
+      }
+      .search {
+        position: absolute;
+        top: 12px;
+        left: 20px;
+        color: #999;
+        z-index:100000;
+        i {
+          position: absolute;
+          top: 50%;
+          transform: translate(0, -50%);
+          left: 30px;
+          color: #999;
+          font-size: 28px;
+        }
+        input {
+          width: 635px;
+          height: 63px;
+          line-height: 63px;
+          background: rgba(255, 255, 255, 0.5);
+          border-radius: 31px;
+          padding-left: 75px;
+          font-size: 28px;
+          border: none;
+          outline: none;
         }
       }
     }
@@ -158,14 +184,14 @@
         margin-top:10px;
       }
       .thisVideo{
-        box-shadow:#ccc 1px 1px 10px 1px ;
+        box-shadow: 0px 9px 24px 0px
+        rgba(198, 198, 198, 0.45);
         background-color:white;
         box-sizing: border-box;
         overflow: hidden;
         border-radius: 15px;
         .leftImg{
           width:128px;
-          height:128px;
         }
         .textCenter{
           text-align: left;
@@ -246,11 +272,15 @@
           .leftText{
             align-items: flex-start;
             text-align: left;
-            .rightImg{
+            .img{
               width:190px;
               height:130px;
               margin-right:20px;
               border-radius: 10px;
+              overflow:hidden;
+              img{
+                width:100%;
+              }
             }
             h4{
               margin-bottom:10px;

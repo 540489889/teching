@@ -5,6 +5,7 @@ export default {
   //首页
   home: {
     index: '/home/Indexd/index',//系统轮播图热点展示
+    Classroom:'/home/Indexd/intheAir'//
   },
   //信息化
   informatization: {
