@@ -89,7 +89,7 @@
             this.live = data.live
             this.checkWillLive()
             this.formatTime()
-            console.log(this.live)
+            // console.log(this.live)
           }
         })
       },
