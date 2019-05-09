@@ -31,6 +31,7 @@ axios.interceptors.response.use(function (response) {
     }
 
   }
+
   return response
 }, function (error) {
   // Do something with response error
