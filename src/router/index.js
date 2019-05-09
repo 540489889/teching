@@ -11,7 +11,62 @@ var router =  new Router({
       component: resolve => require(['@/pages/home/home'], resolve) ,
       meta:{index: 1, title: '首页', requireAuth: false}
     },
-    //
+    //技术装备
+    {
+      path: '/tEquipment/index',
+      name: 'tEquipmentIndex',
+      component: resolve => require(['@/pages/tEquipment/index'], resolve) ,
+      meta:{index: 2, title: '技术装备', requireAuth: false}
+    },
+    //技术装备详情
+    {
+      path: '/tEquipment/details',
+      name: 'tEquipmentDetails',
+      component: resolve => require(['@/pages/tEquipment/details'], resolve) ,
+      meta:{index: 3, title: '技术装备详情', requireAuth: false}
+    },
+    //新闻资讯
+    {
+      path: '/news/index',
+      name: 'NewsIndex',
+      component: resolve => require(['@/pages/news/index'], resolve) ,
+      meta:{index: 2, title: '首页', requireAuth: false}
+    },
+    //新闻资讯活动列表
+    {
+      path: '/news/activeList',
+      name: 'NewsActiveList',
+      component: resolve => require(['@/pages/news/activeList'], resolve) ,
+      meta:{index: 3, title: '活动动态列表', requireAuth: false}
+    },
+    //新闻资讯活动列表详情
+    {
+      path: '/news/activeDetails',
+      name: 'NewsActiveDetails',
+      component: resolve => require(['@/pages/news/activeDetails'], resolve) ,
+      meta:{index: 4, title: '活动详情', requireAuth: false}
+    },
+    //新闻资讯成果展示列表
+    {
+      path: '/news/fruitsList',
+      name: 'NewsFruitsList',
+      component: resolve => require(['@/pages/news/fruitsList'], resolve) ,
+      meta:{index: 3, title: '成果展示', requireAuth: false}
+    },
+    //新闻列表详情
+    {
+      path: '/news/newsDetails',
+      name: 'newsDetails',
+      component: resolve => require([ '@/pages/news/newsDetails'], resolve) ,
+      meta:{index: 3, title: '视频详情', requireAuth: false}
+    },
+    //视频详情
+    {
+      path: '/news/newsVideoDetail',
+      name: 'newsVideoDetail',
+      component: resolve => require([ '@/pages/news/newsVideoDetail'], resolve) ,
+      meta:{index: 4, title: '视频详情', requireAuth: false}
+    },
     //课堂
     {
       path: '/classroom/index',
@@ -102,27 +157,7 @@ var router =  new Router({
       component: resolve => require(['@/pages/informatization/movieDetails'], resolve) ,
       meta:{index: 4, title: '首页', requireAuth: false}
     },
-    //新闻
-    {
-      path: '/news/index',
-      name: 'NewsIndex',
-      component: resolve => require(['@/pages/news/index'], resolve) ,
-      meta:{index: 2, title: '首页', requireAuth: false}
-    },
-    //新闻列表详情
-    {
-      path: '/news/newsDetails',
-      name: 'newsDetails',
-      component: resolve => require([ '@/pages/news/newsDetails'], resolve) ,
-      meta:{index: 3, title: '视频详情', requireAuth: false}
-    },
-    //视频详情
-    {
-      path: '/news/newsVideoDetail',
-      name: 'newsVideoDetail',
-      component: resolve => require([ '@/pages/news/newsVideoDetail'], resolve) ,
-      meta:{index: 4, title: '视频详情', requireAuth: false}
-    },
+
     //资讯
     {
       path: '/information/index',
@@ -289,7 +324,7 @@ var router =  new Router({
       path: '/me/index',
       name: 'MeIndex',
       component: resolve => require(['@/pages/me/index'], resolve) ,
-      meta:{index: 4, title: '首页', requireAuth: true}
+      meta:{index: 4, title: '我的', requireAuth: true}
     },
     //社区
     {
@@ -340,7 +375,7 @@ router.beforeEach((to, from, next) => {
   }
   let path = to.path
   let token = localStorage.getItem('Authorization');
-  console.log(token)
+  console.log(token,9999)
   // 判断该路由是否需要登录权限
   if (to.matched.some(record => record.meta.requireAuth)){
     if(token!=0){

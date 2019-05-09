@@ -6,6 +6,17 @@ export default {
   home: {
     index: '/home/Indexd/index',//系统轮播图热点展示
   },
+  //技术装备
+  tEquipment: {
+    index: '/home/Indexd/technology',//技术装备列表
+    details: '/home/Indexd/techContent',//技术装备列表详情
+  },
+  //新闻资讯
+  newsX: {
+    newBanner: '/home/Indexd/newBanner',//新闻首页
+    dynamicsList: '/home/Indexd/dynamicsList', //活动动态列表
+    achievementsList: '/home/Indexd/achievementsList' //成果展示
+  },
   //信息化
   informatization: {
     proGram: '/home/Index/proGram',//计算机思维编程竞技列表
@@ -25,6 +36,7 @@ export default {
     newList: '/home/Index/newList',//视频列表详情
     videoContent: '/home/Index/videoContent',    //获取视频内容详情
   },
+
   //资讯
   information: {
     InfoActive: '/home/Index/InfoActive',       //获取新装备动态分类

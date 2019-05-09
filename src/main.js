@@ -7,6 +7,8 @@ import './assets/style/animate.min.css'
 //axios
 import http from './api/http'
 import ports from './api/ports'
+// import myLoading from './components/loading/index'
+// Vue.use(myLoading);
 Vue.prototype.http = http
 Vue.prototype.ports = ports
 import axios from 'axios'
@@ -14,6 +16,20 @@ Vue.config.debug = true
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 axios.defaults.withCredentials=true;
+axios.interceptors.response.use(function (response) {
+  // token 已过期，重定向到登录页面
+  if (response.data.loginStatus===0){
+    localStorage.clear()
+    router.replace({
+      path:'/reg/login',
+      query: {redirect: router.currentRoute.fullPath}
+    })
+  }
+  return response
+}, function (error) {
+  // Do something with response error
+  return Promise.reject(error)
+})
 //swiper
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'

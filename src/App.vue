@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <transition :name="transitionName">
-
       <router-view/>
     </transition>
     <nav-bar v-show="showBar"></nav-bar>
@@ -15,7 +14,6 @@ export default {
   data (){
     return{
       transitionName:'',
-      selectedNavTitle:'首页',
       showBar: true
     }
   },
@@ -28,17 +26,18 @@ export default {
   watch: {
     //使用watch 监听$router的变化
     '$route' (to, from) {
+
       //导航显示
       switch (to.name){
         case 'Home':
           this.showBar = true
-              break
+          break
         case 'communityIndex':
-              this.showBar = true
-              break
+          this.showBar = true
+          break
         case 'MeIndex':
-              this.showBar = true
-              break
+          this.showBar = true
+          break
         case 'classroomIndex':
           this.showBar = true
           break

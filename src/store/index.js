@@ -6,7 +6,8 @@ export default new Vuex.Store({
     // 存储token
     Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
     defaultTitle: localStorage.teachingTitle ? localStorage.teachingTitle: '首页',
-    showNavBar:  localStorage.showNav ? localStorage.showNav : true
+    showNavBar:  localStorage.showNav ? localStorage.showNav : true,
+    IMGPATH: 'http://cqeic.swkj2014.com/'
   },
   mutations: {
     // 修改token，并将token存入localStorage

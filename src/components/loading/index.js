@@ -1,14 +1,12 @@
-let loadTemp = require('./loading.vue ').default;     // cli3.0以后引入vue模板需要default
-
+// let loadTemp = require('./loading.vue ').default;     // cli3.0以后引入vue模板需要default
+import loadTemp from './loading.vue';
 let Load = {};  // 定义插件对象
-
-Load.install = (Vue, options) => { //Vue的install方法，用于定义vue插件
+Load.install = (Vue, options) => {
+  //Vue的install方法，用于定义vue插件
   // 如果存在loading 不重复创建DOM
   if (document.getElementsByClassName('.load-status').length) return
-
   // 创建一个VUE构造器
   let lTemp = Vue.extend(loadTemp);
-
   // 提供一个在页面上已存在的DOM元素作为Vue实例的挂载目标。
   // 在实例挂载之后，可以通过$vm.$el访问。
   // 如果这个选项在实例化时有用到，实例将立即进入编译过程。否则，需要显示调用vm.$mount()手动开启编译(如下)
@@ -16,15 +14,13 @@ Load.install = (Vue, options) => { //Vue的install方法，用于定义vue插件
   // let $vm = new toastTpl({
   //  el: document.createElement('div')
   // })
-
   // 实例化VUE实例
   let $vm = new lTemp();
-
   // 此处使用$mount来手动开启编译。用$el来访问元素，并插入到body中
   let tpl = $vm.$mount().$el;
   document.body.appendChild(tpl);
-
-  Vue.prototype.$loading = { //在Vue的原型上添加实例方法，以全局调用
+  Vue.prototype.$loading = {
+    //在Vue的原型上添加实例方法，以全局调用
     show(options) {
       //通过传入props改变$vm下的属性控制组件 例如$vm.text = options
       if (options == "loading") {
@@ -40,4 +36,4 @@ Load.install = (Vue, options) => { //Vue的install方法，用于定义vue插件
   }
 }
 //导出Load
-export default Load;
+export default Load

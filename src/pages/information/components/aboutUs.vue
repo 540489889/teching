@@ -19,6 +19,18 @@
             </div>
           </div>
         </router-link>
+        <router-link tag="li" :to="'/information/brieDetails?id='+item.id" :key="item.id" v-for="item in briefList.department">
+          <div class="leftText flex-box">
+            <!--<img class="rightImg" src="./../../../assets/img/th-b-1.png" alt="">-->
+            <img class="rightImg" :src="'http://cqeic.swkj2014.com/'+item.cover_img" alt="">
+            <div class="box-1">
+              <h4 class="flex-box">
+                <p class="box-1 media_desc">{{item.title}}</p>
+                <!--<span class="style1">教育装备</span>-->
+              </h4>
+            </div>
+          </div>
+        </router-link>
       </ul>
     </div>
     <!--集体市级-->
@@ -34,6 +46,16 @@
           direction="horizontal"
           :options="options">
           <ul class="list-wrapper flex-box" style="align-items: flex-start">
+            <router-link tag="li" :to="'/information/brieDetails?id='+item.id" :key="item.id" v-for="item in briefList.Duty" class="list-item">
+              <div class="">
+                <div class="imgBox"><img :src="'http://cqeic.swkj2014.com/'+item.cover_img" alt=""></div>
+                <div class="resitionBox">
+                  <span class="label">{{item.label}}</span>
+                  <h2 class="text-left media_title">{{item.name}}</h2>
+                  <h3 class="media_desc">{{item.title}}</h3>
+                </div>
+              </div>
+            </router-link>
             <router-link tag="li" :to="'/information/brieDetails?id='+item.id" :key="item.id" v-for="item in briefList.Duty" class="list-item">
               <div class="">
                 <div class="imgBox"><img :src="'http://cqeic.swkj2014.com/'+item.cover_img" alt=""></div>

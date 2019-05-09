@@ -10,3 +10,21 @@
   color:#42a57a;
   font-size:15px;
 }
+.teIndex .cube-scroll-nav-bar-item{
+  padding:5px 5px;
+  margin-left:10px;
+  border:1px solid #bbbbbb;
+  border-radius: 20px;
+}
+.teIndex .cube-scroll-nav-bar-item:last-child{
+  margin-right:10px;
+}
+.teIndex .cube-scroll-nav-bar_horizontal .cube-scroll-wrapper{
+  text-align: left;
+}
+.teIndex .cube-scroll-nav-bar-item_active{
+  background-color:#1ba255;
+  color:white;
+  border-radius: 25px;
+  border:none;
+}

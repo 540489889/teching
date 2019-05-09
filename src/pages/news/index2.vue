@@ -1,25 +1,39 @@
 <template>
   <div class="indexWrapper recommend-content">
     <loading-bar v-show="isLoading"></loading-bar>
-    <div class="spImg" v-if="map">
-      <!--<img src="./../../assets/img/infm-b-1.png" alt="">-->
-      <map-bar :maps="map"></map-bar>
+    <search-bar :showSearchBtn="showSearchBtn"></search-bar>
+    <index-swiper :list="bannerList"></index-swiper>
+    <div class="communtyBar">
+      <cube-tab-bar
+        ref="tabbar"
+        v-model="selectedLabelDefault"
+        :data="tabs"
+        @click="clickHandler"
+        @change="changeHandler">
+      </cube-tab-bar>
     </div>
-    <advert-swiper :list="advertList"></advert-swiper>
-    <activity :activeList="activeList"></activity>
-    <fruit :noticeList="noticeList"></fruit>
+    <transition name="component-fade" mode="out-in">
+      <component
+        :is="view"
+        :list="activeData"
+        :videoD="videoD"
+        :live="live"
+      ></component>
+    </transition>
   </div>
 </template>
 
 <script>
 //  import cubePage from './../components/cube-page.vue'
 //  import './../../assets/stylus/cubeList.styl'
-  import advertSwiper from '../components/advertSwiper.vue'
+  import searchBar from '../components/searchBar.vue'
+  import indexSwiper from '../components/indexSwiper.vue'
+  import newVideo from './components/video.vue'
+  import newActive from './components/active.vue'
+  import newNotice from './components/notice.vue'
   import loadingBar from '../components/loading.vue'
-  import activity from './components/activity.vue'
-  import fruit from './components/fruit.vue'
   import './../../assets/style/cubeNews.css'
-  import mapBar from './components/mapBar.vue'
+
 //  import { findIndex } from '../../assets/js/util'
 //  import { FOLLOWERS_DATA, RECOMMEND_DATA, HOT_DATA } from '../../assets/js/tab-bar'
   //  import readCommunity from './../components/readCommunity.vue'
@@ -30,36 +44,48 @@
         view: 'newActive',
         videoD: "1",
         bannerList: [],
-        advertList: [], //广告轮播
-        activeList: [], //活动动态
-        map: [], //地图
-        noticeList: [],// 成果展示
         isLoading: true,
         showSearchBtn:false,
         searchVal: '',
+        selectedLabelDefault: '活动动态',
+        showSlider:false,
+        tabs: [{
+          label: '活动动态',
+        }, {
+          label: '通知公告',
+        }, {
+          label: '视频',
+        }],
         type: 1,
+        activeData: [],
+        live: {},
+        active1: [],
+        active2: [],
+        active3: []
       }
     },
     components:{
-      advertSwiper,
-      loadingBar,
-      mapBar,
-      activity,
-      fruit
+      searchBar,
+      indexSwiper,
+      newVideo,
+      newActive,
+      newNotice,
+      loadingBar
     },
     methods: {
       getNewBanner (){
-        this.http.get(this.ports.newsX.newBanner, res =>{
+        this.http.get(this.ports.news.newBanner+'?type='+this.type, res =>{
           setTimeout(() => {
             this.isLoading = false
           }, 1000)
           console.log(res)
           if(res.status==200){
             let data = res.data
-            this.advertList = data.achievements
-            this.activeList = data.active
-            this.map = data.map
-            this.noticeList = data.notice
+            this.bannerList = data.bannews
+            this.activeData = data.data
+            if(data.live){
+              this.live = data.live
+            }
           }
         })
       },

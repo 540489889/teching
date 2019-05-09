@@ -81,3 +81,7 @@ body{
   width:14px !important;
   height:14px !important;
 }
+.no-more{
+  padding:30px;
+  display: block;
+}

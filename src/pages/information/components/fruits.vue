@@ -52,6 +52,14 @@
                 </div>
               </div>
             </router-link>
+            <router-link tag="li"  :to="'/information/fruitsDetails?id='+item.id" :key="item.id" v-for="item in InfoAward.city" class="list-item">
+              <div class="flex-box">
+                <div class="imgBox"><img :src="'http://cqeic.swkj2014.com/'+item.cover_img"  alt=""></div>
+                <div class="box-1">
+                  <h3 class="media_desc">{{item.title}}</h3>
+                </div>
+              </div>
+            </router-link>
           </ul>
         </cube-scroll>
       </div>

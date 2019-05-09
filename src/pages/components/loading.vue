@@ -1,6 +1,6 @@
 <template lang="html">
     <div class="">
-        <div class="ajax-loading load-status" v-show="showLoading">
+        <div class="ajax-loading load-status">
             <!--<div class="head-space"></div>-->
             <div class="loading-box">
                 <div class="la-square-jelly-box">
@@ -54,7 +54,7 @@ export default {
     height: 100%;
     background-color: rgba(255,255,255,0);
     position: fixed;
-    z-index:100;
+    z-index:999;
 }
 .head-space {
     height: 4.4rem;
