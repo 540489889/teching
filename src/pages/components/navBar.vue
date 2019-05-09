@@ -18,18 +18,7 @@
     </cube-tab>
   </cube-tab-bar>
 </template>
-<style scoped lang="less">
-  .navBar{
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    font-size:24px;
-    background-color:white;
-    border-top:1px solid #eee;
-    z-index: 99;
-  }
-</style>
+
 <script>
   import './../../assets/style/cubeRest.css'
   export default {
@@ -40,7 +29,7 @@
           label: '首页',
           icon: 'cubeic-home'
         }, {
-          label: '课堂',
+          label: '空中课堂',
           icon: 'cubeic-like'
         }, {
           label: '数据',
@@ -68,7 +57,7 @@
           case '我的':
             this.$router.push('/me/index')
                 break
-          case '课堂':
+          case '空中课堂':
             this.$router.push('/classroom/index')
             break
           case '数据':
@@ -87,3 +76,19 @@
     }
   }
 </script>
+
+<style scoped lang="less">
+  .navBar{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    font-size:24px;
+    background-color:white;
+    border-top:1px solid #eee;
+    z-index: 99;
+  }
+  .navBar .cube-tab_active{
+    color: #029b46;
+  }
+</style>

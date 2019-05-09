@@ -68,8 +68,8 @@
       }
     },
     mounted() {
-
-    }
+      console.log(this.list)
+  }
   }
 </script>
 <style lang="less" scoped>
