@@ -29,9 +29,7 @@ axios.interceptors.response.use(function (response) {
         query: {redirect: router.currentRoute.fullPath}
       })
     }
-
   }
-
   return response
 }, function (error) {
   // Do something with response error
