@@ -22,6 +22,7 @@ axios.interceptors.response.use(function (response) {
   if (response.data.loginStatus===0){
     // localStorage.clear()
     localStorage.setItem('Authorization', 0);
+
     if( router.currentRoute.meta.requireAuth){
       router.replace({
         path:'/',
