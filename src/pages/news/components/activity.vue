@@ -14,7 +14,7 @@
           direction="horizontal"
           :options="options">
           <ul class="list-wrapper">
-            <router-link tag="li"  :to="'/information/fruitsDetails?id='+item.id" :key="item.id" v-for="item in activeList" class="list-item">
+            <router-link tag="li"  :to="'/news/activeDetails?id='+item.id" :key="item.id" v-for="item in activeList" class="list-item">
               <div class="flex-box">
                 <div class="imgBox"><img :src="$store.state.IMGPATH+item.cover_img"  alt=""></div>
                 <div class="box-1">

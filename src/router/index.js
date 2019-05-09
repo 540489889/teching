@@ -53,6 +53,27 @@ var router =  new Router({
       component: resolve => require(['@/pages/news/fruitsList'], resolve) ,
       meta:{index: 3, title: '成果展示', requireAuth: false}
     },
+    //新闻资讯活动列表详情
+    {
+      path: '/news/fruitsDetails',
+      name: 'NewsFruitsDetails',
+      component: resolve => require(['@/pages/news/fruitsDetails'], resolve) ,
+      meta:{index: 4, title: '活动详情', requireAuth: false}
+    },
+    //新闻资讯推荐广告详情
+    {
+      path: '/news/advertDetails',
+      name: 'NewsAdvertDetails',
+      component: resolve => require(['@/pages/news/advertDetails'], resolve) ,
+      meta:{index: 4, title: '活动详情', requireAuth: false}
+    },
+    //学习园地
+    {
+      path: '/learning/index',
+      name: 'LearningIndex',
+      component: resolve => require(['@/pages/learning/index'], resolve) ,
+      meta:{index: 2, title: '活动详情', requireAuth: false}
+    },
     //新闻列表详情
     {
       path: '/news/newsDetails',
@@ -375,7 +396,7 @@ router.beforeEach((to, from, next) => {
   }
   let path = to.path
   let token = localStorage.getItem('Authorization');
-  console.log(token,9999)
+  console.log(token,9999,to.matched.some(record => record.meta.requireAuth))
   // 判断该路由是否需要登录权限
   if (to.matched.some(record => record.meta.requireAuth)){
     if(token!=0){

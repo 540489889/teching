@@ -5,9 +5,9 @@
       <!--<img src="./../../assets/img/infm-b-1.png" alt="">-->
       <map-bar :maps="map"></map-bar>
     </div>
-    <advert-swiper :list="advertList"></advert-swiper>
+    <advert-swiper :list="noticeList" :path="advertPath"></advert-swiper>
     <activity :activeList="activeList"></activity>
-    <fruit :noticeList="noticeList"></fruit>
+    <fruit :noticeList="advertList"></fruit>
   </div>
 </template>
 
@@ -27,6 +27,7 @@
     name: 'NewsIndex',
     data () {
       return {
+        advertPath:'/news/advertDetails',
         view: 'newActive',
         videoD: "1",
         bannerList: [],
@@ -48,6 +49,9 @@
       fruit
     },
     methods: {
+      maxMap(){
+        alert(555)
+      },
       getNewBanner (){
         this.http.get(this.ports.newsX.newBanner, res =>{
           setTimeout(() => {

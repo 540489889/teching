@@ -21,7 +21,7 @@
     name: 'Home',
     data () {
       return {
-        isLoading: false,
+        isLoading: true,
         searchVal: '',
         selectedNavTitle: '首页',
         bannerList: [],//轮播图
@@ -36,12 +36,15 @@
       navBar,
       loadingBar
     },
+    created (){
+      setTimeout(() => {
+        this.isLoading = false
+      }, 500)
+    },
     methods: {
       getIndexData(){
         this.http.get(this.ports.home.index, res =>{
-          setTimeout(() => {
-            this.isLoading = false
-          }, 1000)
+
           if(res.status==200){
             let data = res.data
             this.bannerList = data.banner

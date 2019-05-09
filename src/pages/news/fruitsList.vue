@@ -23,9 +23,12 @@
             </div>
           </div>
         </router-link>
-        <li v-show="!list.length">
-          <h2 class="noList">暂无数据...</h2>
-        </li>
+        <infinite-loading
+          :on-infinite="onInfinite"
+          spinner="spiral"
+          ref="infiniteLoading">
+          <span slot="no-more" class="no-more">我也是有底线的</span>
+        </infinite-loading>
       </ul>
     </div>
   </div>
@@ -35,6 +38,7 @@
 <script>
   import searchBar from '../components/searchBar.vue'
   import loadingBar from './../components/loading'
+  import InfiniteLoading from 'vue-infinite-loading';
   export default {
     name: 'InformatizationSports',
     data () {
@@ -42,30 +46,42 @@
         searchVal: '',
         list: [],
         isLoading: true,
+        page: 0,
+        title: ''
       }
     },
     components:{
       searchBar,
-      loadingBar
+      loadingBar,
+      InfiniteLoading
     },
     methods: {
-      //计算机思维编程竞技列表
-      getAwardListData(){
-        let type = this.$route.query.type
-        this.http.get(this.ports.information.AwardList+'?type='+type,res=>{
-          console.log(res,9999)
-          setTimeout(() => {
-            this.isLoading = false
-          }, 500)
-          if(res.status==200){
-            const data = res.data
-            this.list = data.data
+      onInfinite($state,type) {
+        console.log(type)
+        this.isLoading = false
+        let _this = this;
+        let pageSize = 8;
+        this.page += 1;
+        let data = [];
+        this.http.get(this.ports.newsX.achievementsList+'?page='+this.page+'&&title='+this.title ,res =>{
+          console.log(data)
+          if(res.status == 200){
+            data = res.data.data
+            if(data.length){
+              for(var i = 0;i < data.length;i++){
+                this.list.push(data[i]);
+              }
+//              this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');//加载
+              $state.loaded();
+            }else{
+//              this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');//停止加载
+              $state.complete();
+            }
           }
         })
       },
     },
     mounted(){
-      this.getAwardListData()
     }
   }
 </script>

@@ -1,14 +1,14 @@
 <template>
   <div class="fruitsWrapper">
     <div class="fruits-list-1">
-      <router-link tag="h2" :to="'/news/fruitsList?type='+1" class="titleBox flex-box">
+      <router-link tag="h2" to="/news/fruitsList" class="titleBox flex-box">
         <span class="left-ico flex-box">
           <!--<i class="ds-ico"></i>-->
           成果展示</span>
         <span class="flex-box right-text">更多 <i class="cubeic-arrow"></i></span>
       </router-link>
       <ul>
-        <router-link tag="li" :to="'/information/fruitsDetails?id='+item.id" v-for="item in noticeList" :key="item.id">
+        <router-link tag="li" :to="'/news/fruitsDetails?id='+item.id" v-for="item in noticeList" :key="item.id">
           <div class="leftText flex-box">
             <img class="rightImg" :src="$store.state.IMGPATH+item.cover_img" alt="">
             <div class="box-1">

@@ -18,12 +18,17 @@ Vue.prototype.$axios = axios
 axios.defaults.withCredentials=true;
 axios.interceptors.response.use(function (response) {
   // token 已过期，重定向到登录页面
+  console.log(router,777)
   if (response.data.loginStatus===0){
-    localStorage.clear()
-    router.replace({
-      path:'/reg/login',
-      query: {redirect: router.currentRoute.fullPath}
-    })
+    // localStorage.clear()
+    localStorage.setItem('Authorization', 0);
+    if( router.currentRoute.meta.requireAuth){
+      router.replace({
+        path:'/',
+        query: {redirect: router.currentRoute.fullPath}
+      })
+    }
+
   }
   return response
 }, function (error) {

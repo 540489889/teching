@@ -23,7 +23,7 @@
     methods: {
       getAwardContentData(){
         let id = this.$route.query.id
-        this.http.get(this.ports.newsX.dynamicsDetails+'?id='+id,res=>{
+        this.http.get(this.ports.newsX.achievementsDetails+'?id='+id,res=>{
           console.log(res)
           if(res.status==200){
             const data = res.data

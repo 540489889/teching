@@ -26,7 +26,7 @@
 </template>
 <script>
   import searchBar from '../components/searchBar.vue'
-  import InfiniteLoading from 'vue-infinite-loading';
+  import InfiniteLoading from 'vue-infinite-loading'
   export default {
     name: 'listFruits',
     data (){

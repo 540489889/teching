@@ -5,7 +5,7 @@
       <swiper :options="swiperOption" ref="mySwiper">
         <!-- slides -->
         <swiper-slide v-for="item in list" v-if="showSwiper" :key="item.id">
-          <a class="media_title" @click="handleClickHref(item.herf)" ><span>推荐</span>{{item.title}}</a>
+          <router-link tag="a" :to="path+'?id='+item.id" class="media_title" ><span>推荐</span>{{item.title}}</router-link>
         </swiper-slide>
         <!--<swiper-slide  >-->
           <!--<div class="media_title"><span>测试</span>2教育部等九部门关于印发中小学生减负措施。</div>-->
@@ -37,7 +37,8 @@
       }
     },
     props: {
-      list: Array
+      list: Array,
+      path: String
     },
     methods:{
       handleClickHref(href){

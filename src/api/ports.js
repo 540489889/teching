@@ -16,7 +16,9 @@ export default {
   newsX: {
     newBanner: '/home/Indexd/newBanner',//新闻首页
     dynamicsList: '/home/Indexd/dynamicsList', //活动动态列表
-    achievementsList: '/home/Indexd/achievementsList' //成果展示
+    dynamicsDetails: '/home/Indexd/dynamicsDetails', //活动详情
+    achievementsList: '/home/Indexd/achievementsList', //成果展示
+    achievementsDetails: '/home/Indexd/achievementsDetails' //成果展示文章详情
   },
   //信息化
   informatization: {
