@@ -404,6 +404,7 @@
           background-size:100%;
         }
       }
+
       .imgBox{
         position:relative;
         margin-bottom:10px;
