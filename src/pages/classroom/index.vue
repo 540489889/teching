@@ -12,26 +12,24 @@
       <h3 class="text-left">直播预告</h3>
       <ul>
         <li>
-          <a href="latestLive,hrefs">
-            <div class="thisVideo flex-box">
-              <div class="leftImg">
-                <img :src="latestLive.picture" alt>
-              </div>
-              <div class="textCenter box-1">
-                <h4 class="media_title">{{latestLive.title}}</h4>
-                <p class="flex-box">
-                  <span class="flex-box">
-                    <i></i>
-                    {{latestLive.begin_time}}
-                  </span>
-                  {{latestLive.teacher}}
-                </p>
-              </div>
-              <div class="right-ico">
-                <i class="v-ico-1"></i>
-              </div>
+          <div class="thisVideo flex-box">
+            <div class="leftImg">
+              <img :src="latestLive.picture" alt>
             </div>
-          </a>
+            <div class="textCenter box-1">
+              <h4 class="media_title">{{latestLive.title}}</h4>
+              <p class="flex-box">
+                <span class="flex-box">
+                  <i></i>
+                  {{latestLive.begin_time}}
+                </span>
+                {{latestLive.teacher}}
+              </p>
+            </div>
+            <div class="right-ico">
+              <i class="v-ico-1"></i>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
@@ -42,7 +40,7 @@
           <span class="left-ico flex-box">直播课堂</span>
         </h2>
         <ul>
-          <li v-for="(item) in live" :key="item.id">
+          <li v-for="(item) in searchLive" :key="item.id">
             <a :href="item.hrefs">
               <div class="leftText flex-box">
                 <div class="img">
@@ -81,7 +79,8 @@ export default {
       searchVal: "",
       live: [],
       willLive: [],
-      latestLive: {}
+      latestLive: {},
+      searchLive: []
     };
   },
   components: {
@@ -89,7 +88,7 @@ export default {
     bannerSwiper
   },
   methods: {
-    // 请勿页面数据
+    // 请求页面数据
     changeHandler() {
       this.http.get(this.ports.home.Classroom, res => {
         setTimeout(() => {
@@ -106,9 +105,9 @@ export default {
     },
     // 筛选预告
     checkWillLive(arr) {
+      this.searchLive = this.live;
       for (var i = 0; i < arr.length; i++) {
         arr[i].picture = "http://cqeic.swkj2014.com" + arr[i].picture;
-        console.log(arr[i].picture);
         if (arr[i].begin_time * 1000 > Date.now()) {
           this.willLive.push(arr[i]);
           arr.splice(i, 1);
@@ -152,6 +151,21 @@ export default {
       }
       var newTime = hour + ":" + min;
       return newTime;
+    },
+    // 搜索
+    focus(val) {
+      if (val) {
+        this.searchLive = this.live.filter(function(v, index, arr) {
+          return v.title.includes(val);
+        });
+      } else {
+        this.searchLive = this.live;
+      }
+    }
+  },
+  watch: {
+    searchVal: function(value) {
+      this.focus(value);
     }
   },
   mounted() {
@@ -204,6 +218,7 @@ a {
         font-size: 28px;
         border: none;
         outline: none;
+        color: #999;
       }
     }
   }
