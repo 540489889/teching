@@ -172,6 +172,7 @@ var router =  new Router({
       component: resolve => require(['@/pages/classroom/index'], resolve) ,
       meta:{index: 2, title: '课堂', requireAuth: false}
     },
+
     //登录
     {
       path: '/reg/login',
