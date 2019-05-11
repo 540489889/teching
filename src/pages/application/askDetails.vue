@@ -1,6 +1,6 @@
 <template>
   <div class="askWrapper recommend-content">
-    <loading-bar v-show="isLoading"></loading-bar>
+    <loading-bar v-if="isLoading"></loading-bar>
     <div class="askProblem">
       <h4>{{question.title}}</h4>
       <div class="infor" v-html="question.content"></div>

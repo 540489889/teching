@@ -1,6 +1,6 @@
 <template>
   <div class="sportWrapper recommend-content">
-    <loading-bar v-show="isLoading"></loading-bar>
+    <loading-bar v-if="isLoading"></loading-bar>
     <search-bar :showSearchBtn="showSearchBtn" :showSearchVal="showSearchVal"></search-bar>
     <div class="infoList2">
       <!--<h2 class="titleBox flex-box">-->

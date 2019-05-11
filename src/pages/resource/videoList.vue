@@ -1,6 +1,6 @@
 <template>
   <div class="videoList">
-    <loading-bar v-show="isLoading"></loading-bar>
+    <loading-bar v-if="isLoading"></loading-bar>
     <new-video :list="list" :videoD="videoD"></new-video>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="collectWrapper recommend-content">
-    <loading-bar v-show="isLoading"></loading-bar>
+    <loading-bar v-if="isLoading"></loading-bar>
     <ul>
       <router-link tag="li" :to="'/application/collectDetails?id='+item.id" v-for="item in list" :key="item.id">
         <h4 class="flex-box">{{item.title}}

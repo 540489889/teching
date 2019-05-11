@@ -1,6 +1,6 @@
 <template>
   <div class="detailsWrapper recommend-content">
-    <loading-bar v-show="isLoading"></loading-bar>
+    <loading-bar v-if="isLoading"></loading-bar>
     <div class="topBook flex-box">
       <div class="flex-box">
         <div class="imgLeft">

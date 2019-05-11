@@ -1,6 +1,6 @@
 <template>
   <div class="airRoom recommend-content">
-    <loading-bar v-show="isLoading"></loading-bar>
+    <loading-bar v-if="isLoading"></loading-bar>
     <!--空中课堂-->
     <div class="airBox">
       <div class="airContent flex-box"  v-if="new Date(item.begin_time*1000)< new Date()" v-for="item in list" :key="item.id">

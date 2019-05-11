@@ -1,6 +1,6 @@
 <template>
   <div class="campusWrapper recommend-content">
-    <loading-bar v-show="isLoading"></loading-bar>
+    <loading-bar v-if="isLoading"></loading-bar>
     <search-bar></search-bar>
     <div class="infoList2">
       <!--<h2 class="titleBox flex-box">-->

@@ -1,6 +1,6 @@
 <template>
   <div class="bookList">
-    <loading-bar v-show="isLoading"></loading-bar>
+    <loading-bar v-if="isLoading"></loading-bar>
     <ul class="list-wrapper">
       <router-link tag="li" :to="'/learning/bookDetails?eid='+item.id" :key="item.id" v-for="(item,index) in list" class="list-item">
         <div class="boxBook">

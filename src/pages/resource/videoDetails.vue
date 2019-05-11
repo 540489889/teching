@@ -1,7 +1,7 @@
 <template>
   <div class="videoList">
     <new-video :list="list" ></new-video>
-    <loading-bar v-show="isLoading"></loading-bar>
+    <loading-bar v-if="isLoading"></loading-bar>
     <div  v-for="item in list" :key="item.id">
       <div class="vdInfo">
         <div class="tpVideo flex-box">

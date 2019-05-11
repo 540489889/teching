@@ -1,6 +1,6 @@
 <template>
   <div class="indexWrapper recommend-content">
-    <loading-bar v-show="isLoading"></loading-bar>
+    <loading-bar v-if="isLoading"></loading-bar>
     <div class="">
       <search-bar :showSearchBtn="showSearchBtn" :showSearchVal="showSearchVal"></search-bar>
       <index-swiper></index-swiper>
