@@ -137,6 +137,7 @@ var router = new Router({
       component: (resolve) => require(['@/pages/informatization/sportsDetails'], resolve),
       meta: { index: 4, title: '首页', requireAuth: false }
 		},
+
 		//教育装备
     {
       path: '/informatization/educational',
