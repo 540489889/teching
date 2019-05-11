@@ -1,5 +1,6 @@
 <template>
   <div class="roomIndex recommend-content">
+    <loading-bar v-show="isLoading"></loading-bar>
     <div class="banner">
       <bannerSwiper :list="bannerList"></bannerSwiper>
       <div class="search">
@@ -71,10 +72,12 @@
 <script>
 import searchBar from "../components/searchBar.vue";
 import bannerSwiper from "../classroom/BannerSwiper.vue";
+import loadingBar from "../components/loading.vue";
 export default {
   name: "sayValue",
   data() {
     return {
+      isLoading: true,
       bannerList: [],
       searchVal: "",
       live: [],
@@ -85,7 +88,8 @@ export default {
   },
   components: {
     searchBar,
-    bannerSwiper
+    bannerSwiper,
+    loadingBar
   },
   methods: {
     // 请求页面数据
