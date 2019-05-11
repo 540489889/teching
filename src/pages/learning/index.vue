@@ -1,6 +1,6 @@
 <template>
   <div class="resourcesWrapper meWrapper recommend-content">
-    <loading-bar v-if="isLoading"></loading-bar>
+
     <div class="resourBanner">
       <img src="../../assets/img/resource-banner.png" alt="">
       <!--<curr-swiper :list="resourceList.banener"></curr-swiper>-->

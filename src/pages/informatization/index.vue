@@ -1,6 +1,6 @@
 <template>
   <div class="infoWrapper recommend-content">
-    <loading-bar v-if="isLoading"></loading-bar>
+
     <search-bar></search-bar>
     <div class="infoList1 meWrapper">
       <h2 class="titleBox flex-box">

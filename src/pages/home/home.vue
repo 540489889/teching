@@ -1,6 +1,6 @@
 <template>
   <div class="homeWrapper recommend-content">
-    <loading-bar v-if="isLoading"></loading-bar>
+
     <search-bar></search-bar>
     <index-swiper :list="bannerList"></index-swiper>
     <advert-swiper :list="recomdList"></advert-swiper>

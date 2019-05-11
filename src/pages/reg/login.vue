@@ -1,6 +1,6 @@
 <template>
   <div class="signWrapper recommend-content">
-    <loading-bar v-if="isLoading"></loading-bar>
+
     <div class="textTitle">
       <!--<h2>2019中小学教学资源</h2>-->
       <!--<h2>开发项目启动会</h2>-->

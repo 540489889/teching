@@ -1,6 +1,6 @@
 <template>
   <div class="appWrapper recommend-content">
-    <loading-bar v-if="isLoading"></loading-bar>
+
     <search-bar></search-bar>
     <index-swiper :list="banner"></index-swiper>
     <div class="listInfo">

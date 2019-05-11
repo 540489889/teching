@@ -1,6 +1,6 @@
 <template>
   <div class="informationWrapper recommend-content">
-    <loading-bar v-if="isLoading"></loading-bar>
+
     <div class="spImg" v-if="map">
       <!--<img src="./../../assets/img/infm-b-1.png" alt="">-->
       <map-bar :maps="map"></map-bar>

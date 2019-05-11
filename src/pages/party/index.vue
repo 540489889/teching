@@ -1,6 +1,6 @@
 <template>
   <div class="partyWrapper recommend-content">
-    <loading-bar v-if="isLoading"></loading-bar>
+
     <search-bar></search-bar>
     <div class="partyBanner">
       <!--<img src="./../../assets/img/party-b-1.png" alt="">-->

@@ -1,6 +1,6 @@
 <template>
   <div class="viewWrapper">
-    <loading-bar v-if="isLoading"></loading-bar>
+
     <video-detail :list="list"></video-detail>
   </div>
 </template>

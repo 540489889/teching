@@ -1,6 +1,6 @@
 <template>
   <div class="askWrapper recommend-content">
-    <loading-bar v-if="isLoading"></loading-bar>
+
     <search-bar :showSearchBtn="showSearchBtn" :showSearchVal="showSearchVal"></search-bar>
     <!--精选问答-->
     <div class="selectedWd">

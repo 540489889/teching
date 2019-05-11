@@ -1,6 +1,6 @@
 <template>
   <div class="videoDetail recommend-content">
-    <loading-bar v-if="isLoading"></loading-bar>
+
     <new-video :list="list"></new-video>
     <div  v-for="item in list" :key="item.id">
       <div class="vdInfo">

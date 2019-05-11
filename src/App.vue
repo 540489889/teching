@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <loading v-if="isLoading"></loading>
     <transition :name="transitionName">
       <router-view/>
     </transition>
@@ -9,19 +10,24 @@
 
 <script>
 import navBar from './pages/components/navBar.vue'
+import loading from './pages/components/loading.vue'
 export default {
   name: 'app',
   data (){
     return{
       transitionName:'',
-      showBar: true
+      showBar: true,
+      isLoading: true,
     }
   },
   created (){
-
+    setTimeout(() => {
+      this.isLoading = false
+    }, 1000)
   },
   components:{
-    navBar
+    navBar,
+    loading
   },
   watch: {
     //使用watch 监听$router的变化
