@@ -28,3 +28,10 @@
   border-radius: 25px;
   border:none;
 }
+.detailsWrapper .cube-rate-item{
+  width:16px;
+}
+.infoWrapper  .zy_title{
+  font-size:30px;
+  padding:10px;
+}

@@ -32,7 +32,7 @@
           label: '空中课堂',
           icon: 'cubeic-like'
         }, {
-          label: '数据',
+          label: '教育数据',
           icon: 'cubeic-vip'
         }, {
           label: '我的',
@@ -60,8 +60,8 @@
           case '空中课堂':
             this.$router.push('/classroom/index')
             break
-          case '数据':
-            this.$router.push('/community/index')
+          case '教育数据':
+            alert('敬请期待')
             break
         }
 

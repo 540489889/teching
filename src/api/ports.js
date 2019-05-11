@@ -20,6 +20,17 @@ export default {
     achievementsList: '/home/Indexd/achievementsList', //成果展示
     achievementsDetails: '/home/Indexd/achievementsDetails' //成果展示文章详情
   },
+  //学习园地
+  learning: {
+    Garden: '/home/Indexd/Garden',//学习园地首页
+    readList: '/home/Indexd/readList',//阅读资源列表
+    rebook: '/home/Indexd/rebook',//阅读内容
+  },
+  //专题活动
+  specialActive: {
+    schoolMoves: '/home/Indexd/schoolMoves',//专题活动首页
+    prograList: '/home/Indexd/prograList',//计算机编程列表
+  },
   //信息化
   informatization: {
     proGram: '/home/Index/proGram',//计算机思维编程竞技列表

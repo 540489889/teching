@@ -48,15 +48,17 @@
       activity,
       fruit
     },
+    created (){
+      setTimeout(() => {
+        this.isLoading = false
+      }, 500)
+    },
     methods: {
       maxMap(){
         alert(555)
       },
       getNewBanner (){
         this.http.get(this.ports.newsX.newBanner, res =>{
-          setTimeout(() => {
-            this.isLoading = false
-          }, 1000)
           console.log(res)
           if(res.status==200){
             let data = res.data

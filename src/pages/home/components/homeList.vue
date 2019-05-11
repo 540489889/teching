@@ -5,8 +5,8 @@
       <li><router-link tag="span" to="/tEquipment/index">技术装备</router-link></li>
       <li><router-link tag="span" to="/news/index">新闻资讯</router-link></li>
       <li><router-link tag="span" to="/learning/index">学习园地</router-link></li>
-      <li><router-link tag="span" to="/resource/index">专题活动</router-link></li>
-      <li><router-link tag="span" to="/dataCenter/index">数据中心</router-link></li>
+      <li><router-link tag="span" to="/specialActive/index">专题活动</router-link></li>
+      <li><router-link tag="span" to="/application/index">数据中心</router-link></li>
       <li><router-link tag="span" to="/party/index">计装之家</router-link></li>
     </ul>
   </div>

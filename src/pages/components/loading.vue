@@ -54,7 +54,7 @@ export default {
     height: 100%;
     background-color: rgba(255,255,255,0);
     position: fixed;
-    z-index:999;
+    z-index:1999;
 }
 .head-space {
     height: 4.4rem;
