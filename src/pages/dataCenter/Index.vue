@@ -10,23 +10,23 @@
     </div>
     <div class="main">
       <div class="title">调查调研</div>
-      <div class="item">
+      <div class="item" v-for="val in item" :key="val.id">
         <div class="item-title">
-          <p>中学生消费情况调查报告</p>
-          <div class="status" :class="isrunning ? 'active' : ''">
+          <p>{{val.title}}</p>
+          <div class="status" :class="val.isrunning ? 'active' : ''">
             <i></i>
-            进行中
+            {{val.isrunning?'进行中':'已结束'}}
           </div>
         </div>
         <div class="msg">
-          <span class="time">2019.04.10 22:36</span>
+          <span class="time">{{val.update}}</span>
           <span class="play-count">
             <i class="cubeic-person"></i>
-            23456
+            {{val.annum}}
           </span>
         </div>
-        <div class="link" @click="gotoQuestion">
-          <img src="../../assets/img/data-link.png" alt>
+        <div class="link" @click="gotoQuestion(val.id,val.isrunning)">
+          <img :src="val.cover_img" alt>
         </div>
         <div class="item-line"></div>
       </div>
@@ -45,7 +45,7 @@ export default {
       isLoading: false,
       placeholder: "调查调研",
       searchValue: "",
-      isrunning: true
+      item: []
     };
   },
   components: {
@@ -58,12 +58,48 @@ export default {
     },
     handleIsLogin() {},
     // 跳转问卷详情页面
-    gotoQuestion() {
-      this.$router.push({
-        path: "/dataCenter/questionnaire",
-        query: { id: "1" }
+    gotoQuestion(detailId, isrunning) {
+      if (isrunning) {
+        this.$router.push({
+          path: "/dataCenter/questionnaire",
+          query: { id: detailId }
+        });
+      }
+    },
+    // 数据接口
+    getIndexData() {
+      this.http.get(this.ports.dataCenter.index, res => {
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 1000);
+        if (res.status === 200) {
+          this.item = res.data.data;
+          this.isRunning();
+        }
       });
+    },
+    // 筛选是否进行中
+    isRunning() {
+      // 排序，进行中的在前面
+      this.item.sort(function(a, b) {
+        return (
+          new Date(b.start_time).getTime() - new Date(a.start_time).getTime()
+        );
+      });
+      for (let i of this.item) {
+        i.cover_img = "http://cqeic.swkj2014.com" + i.cover_img;
+        let startTime = new Date(i.start_time).getTime();
+        let endTime = new Date(i.end_time).getTime();
+        if (startTime < Date.now() && Date.now() < endTime) {
+          i.isrunning = true;
+        } else {
+          i.isrunning = false;
+        }
+      }
     }
+  },
+  mounted() {
+    this.getIndexData();
   }
 };
 </script>
@@ -109,6 +145,7 @@ export default {
       margin-bottom: 33px;
     }
     .item {
+      margin-bottom: 30px;
       .item-title {
         p {
           font-size: 30px;

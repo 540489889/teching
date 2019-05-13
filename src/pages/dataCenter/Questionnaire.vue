@@ -2,29 +2,26 @@
   <div class="questionnaire">
     <loading-bar v-show="isLoading"></loading-bar>
     <div class="banner">
-      <img src="../../assets/img/data-link.png" alt>
+      <img :src="subject.cover_img" alt>
     </div>
     <div class="quesion-title">
-      <p>中学生作业调查问卷</p>
-      <p>亲爱的同学们:你好，我们是重庆市市九龙坡区十三中二年五班的学生，首先感谢您在百忙之中来完成此问卷。</p>
+      <p>{{subject.title}}</p>
+      <p>{{subject.subtitle}}</p>
     </div>
     <div class="subject">
       <form action>
-        <div class="subject-item" v-for="(item,index) in subject.list" :key="index">
-          <div class="subject-title">
-            {{item.title}}
-            <span>{{item.isradio?"（单选）":"（多选）"}}</span>
-          </div>
+        <div class="subject-item" v-for="item in subject.content" :key="item.id">
+          <div class="subject-title">{{item.title}}</div>
           <div class="check-item" v-if="!item.isTextArea">
-            <label v-for="(childVal,i) in item.options" :key="i">
+            <label v-for="(childVal,i) in item.answer" :key="i">
               <input
                 name="n1"
-                :type="item.type"
-                :value="childVal.id"
+                type="checkbox"
+                :value="childVal"
                 v-model="item.checkValue"
-                v-on:change="change()"
+                v-on:change="change(item.checkValue)"
               >
-              <span>{{childVal.value}}</span>
+              <span>{{childVal}}</span>
             </label>
           </div>
           <div class="check-item" v-else>
@@ -36,11 +33,12 @@
                 rows="10"
                 v-model="item.checkValue"
                 @input="handleInputTextarea"
+                placeholder="请输入内容"
               ></textarea>
             </div>
           </div>
         </div>
-        <button type="submit">提交</button>
+        <button type="button" @click="subAnswer()">提交</button>
       </form>
     </div>
     <div class="model" ref="model" v-if="isModelShow">
@@ -50,11 +48,21 @@
           <form action>
             <div class="input" v-for="(item,index) in loginData" :key="index">
               <span>{{item.name}} ：</span>
-              <input type="text" :placeholder="item.placeholder">
+              <input type="text" v-model="item.data" :placeholder="item.placeholder" required>
             </div>
           </form>
         </div>
-        <button class="yes" @click="submitLogin">确定</button>
+        <button type="button" class="yes" @click="submitLogin">确定</button>
+      </div>
+    </div>
+    <div class="pop-box" v-if="isSuccess">
+      <div class="content">
+        <div class="result">
+          <div class="img">
+            <img src="../../assets/ico/check.png" alt>
+          </div>
+          <div>提交成功</div>
+        </div>
       </div>
     </div>
   </div>
@@ -152,9 +160,13 @@
             width: 100%;
             overflow: auto;
             word-break: break-all;
-            padding: 0;
+            padding: 20px;
             resize: none;
             outline: none;
+            box-sizing: border-box;
+            textarea::-webkit-input-placeholder {
+              color: #bbb;
+            }
           }
         }
       }
@@ -237,11 +249,50 @@
       }
     }
   }
+  .pop-box {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.5);
+    .content {
+      width: 512px;
+      height: 322px;
+      background-color: #ffffff;
+      border-radius: 18px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      .result {
+        text-align: center;
+        .img {
+          width: 85px;
+          height: 85;
+          margin: 54px auto 0;
+          padding: 20px;
+          background: green;
+          border-radius: 50%;
+          img {
+            width: 100%;
+          }
+        }
+        div {
+          margin-top: 57px;
+          font-size: 34px;
+          color: #333;
+        }
+      }
+    }
+  }
 }
 </style>
 
 <script>
 import loadingBar from "../components/loading.vue";
+import { setTimeout, clearTimeout } from "timers";
 export default {
   name: "questionnaire",
   components: {
@@ -250,96 +301,131 @@ export default {
   data() {
     return {
       isLoading: false,
-      isModelShow: true,
+      isModelShow: false,
+      isSuccess: false,
+      answer: [],
       loginData: [
         {
           name: "学校",
-          placeholder: "请输入您所在学校名称"
+          placeholder: "请输入您所在学校名称",
+          data: ""
         },
         {
           name: "班级",
-          placeholder: "请输入您所在班级"
+          placeholder: "请输入您所在班级",
+          data: ""
         },
         {
           name: "姓名",
-          placeholder: "请输入您的姓名"
+          placeholder: "请输入您的姓名",
+          data: ""
         },
         {
           name: "密码",
-          placeholder: "请输入填报密码"
+          placeholder: "请输入填报密码",
+          data: ""
         }
       ],
-      subject: {
-        bannerimg: "",
-        theme: "",
-        list: [
-          {
-            title: "Q1：你所在的年级?",
-            type: "radio",
-            checkValue: [],
-            isTextArea: false,
-            options: [
-              {
-                id: "1",
-                value: "初一"
-              },
-              {
-                id: "2",
-                value: "初二"
-              },
-              {
-                id: "3",
-                value: "初三"
-              }
-            ]
-          },
-          {
-            title: "Q4：觉得写作业时困难重重的科目是？",
-            type: "checkbox",
-            checkValue: [],
-            value: "",
-            options: [
-              {
-                id: "1",
-                value: "初一",
-                ischecked: true
-              },
-              {
-                id: "2",
-                value: "初二",
-                ischecked: true
-              },
-              {
-                id: "3",
-                value: "初三",
-                ischecked: true
-              }
-            ],
-            isTextArea: false
-          },
-          {
-            title: "Q6：您对各科老师布置的作业有什么意见或建议？",
-            type: "textarea",
-            checkValue: [],
-            isTextArea: true
-          }
-        ]
-      }
+      subject: {}
     };
   },
   methods: {
-    change() {
-      // console.log(this.subject[0].checkValue);
-    },
-    submitLogin() {
-      this.isModelShow = false;
+    change(data) {
+      // console.log(data);
     },
     handleInputTextarea() {
-      console.log(this.subject.list[2].checkValue);
+      // console.log(this.subject.content[2].checkValue);
+    },
+    showToastTxtOnly(text) {
+      this.toast = this.$createToast({
+        txt: text,
+        type: "txt"
+      });
+      this.toast.show();
+    },
+    // 获取试卷题目
+    getQuestions() {
+      this.http.post(
+        this.ports.dataCenter.detail,
+        { id: this.$route.query.id },
+        res => {
+          if (res.status === 200) {
+            this.subject = res.data;
+            this.handelQuestions();
+          }
+        }
+      );
+    },
+    // 处理问卷数据
+    handelQuestions() {
+      var newArr = [];
+      this.subject.cover_img =
+        "http://cqeic.swkj2014.com" + this.subject.cover_img;
+      for (var i = 0; i < this.subject.content.length; i++) {
+        if (!this.subject.content[i].answer) {
+          this.subject.content[i].isTextArea = true;
+        } else {
+          this.subject.content[i].isTextArea = false;
+        }
+        this.subject.content[i].checkValue = [];
+      }
+    },
+    // 提交登录数据
+    submitLogin() {
+      let params = {};
+      params.school = this.loginData[0].data;
+      params.team = this.loginData[1].data;
+      params.username = this.loginData[2].data;
+      params.password = this.loginData[3].data;
+      for (var i = 0; i < this.loginData.length; i++) {
+        if (this.loginData[i].data === "") {
+          this.showToastTxtOnly("请填写完整信息");
+          return false;
+        }
+      }
+      this.http.post(this.ports.dataCenter.islogin, params, res => {
+        if (res.status == 500) {
+          this.showToastTxtOnly(res.message);
+        } else {
+          this.isModelShow = false;
+        }
+      });
+    },
+    // 提交答案
+    subAnswer() {
+      let params = {};
+      params.id = this.$route.query.id;
+      params.answer = "";
+      for (var i = 0; i < this.subject.content.length; i++) {
+        if (this.subject.content[i].isTextArea === true) {
+          let newCheckValue = this.subject.content[i].checkValue.split('"');
+          this.subject.content[i].checkValue = newCheckValue;
+        }
+        this.answer.push(this.subject.content[i].checkValue);
+        if (this.subject.content[i].checkValue.length == 0) {
+          this.showToastTxtOnly("您的问卷还没有做完");
+          return false;
+        }
+      }
+      params.answer = JSON.stringify(this.answer);
+      this.http.post(this.ports.dataCenter.answer, params, res => {
+        if (res.status == 500) {
+          this.showToastTxtOnly(res.message);
+        } else {
+          let timer;
+          this.isSuccess = true;
+          let _this = this;
+          timer = setTimeout(function() {
+            _this.isSuccess = false;
+            _this.$router.replace({ path: "/" });
+            clearTimeout(timer);
+          }, 3000);
+        }
+      });
     }
   },
   mounted() {
-    console.log(this.$route.query.id);
+    this.getQuestions();
   }
 };
 </script>
