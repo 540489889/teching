@@ -7,6 +7,13 @@ export default {
     index: '/home/Indexd/index',//系统轮播图热点展示
     Classroom:'/home/Indexd/intheAir'//
   },
+  // 数据中心
+  dataCenter: {
+    index: 'home/indexd/investigation', //调查调研
+    islogin: 'home/indexd/investiLogin', //提交登录
+    detail: 'home/indexd/gationDetal', //问卷详情页
+    answer: 'home/indexd/gationAnswer' //提交答案
+  },
   //技术装备
   tEquipment: {
     index: '/home/Indexd/technology',//技术装备列表
