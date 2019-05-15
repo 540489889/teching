@@ -4,12 +4,12 @@
       <div class="title flex-box">
         <div class="left"><img src="./../../assets/ico/rm-banner.png" alt=""></div>
         <div class="right1 box-1">
-          <h4 class="media_title">寄小读者[插图本]</h4>
-          <p class="media_title">冰心 2480人在读</p>
+          <h4 class="media_title">{{list.bookname}}</h4>
+          <p class="media_title">{{list.author}} {{list.rednum}}人在读</p>
         </div>
         <div class="right2 flex-box">
-          <cube-rate v-model="star" :disabled="disabled" :max="maxStar" :justify="justify"></cube-rate>
-          <span class="scoreNum">9.0</span>
+          <cube-rate v-model="list.scores" :disabled="disabled" :max="maxStar" :justify="justify"></cube-rate>
+          <span class="scoreNum">{{parseFloat(list.scores*2)}}</span>
         </div>
       </div>
       <div class="scoreContent">
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="define">
-      <button>确定</button>
+      <button @click="scoreClick">确定</button>
     </div>
   </div>
 </template>
@@ -39,22 +39,69 @@
     data (){
       return{
         placeholder: '请输入内容',
-        maxlength: 100,
+        maxlength: 300,
         autofocus: true,
         value: 0,
         textVal: '',
-        star: 4.5,
+        star: 0,
         maxStar: 5,
         disabled: true,
         justify: false,
-        content: {}
+        list: {}
       }
     },
     methods: {
-
+      showToastTxt(text) {
+        this.toast = this.$createToast({
+          txt: text,
+          type: 'txt',
+          $events: {
+            timeout: () => {
+            }
+          }
+        })
+        this.toast.show()
+      },
+      showToastTxtOnly(text) {
+        this.toast = this.$createToast({
+          txt: text,
+          type: 'txt',
+          $events: {
+            timeout: () => {
+              this.$router.go(-1);
+            }
+          }
+        })
+        this.toast.show()
+      },
+      getData () {
+        let list = JSON.parse(this.$route.query.list)
+        this.list = list
+        console.log(list)
+      },
+      //评分
+      scoreClick(){
+        let params = {};
+        params.eid = this.list.id //电子书id
+        params.score = this.value //评分
+        params.content = this.textVal //内容
+        if (this.value == 0) {
+          this.showToastTxt('您还没有为打分哟！');
+          return false
+        }
+        if (this.textVal == '') {
+          this.showToastTxt('请输入您的评价！');
+          return false
+        }
+        this.http.post(this.ports.learning.addComment,params,res=>{
+          console.log(res)
+          let _this = this
+          this.showToastTxtOnly(res.message);
+        })
+      }
     },
     mounted (){
-
+      this.getData()
     }
   }
 </script>
@@ -71,8 +118,8 @@
         border-radius: 5px;
         .left{
           img{
-            width:80px;
-            height:100px;
+            width:100px;
+            height:120px;
           }
         }
         .right1{
@@ -99,7 +146,7 @@
       }
       .scoreContent{
         .scoreTx{
-          padding:20px 0;
+          padding:30px 0;
           font-size:32px;
           margin-bottom:10px;
         }
@@ -124,7 +171,7 @@
         background-color:#1ba255;
         color:white;
         text-align: center;
-        font-size:36px;
+        font-size:32px;
         width:630px;
         height:100px;
         line-height:100px;

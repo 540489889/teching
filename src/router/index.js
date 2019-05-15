@@ -265,7 +265,7 @@ var router =  new Router({
       path: '/classroom/index',
       name: 'classroomIndex',
       component: resolve => require(['@/pages/classroom/index'], resolve) ,
-      meta:{index: 2, title: '课堂', requireAuth: false}
+      meta:{index: 2, title: '空中课堂', requireAuth: false}
     },
 
     //登录
@@ -519,6 +519,13 @@ var router =  new Router({
       name: 'MeIndex',
       component: resolve => require(['@/pages/me/index'], resolve) ,
       meta:{index: 4, title: '我的', requireAuth: true}
+    },
+    //设置
+    {
+      path: '/me/setUp',
+      name: 'MeSetUp',
+      component: resolve => require(['@/pages/me/setUp'], resolve) ,
+      meta:{index: 5, title: '设置', requireAuth: true}
     },
     //社区
     {

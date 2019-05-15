@@ -1,6 +1,6 @@
 <template>
   <div class="homeWrapper recommend-content">
-
+    <loading v-if="isLoading"></loading>
     <search-bar></search-bar>
     <index-swiper :list="bannerList"></index-swiper>
     <advert-swiper :list="recomdList"></advert-swiper>
@@ -15,7 +15,7 @@
   import searchBar from '../components/searchBar.vue'
   import indexSwiper from '../components/indexSwiper.vue'
   import advertSwiper from '../components/advertSwiper.vue'
-  import loadingBar from '../components/loading.vue'
+  import loading from '../components/loading.vue'
 //  import
   export default {
     name: 'Home',
@@ -34,7 +34,7 @@
       advertSwiper,
       homeList,
       navBar,
-      loadingBar
+      loading
     },
     created (){
       setTimeout(() => {

@@ -221,3 +221,18 @@
 .releaseL2 .cube-select-placeholder{
   color:#010101;
 }
+.tabMe .cube-tab_active{
+  color:black;
+  position:relative;
+}
+.tabMe .cube-tab_active::before{
+  content: "";
+  display: inline-block;
+  height:2px;
+  width:20px;
+  background-color:#029b46;
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform: translateX(-50%);
+}

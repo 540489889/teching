@@ -31,6 +31,9 @@
 .detailsWrapper .cube-rate-item,.scoreWrapper .cube-rate-item{
   width:16px;
 }
+.inside .cube-rate-item,.scoreWrapper .cube-rate-item{
+  width:12px;
+}
 .infoWrapper  .zy_title{
   font-size:30px;
   padding:10px;

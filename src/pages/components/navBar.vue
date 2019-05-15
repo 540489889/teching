@@ -1,7 +1,7 @@
 <template>
   <cube-tab-bar
     class="navBar"
-    v-model="selectedLabelSlots"
+    v-model="selectedNavTitle"
     @click="clickHandler"
     @change="changeHandler">
     <cube-tab
@@ -24,7 +24,7 @@
   export default {
     data () {
       return {
-        selectedLabelSlots: this.$store.state.defaultTitle,
+        selectedLabelSlots: '首页',
         tabs: [{
           label: '首页',
           icon: 'cubeic-home'
@@ -44,12 +44,12 @@
       }
     },
     props:{
-      selectedNavTitle: String
+      selectedNavTitle: String,
     },
     methods: {
       clickHandler (label) {
         // if you clicked home tab, then print 'Home'
-        this.$store.commit('changeTitle',label)
+//        this.$store.commit('changeTitle',label)
         switch (label){
           case '首页':
             this.$router.push('/')
@@ -73,7 +73,7 @@
     },
     mounted (){
 //      this.clickHandler(this.selectedNavTitle)
-    }
+    },
   }
 </script>
 

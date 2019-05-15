@@ -25,9 +25,11 @@ export default {
     Garden: '/home/Indexd/Garden',//学习园地首页
     readList: '/home/Indexd/readList',//阅读资源列表
     rebook: '/home/Indexd/rebook',//阅读内容
+    redbook: '/home/Indexd/redbook',//阅读内容
     oneComment: '/home/Indexd/oneComment', //一级评论列表
     commentList: '/home/Indexd/commentList', //评论列表
     commentDetails: '/home/Indexd/commentDetails', //评论列表详情
+    addComment: '/home/Indexd/addComment', //添加以及评论
   },
   //专题活动
   specialActive: {
@@ -125,5 +127,8 @@ export default {
   //社区
   community: {
 
+  },
+  me:{
+    userIndex: '/home/Indexd/UserIndex',//用户首页
   }
 }

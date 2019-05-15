@@ -1,16 +1,15 @@
 <template>
   <div id="app">
-    <loading v-if="isLoading"></loading>
     <transition :name="transitionName">
       <router-view/>
     </transition>
-    <nav-bar v-show="showBar"></nav-bar>
+    <nav-bar :selectedNavTitle="this.$store.state.defaultTitle" v-show="showBar"></nav-bar>
   </div>
 </template>
 
 <script>
+
 import navBar from './pages/components/navBar.vue'
-import loading from './pages/components/loading.vue'
 export default {
   name: 'app',
   data (){
@@ -21,18 +20,18 @@ export default {
     }
   },
   created (){
-    setTimeout(() => {
-      this.isLoading = false
-    }, 1000)
+  },
+  methods:{
+
   },
   components:{
     navBar,
-    loading
   },
   watch: {
     //使用watch 监听$router的变化
     '$route' (to, from) {
-
+//      this.$store.state.defaultTitle = '首页'
+      this.$store.commit('changeTitle',to.meta.title)
       //导航显示
       switch (to.name){
         case 'Home':

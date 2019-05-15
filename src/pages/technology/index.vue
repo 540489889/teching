@@ -1,5 +1,6 @@
 <template>
   <div class="partyWrapper recommend-content aboutUs">
+    <loading v-if="isLoading"></loading>
     <div class="searchDiv">
       <search-bar></search-bar>
     </div>
@@ -104,7 +105,7 @@
 </template>
 
 <script>
-  import loadingBar from '../components/loading.vue'
+  import loading from '../components/loading.vue'
   import searchBar from '../components/searchBar.vue'
   import currSwiper from '../components/currSwiper.vue'
   export default {
@@ -114,7 +115,7 @@
         activity: [], //活动风采
         banner: [], //banner
         branch: [], //职能职责
-        isLoading: false,
+        isLoading: true,
         searchVal: '',
         items: [1, 2, 3, 4, 5, 6],
         direction: "horizontal",
@@ -130,8 +131,13 @@
     },
     components:{
       searchBar,
-      loadingBar,
+      loading,
       currSwiper
+    },
+    created (){
+      setTimeout(() => {
+        this.isLoading = false
+      }, 500)
     },
     methods: {
       getPartyIndex (){

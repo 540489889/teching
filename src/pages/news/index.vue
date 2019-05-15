@@ -1,6 +1,6 @@
 <template>
   <div class="indexWrapper recommend-content">
-
+    <loading v-if="isLoading"></loading>
     <div class="spImg" v-if="map">
       <!--<img src="./../../assets/img/infm-b-1.png" alt="">-->
       <map-bar :maps="map"></map-bar>
@@ -15,7 +15,7 @@
 //  import cubePage from './../components/cube-page.vue'
 //  import './../../assets/stylus/cubeList.styl'
   import advertSwiper from '../components/advertSwiper.vue'
-  import loadingBar from '../components/loading.vue'
+  import loading from '../components/loading.vue'
   import activity from './components/activity.vue'
   import fruit from './components/fruit.vue'
   import './../../assets/style/cubeNews.css'
@@ -43,7 +43,7 @@
     },
     components:{
       advertSwiper,
-      loadingBar,
+      loading,
       mapBar,
       activity,
       fruit

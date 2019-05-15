@@ -2,35 +2,43 @@
   <div class="meWrapper recommend-content">
     <div class="">
       <div class="meTitle flex-box">
-        <router-link tag="h6" to="/reg/login" class="mePsBg">
-          <span><i></i></span>
-          <p>登录</p>
-        </router-link>
+        <!--<router-link tag="h6" to="/reg/login" class="mePsBg">-->
+          <!--<span><i></i></span>-->
+          <!--<p>登录</p>-->
+        <!--</router-link>-->
+      </div>
+      <div class="userInfo flex-box">
+        <img class="userTx" src="./../../assets/img/party-c-1.png" alt="">
+        <span>栀璃鸢年</span>
+        <router-link tag="span" to="./setUp" class="setUp"><i class="cubeic-setting"></i>设置</router-link>
       </div>
       <div class="meContent">
-        <h2 class="flex-box">
-          <span class="left-ico flex-box"><i class="ds-ico"></i>最近阅读</span>
-          <span class="flex-box right-text">更多 <i class="cubeic-arrow"></i></span>
-        </h2>
-        <div class="scroll-list-wrap">
-          <cube-scroll
-            ref="scroll"
-            :data="items"
-            direction="horizontal"
-            :options="options">
-            <ul class="list-wrapper">
-              <li v-for="item in items" class="list-item">
-                <div class="imgBox"><img src="../../assets/img/banner-me-1.png" alt=""></div>
-                <h3 class="media_desc">同理心：做个让人舒服的做个让人舒服的做个让人舒服的</h3>
-                <p class="media_title">霍华德·本内特霍华德·本内特</p>
-              </li>
-            </ul>
-          </cube-scroll>
-        </div>
+        <!--<h2 class="flex-box">-->
+          <!--<span class="left-ico flex-box"><i class="ds-ico"></i>最近阅读</span>-->
+          <!--<span class="flex-box right-text">更多 <i class="cubeic-arrow"></i></span>-->
+        <!--</h2>-->
+        <h3 class="tabMe">
+          <cube-tab-bar
+            v-model="selectedLabelSlots"
+            inline
+            @click="clickHandler">
+            <cube-tab v-for="(item, index) in tabs" :label="item.label" :key="item.label">
+              <!-- name为icon的插槽 -->
+              <i slot="icon" :class="item.icon"></i>
+              <!-- 默认插槽 -->
+              {{item.label}}
+            </cube-tab>
+          </cube-tab-bar>
+        </h3>
+        <transition name="component-fade" mode="out-in">
+          <component
+            :is="view"
+          ></component>
+        </transition>
       </div>
-      <div class="outLog" @click="outLogin">
-        退出登录
-      </div>
+      <!--<div class="outLog" @click="outLogin">-->
+        <!--退出登录-->
+      <!--</div>-->
     </div>
     <!--<nav-bar :selectedNavTitle="selectedNavTitle"></nav-bar>-->
   </div>
@@ -38,59 +46,56 @@
 
 <script>
   import navBar from './../components/navBar.vue'
+  import reading from './components/reading.vue'
+  import live from './components/live.vue'
+  import experience from './components/experience.vue'
   import './../../assets/style/cubeRest.css'
-  import { mapMutations } from 'vuex'
   export default {
     name: 'Home',
     data () {
       return {
-        selectedNavTitle: '我的',
+        view: 'reading',
+        selectedLabelSlots: '在线阅读',
+        tabs: [{
+          label: '在线阅读',
+          icon: 'cub1'
+        }, {
+          label: '直播课堂',
+          icon: 'cub2'
+        }, {
+          label: '读书心得',
+          icon: 'cub3'
+        }, ],
         searchVal: '',
-        items: [1, 2, 3, 4, 5, 6],
-        direction: "horizontal",
-        options: {
-//          scrollbar: {
-//            fade: false
-//          }
-        },
-        scrollX: true,
-        scrollY: false
       }
     },
     components: {
-      navBar
+      navBar,
+      reading,
+      live,
+      experience
     },
     created (){
 
     },
     mounted (){
-      console.log(this.$route.path)
+      this.getMeData()
     },
     methods:{
-      ...mapMutations(['changeLogin']),
-      showToastTxtOnly(text) {
-        this.toast = this.$createToast({
-          txt: text,
-          type: 'txt'
-        })
-        this.toast.show()
+      clickHandler (label) {
+        if(label=='在线阅读'){
+          this.view = 'reading'
+        }
+        if(label=='直播课堂'){
+          this.view = 'live'
+        }
+        if(label=='读书心得'){
+          this.view = 'experience'
+        }
       },
-      outLogin (){
-        this.http.get(this.ports.reg.outLogin, res =>{
-          this.showToastTxtOnly(res.message)
+      getMeData(){
+        this.http.get(this.ports.me.userIndex,res=>{
           console.log(res)
-          if(res.status==200){
-            this.userToken = res.loginStatus;
-            // 将用户token保存到vuex中
-            this.changeLogin({ Authorization: this.userToken });
-            //如果存在参数
-            if(this.$route.query.redirect) {
-              let redirect = this.$route.query.redirect;
-              this.$router.replace(redirect);//则跳转至进入登录页前的路由
-            }else{
-              this.$router.replace({ path: '/reg/login' });
-            }
-          }
         })
       }
     }
@@ -98,13 +103,20 @@
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less">
+  .component-fade-enter-active, .component-fade-leave-active {
+    transition: opacity .3s ease;
+  }
+  .component-fade-enter, .component-fade-leave-to
+    /* .component-fade-leave-active for below version 2.1.8 */ {
+    opacity: 0;
+  }
   .meWrapper{
     background-color:#f5f5f5;
-    font-size:24px;
+    font-size:28px;
     .meTitle{
       width:750px;
-      height:370px;
-      background:url(./../../assets/ico/mg-t-bg.png) no-repeat center white;
+      height:243px;
+      background:url(./../../assets/ico/m-t-1.png) no-repeat center white;
       background-size:100%;
       text-align: center;
       justify-content: center;
@@ -133,6 +145,38 @@
           margin-top:10px;
         }
       }
+    }
+    .userInfo{
+      font-size:32px;
+      justify-content: space-between;
+      position:relative;
+      background-color:white;
+      height:120px;
+      padding:0 20px;
+      margin-bottom:20px;
+      .userTx{
+        position:absolute;
+        width:120px;
+        height:120px;
+        border-radius: 50%;
+        top:-90px;
+      }
+      .setUp{
+        font-size:28px;
+        background-color:#e8e8e8;
+        padding:5px 10px;
+        border-radius: 20px;
+        i{
+          color:#8a8a8a;
+          margin-right:5px;
+        }
+      }
+    }
+    .tabMe{
+      padding:20px;
+      padding-top:0;
+      margin-bottom:20px;
+      border-bottom:1px solid #eee;
     }
     .meContent{
       background-color:white;

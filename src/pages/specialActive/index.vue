@@ -1,6 +1,6 @@
 <template>
   <div class="infoWrapper recommend-content">
-
+    <loading v-if="isLoading"></loading>
     <search-bar></search-bar>
     <div class="infoList1 meWrapper">
       <h2 class="titleBox flex-box">
@@ -95,7 +95,7 @@
 
 <script>
   import './../../assets/style/cubeNews.css'
-  import loadingBar from './../components/loading'
+  import loading from './../components/loading'
   import searchBar from '../components/searchBar.vue'
   import indexSwiper from '../components/indexSwiper.vue'
   import './../../assets/style/zy.media.min.css'
@@ -129,10 +129,12 @@
     components:{
       searchBar,
       indexSwiper,
-      loadingBar
+      loading
     },
     created (){
-
+      setTimeout(() => {
+        this.isLoading = false
+      }, 500)
     },
     methods: {
       moveInit(){
