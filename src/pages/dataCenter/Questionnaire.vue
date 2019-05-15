@@ -270,7 +270,7 @@
         text-align: center;
         .img {
           width: 85px;
-          height: 85;
+          height: 85px;
           margin: 54px auto 0;
           padding: 20px;
           background: green;
@@ -301,7 +301,7 @@ export default {
   data() {
     return {
       isLoading: false,
-      isModelShow: false,
+      isModelShow: true,
       isSuccess: false,
       answer: [],
       loginData: [

@@ -4,7 +4,7 @@
     <search-bar :placeholder="placeholder" @changeValue="changeValue"></search-bar>
     <div class="line"></div>
     <div class="data-head flex-box">
-      <img src="../../assets/img/data-head.png" alt>
+      <img src="./../../assets/img/data-head.png" alt>
       <span>教育数据</span>
       <span>可视化界面、教学数据、装备数据</span>
     </div>

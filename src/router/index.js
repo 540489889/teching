@@ -130,6 +130,7 @@ var router =  new Router({
       component: resolve => require(['@/pages/specialActive/index'], resolve) ,
       meta:{index: 2, title: '专题活动', requireAuth: false}
     },
+
     //人工智能列表
     {
       path: '/specialActive/intelligenceList',
@@ -182,6 +183,19 @@ var router =  new Router({
       name: 'testDetails',
       component: resolve => require(['@/pages/specialActive/testDetails'], resolve) ,
       meta:{index: 4, title: '人工智能', requireAuth: false}
+    },
+    //数据中心
+    {
+      path: '/dataCenter/index',
+      name: 'dataCenterIndex',
+      component: resolve => require(['@/pages/dataCenter/index'], resolve) ,
+      meta:{index: 3, title: '数据中心', requireAuth: false}
+    },
+    {
+      path: '/dataCenter/Questionnaire',
+      name: 'Questionnaire',
+      component: resolve => require(['@/pages/dataCenter/Questionnaire'], resolve) ,
+      meta:{index: 4, title: '数据中心', requireAuth: false}
     },
     //校园影视列表
     {
