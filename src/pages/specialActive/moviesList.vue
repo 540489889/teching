@@ -1,48 +1,31 @@
 <template>
   <div class="teIndex recommend-content">
-    <loading v-if="isLoading"></loading>
     <search-bar></search-bar>
     <div class="teNav">
       <cube-scroll-nav-bar :current="current" :labels="labels" @change="changeHandler" />
     </div>
-    <div class="videoList1" v-show="current=='校园影视视频'">
+    <div class="videoList1 movesWrapper" v-show="current=='校园影视视频'">
       <ul>
-        <li>
+        <li v-for="item in moves" :key="item.id">
           <div class="tpVideo flex-box">
             <div class="leftImg">
             </div>
             <div class="textInfo box-1">
-              <h4 class="media_title">重庆市九龙坡区育才中学低33届春季运动会重庆市九龙坡区育才中学低33届春季运动会</h4>
-              <p>2019.04.23 10:00 <span>23435观看</span></p>
+              <h4 class="media_title">{{item.title}}</h4>
+              <p>{{item.update}} <span>{{item.locknum}}观看</span></p>
             </div>
           </div>
           <div class="videoImg">
-            <video poster="https://r1.ykimg.com/05420408584A363C6A0A47047DD24931" data-config='{"mediaTitle": "测试视频--视频"}'>
-              <source src="http://www.w3cschool.cc/try/demo_source/mov_bbb.mp4" type="video/mp4">
-              您的浏览器不支持HTML5视频
-            </video>
-          </div>
-        </li>
-        <li>
-          <div class="tpVideo flex-box">
-            <div class="leftImg">
-            </div>
-            <div class="textInfo box-1">
-              <h4 class="media_title">重庆市九龙坡区育才中学低33届春季运动会重庆市九龙坡区育才中学低33届春季运动会</h4>
-              <p>2019.04.23 10:00 <span>23435观看</span></p>
-            </div>
-          </div>
-          <div class="videoImg">
-            <video poster="https://r1.ykimg.com/05420408584A363C6A0A47047DD24931" data-config='{"mediaTitle": "测试视频--视频"}'>
-              <source src="http://www.w3cschool.cc/try/demo_source/mov_bbb.mp4" type="video/mp4">
+            <video :poster="$store.state.IMGPATH+item.cover_img">
+              <source :src="$store.state.IMGPATH+item.video" type="video/mp4">
               您的浏览器不支持HTML5视频
             </video>
           </div>
         </li>
         <infinite-loading
-          :on-infinite="onInfinite"
+          :on-infinite="onInfiniteTwo"
           spinner="spiral"
-          ref="infiniteLoading">
+          ref="infiniteLoadings">
           <span slot="no-more" class="no-more">我也是有底线的</span>
         </infinite-loading>
       </ul>
@@ -82,7 +65,6 @@
 <script>
   import "./../../assets/style/cubeNews.css"
   import searchBar from '../components/searchBar.vue'
-  import loading from '../components/loading.vue'
   import InfiniteLoading from 'vue-infinite-loading';
   import './../../assets/style/zy.media.min.css'
   import './../../assets/js/zy.media.min.js'
@@ -93,7 +75,9 @@
         current: '校园影视活动',
         isLoading: true,
         list: [],
+        moves: [],
         type: 0,
+        title: '',
         labels: [
           '校园影视活动',
           '校园影视视频',
@@ -105,7 +89,6 @@
     },
     components: {
       searchBar,
-      loading,
       InfiniteLoading
     },
     methods: {
@@ -119,21 +102,43 @@
           case '校园影视视频':
             this.type = 1
             this.page = 0
+            this.moves = []
+            this.onInfiniteTwo()
             break
         }
         this.changeFilter()
-
       },
-      onInfinite($state,type) {
-        console.log(type)
-        this.isLoading = false
+      onInfiniteTwo($state,type) {
         let _this = this;
         let pageSize = 8;
         this.page += 1;
         let data = [];
-        this.http.get(this.ports.tEquipment.index+'?page='+this.page+'&&type='+this.type ,res =>{
+        this.http.get(this.ports.specialActive.movesList+'?page='+this.page+'&&title='+this.title ,res =>{
           if(res.status == 200){
-            data = res.data
+            data = res.data.data
+            console.log(data)
+            if(data.length){
+              for(var i = 0;i < data.length;i++){
+                this.moves.push(data[i]);
+              }
+//              this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');//加载
+              $state.loaded();
+            }else{
+//              this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');//停止加载
+              $state.complete();
+            }
+            this.moveInit()
+          }
+        })
+      },
+      onInfinite($state,type) {
+        let _this = this;
+        let pageSize = 8;
+        this.page += 1;
+        let data = [];
+        this.http.get(this.ports.specialActive.schoolList+'?page='+this.page+'&&title='+this.title ,res =>{
+          if(res.status == 200){
+            data = res.data.data
             console.log(data)
             if(data.length){
               for(var i = 0;i < data.length;i++){
@@ -153,13 +158,22 @@
       },
       changeFilter() {
         this.list = [];
+        this.moves = []
         this.$nextTick(() => {
           this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+          this.$refs.infiniteLoadings.$emit('$InfiniteLoading:reset');
         });
       }
     },
     mounted (){
-      this.moveInit()
+
+    },
+    watch :{
+      moves(){
+        this.$nextTick(() => {
+          this.moveInit()
+        });
+      }
     }
   }
 </script>

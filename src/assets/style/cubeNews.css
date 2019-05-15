@@ -28,10 +28,13 @@
   border-radius: 25px;
   border:none;
 }
-.detailsWrapper .cube-rate-item{
+.detailsWrapper .cube-rate-item,.scoreWrapper .cube-rate-item{
   width:16px;
 }
 .infoWrapper  .zy_title{
   font-size:30px;
   padding:10px;
+}
+.sayValue .cube-textarea{
+  background-color:#f5f5f5;
 }

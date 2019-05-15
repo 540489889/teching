@@ -15,36 +15,33 @@ import axios from 'axios'
 Vue.config.debug = true
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
-axios.defaults.withCredentials = true;
-axios.interceptors.response.use(function(response) {
-    // token 已过期，重定向到登录页面
-    console.log(router, 777)
-    if (response.data.loginStatus === 0) {
-      // localStorage.clear()
-      localStorage.setItem('Authorization', 0);
+axios.defaults.withCredentials=true;
+axios.interceptors.response.use(function (response) {
+  // token 已过期，重定向到登录页面
+  if (response.data.loginStatus===0){
+    // localStorage.clear()
+    localStorage.setItem('Authorization', 0);
 
-      if (router.currentRoute.meta.requireAuth) {
-        router.replace({
-          path: '/',
-          query: { redirect: router.currentRoute.fullPath }
-        })
-      }
+    if( router.currentRoute.meta.requireAuth){
+      router.replace({
+        path:'/reg/login',
+        query: {redirect: router.currentRoute.fullPath}
+      })
     }
-    return response
-  }, function(error) {
-    // Do something with response error
-    return Promise.reject(error)
-  })
-  //swiper
+  }
+  return response
+}, function (error) {
+  // Do something with response error
+  return Promise.reject(error)
+})
+//swiper
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
-Vue.use(VueAwesomeSwiper, /* { default global options } */ )
-  // By default we import all the components.
-  // Only reserve the components on demand and remove the rest.
-  // Style is always required.
-  //vuex
-
-
+Vue.use(VueAwesomeSwiper, /* { default global options } */)
+// By default we import all the components.
+// Only reserve the components on demand and remove the rest.
+// Style is always required.
+//vuex
 import store from './store/index'
 import {
   Style,
@@ -132,7 +129,7 @@ Vue.use(ScrollNavBar)
 Vue.use(RecycleList)
 
 Vue.config.productionTip = false
-  /* eslint-disable no-new */
+/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,

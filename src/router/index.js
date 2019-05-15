@@ -88,6 +88,34 @@ var router =  new Router({
       component: resolve => require(['@/pages/learning/bookDetails'], resolve) ,
       meta:{index: 4, title: '阅读资源', requireAuth: false}
     },
+    //填写读书心得
+    {
+      path: '/learning/score',
+      name: 'LearningScore',
+      component: resolve => require(['@/pages/learning/score'], resolve) ,
+      meta:{index: 5, title: '评分', requireAuth: false}
+    },
+    //说点什么
+    {
+      path: '/learning/sayValue',
+      name: 'sayValue',
+      component: resolve => require(['@/pages/learning/sayValue'], resolve) ,
+      meta:{index: 6, title: '发表评论', requireAuth: false}
+    },
+    //心得体会列表
+    {
+      path: '/learning/experience',
+      name: 'LearningExperience',
+      component: resolve => require(['@/pages/learning/experience'], resolve) ,
+      meta:{index: 4, title: '评分', requireAuth: false}
+    },
+    //心得体会列表详情
+    {
+      path: '/learning/experienceAll',
+      name: 'LearningExperienceAll',
+      component: resolve => require(['@/pages/learning/experienceAll'], resolve) ,
+      meta:{index: 5, title: '评分', requireAuth: false}
+    },
     //学习园地 在线资源
     {
       path: '/learning/onLineResources',
@@ -109,6 +137,12 @@ var router =  new Router({
       component: resolve => require(['@/pages/specialActive/intelligenceList'], resolve) ,
       meta:{index: 3, title: '人工智能', requireAuth: false}
     },
+    {
+      path: '/specialActive/intelligencesList',
+      name: 'IntelligencesList',
+      component: resolve => require(['@/pages/specialActive/intelligencesList'], resolve) ,
+      meta:{index: 3, title: '人工智能', requireAuth: false}
+    },
     //人工智能列表详情
     {
       path: '/specialActive/intelligenceDetails',
@@ -116,12 +150,31 @@ var router =  new Router({
       component: resolve => require(['@/pages/specialActive/intelligenceDetails'], resolve) ,
       meta:{index: 4, title: '人工智能', requireAuth: false}
     },
+
     //创新实验
     {
       path: '/specialActive/testList',
       name: 'testList',
       component: resolve => require(['@/pages/specialActive/testList'], resolve) ,
       meta:{index: 3, title: '人工智能', requireAuth: false}
+    },
+    {
+      path: '/specialActive/classRoomList',
+      name: 'classRoomList',
+      component: resolve => require(['@/pages/specialActive/classRoomList'], resolve) ,
+      meta:{index: 3, title: '创新课堂应用专题', requireAuth: false}
+    },
+    {
+      path: '/specialActive/educationList',
+      name: 'educationList',
+      component: resolve => require(['@/pages/specialActive/educationList'], resolve) ,
+      meta:{index: 3, title: '创新教育应用专题', requireAuth: false}
+    },
+    {
+      path: '/specialActive/experimentList',
+      name: 'experimentList',
+      component: resolve => require(['@/pages/specialActive/experimentList'], resolve) ,
+      meta:{index: 3, title: '创新实验联盟专题', requireAuth: false}
     },
     //创新实验列表详情
     {
@@ -143,6 +196,48 @@ var router =  new Router({
       name: 'moviesDetails',
       component: resolve => require(['@/pages/specialActive/moviesDetails'], resolve) ,
       meta:{index: 4, title: '校园影视', requireAuth: false}
+    },
+    //技装之家
+    {
+      path: '/technology/index',
+      name: 'technologyIndex',
+      component: resolve => require(['@/pages/technology/index'], resolve) ,
+      meta:{index: 2, title: '活动详情', requireAuth: false}
+    },
+    //技装之家列表页
+    {
+      path: '/technology/techList',
+      name: 'techList',
+      component: resolve => require(['@/pages/technology/techList'], resolve) ,
+      meta:{index: 3, title: '列表', requireAuth: false}
+    },
+    //技装之家列表页
+    {
+      path: '/technology/infor',
+      name: 'technologyInfor',
+      component: resolve => require(['@/pages/technology/infor'], resolve) ,
+      meta:{index: 3, title: '信息', requireAuth: false}
+    },
+    //技装之家中心机构详情
+    {
+      path: '/technology/inforOffice',
+      name: 'inforOffice',
+      component: resolve => require(['@/pages/technology/inforOffice'], resolve) ,
+      meta:{index: 3, title: '详情', requireAuth: false}
+    },
+    //技装之家中心活动详情
+    {
+      path: '/technology/inforActive',
+      name: 'inforActive',
+      component: resolve => require(['@/pages/technology/inforActive'], resolve) ,
+      meta:{index: 3, title: '详情', requireAuth: false}
+    },
+    //技装之家列表详情
+    {
+      path: '/technology/details',
+      name: 'technologyDetails',
+      component: resolve => require(['@/pages/technology/details'], resolve) ,
+      meta:{index: 4, title: '列表详情', requireAuth: false}
     },
     //新闻
     {

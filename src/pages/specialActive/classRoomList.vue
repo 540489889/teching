@@ -68,7 +68,7 @@
         let pageSize = 8;
         this.page += 1;
         let data = [];
-        this.http.get(this.ports.specialActive.prograList+'?page='+this.page+'&&title='+this.title ,res =>{
+        this.http.get(this.ports.specialActive.classroom+'?page='+this.page+'&&title='+this.title ,res =>{
           if(res.status == 200){
             data = res.data.data
             if(data.length){

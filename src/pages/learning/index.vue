@@ -67,6 +67,38 @@
         </cube-scroll>
       </div>
     </div>
+    <!--新书推荐-->
+    <div class="comBox">
+      <router-link tag="h2" to="/learning/bookList?type=2" class="titleBox flex-box">
+        <span class="left-ico flex-box">
+          <!--<i class="ds-ico"></i>-->
+          新书推荐</span>
+        <span class="flex-box right-text">更多 <i class="cubeic-arrow"></i></span>
+      </router-link>
+      <div class="hotContent">
+        <ul>
+          <router-link tag="li" :to="'./bookDetails?eid='+item.id" class="flex-box" v-if="newsBook.length" v-for="item in newsBook" :key="item.id">
+            <div class="left">
+              <img :src="$store.state.IMGPATH+item.cover_img" alt="">
+            </div>
+            <div class="right box-1">
+              <h4 class="media_title">{{item.title}}</h4>
+              <p class="media_desc">{{item.title}}</p>
+            </div>
+          </router-link>
+          <!--<li class="flex-box">-->
+            <!--<div class="left">-->
+              <!--<img src="./../../assets/img/banner-me-2.png" alt="">-->
+            <!--</div>-->
+            <!--<div class="right box-1">-->
+              <!--<h4 class="media_title">没伞的孩子，必须努力奔跑必须努力奔跑</h4>-->
+              <!--<p class="media_desc"> 一块石头，一半做成了佛，一半做成了台阶。人-->
+                <!--们都踩着台阶去拜佛。台阶不服气地问佛：“我...</p>-->
+            <!--</div>-->
+          <!--</li>-->
+        </ul>
+      </div>
+    </div>
     <!--阅读资源-->
     <div class="readHz readBox">
       <router-link tag="h2" to="/learning/bookList" class="titleBox flex-box">
@@ -98,48 +130,6 @@
             <!--<p class="media_title">艾弗里·蒙森;乔里·</p>-->
           <!--</li>-->
         <!--</ul>-->
-    </div>
-    <!--新书推荐-->
-    <div class="comBox">
-      <router-link tag="h2" to="/learning/bookList" class="titleBox flex-box">
-        <span class="left-ico flex-box">
-          <!--<i class="ds-ico"></i>-->
-          新书推荐</span>
-        <span class="flex-box right-text">更多 <i class="cubeic-arrow"></i></span>
-      </router-link>
-      <div class="hotContent">
-        <ul>
-          <li class="flex-box" v-if="newsBook.length" v-for="item in newsBook" :key="item.id">
-            <div class="left">
-              <img :src="$store.state.IMGPATH+item.cover_img" alt="">
-            </div>
-            <div class="right box-1">
-              <h4 class="media_title">{{item.title}}</h4>
-              <p class="media_desc">{{item.title}}</p>
-            </div>
-          </li>
-          <li class="flex-box">
-            <div class="left">
-              <img src="./../../assets/img/banner-me-2.png" alt="">
-            </div>
-            <div class="right box-1">
-              <h4 class="media_title">没伞的孩子，必须努力奔跑必须努力奔跑</h4>
-              <p class="media_desc"> 一块石头，一半做成了佛，一半做成了台阶。人
-                们都踩着台阶去拜佛。台阶不服气地问佛：“我...</p>
-            </div>
-          </li>
-          <li class="flex-box">
-            <div class="left">
-              <img src="./../../assets/img/banner-me-2.png" alt="">
-            </div>
-            <div class="right box-1">
-              <h4 class="media_title">没伞的孩子，必须努力奔跑必须努力奔跑</h4>
-              <p class="media_desc"> 一块石头，一半做成了佛，一半做成了台阶。人
-                们都踩着台阶去拜佛。台阶不服气地问佛：“我...</p>
-            </div>
-          </li>
-        </ul>
-      </div>
     </div>
     <div class="infoList3">
       <div class="textBox">
@@ -177,9 +167,11 @@
             :options="options">
             <ul class="list-wrapper">
               <li v-for="(item,index) in readUser" :key="item.id" class="list-item">
-                <div class="imgBox"><img src="../../assets/img/banner-me-1.png" alt=""></div>
-                <h3 class="media_title">同理心做个让人舒服的做个让人舒服的做个让人舒服的</h3>
-                <p class="media_title">霍华德·本内特霍华德·本内特</p>
+                <div class="imgBox" v-if="item.port"><img :src="$store.state.IMGPATH+item.port" alt=""></div>
+                <div class="imgBox" v-else><img src="../../assets/ico/logo-ico-1.png" alt=""></div>
+                <h3 class="media_title" v-if="item.username">{{item.username}}</h3>
+                <h3 class="media_title" v-else>{{item.iphone}}</h3>
+                <p class="media_title">{{item.booknum}}阅读量</p>
               </li>
             </ul>
             <h6 class="noUser" v-if="!readUser">暂无达人呦...快来成为第一个达人吧</h6>
@@ -189,66 +181,71 @@
     </div>
     <!--读书心得-->
     <div class="superBox">
-      <h2 class="titleBox flex-box">
+      <router-link tag="h2" to="./experience" class="titleBox flex-box">
         <span class="left-ico flex-box">
           <!--<i class="ds-ico"></i>-->
           读书心得
         </span>
         <span class="flex-box right-text">更多 <i class="cubeic-arrow"></i></span>
-      </h2>
+      </router-link>
       <ul>
         <li v-for="item in comment">
           <div class="oneBox">
             <div class="tpVideo">
-              <div class="leftImg flex-box">
+              <div v-if="item.port" class="leftImg flex-box">
+                <img :src="$store.state.IMGPATH+item.port" alt="">
+                <h4 class="media_title">{{item.nickname}}</h4>
+              </div>
+              <div class="leftImg flex-box" v-else>
                 <img src="../../assets/ico/video-ico-3.png" alt="">
-                <h4 class="media_title">{{item.title}}</h4>
+                <h4 class="media_title">{{item.nickname}}</h4>
               </div>
               <div class="textInfo box-1">
-                <p>{{item.content}}
+                <p>
+                  {{item.content}}
                 </p>
               </div>
-              <div class="bookInfo flex-box">
+              <router-link tag="div" :to="'./bookDetails?eid='+item.id"  class="bookInfo flex-box" >
                 <div class="left">
-                  <img src="./../../assets/img/banner-me-2.png" alt="">
+                  <img :src="$store.state.IMGPATH+item.cover_img" alt="">
                 </div>
                 <div class="right">
                   <h4 class="media_title">{{item.bookname}}</h4>
                   <p class="media_desc">{{item.author}}</p>
                 </div>
-              </div>
+              </router-link>
             </div>
             <div class="infor">
               <!--{{item.content}}-->
             </div>
           </div>
         </li>
-        <li>
-          <div class="oneBox">
-            <div class="tpVideo">
-              <div class="leftImg flex-box">
-                <img src="../../assets/ico/video-ico-3.png" alt="">
-                <h4 class="media_title">别看我只是一只羊别看我只是一只羊别看我只是一只羊别看我只是一只羊</h4>
-              </div>
-              <div class="textInfo box-1">
-                <p>故事是以小王子和心爱的玫瑰花吵架而离开自己的星球之后的旅途为主线的，小王子在各个星球间旅行，遇见了许多形形色色的人，最后小王子来到了地球，遇见了一个童心未泯的飞行员和聪明善良的小狐...
-                </p>
-              </div>
-              <div class="bookInfo flex-box">
-                <div class="left">
-                  <img src="./../../assets/img/banner-me-2.png" alt="">
-                </div>
-                <div class="right">
-                  <h4 class="media_title">小王子</h4>
-                  <p class="media_desc">圣埃克苏佩里</p>
-                </div>
-              </div>
-            </div>
-            <div class="infor">
-              <!--{{item.content}}-->
-            </div>
-          </div>
-        </li>
+        <!--<li>-->
+          <!--<div class="oneBox">-->
+            <!--<div class="tpVideo">-->
+              <!--<div class="leftImg flex-box">-->
+                <!--<img src="../../assets/ico/video-ico-3.png" alt="">-->
+                <!--<h4 class="media_title">别看我只是一只羊别看我只是一只羊别看我只是一只羊别看我只是一只羊</h4>-->
+              <!--</div>-->
+              <!--<div class="textInfo box-1">-->
+                <!--<p>故事是以小王子和心爱的玫瑰花吵架而离开自己的星球之后的旅途为主线的，小王子在各个星球间旅行，遇见了许多形形色色的人，最后小王子来到了地球，遇见了一个童心未泯的飞行员和聪明善良的小狐...-->
+                <!--</p>-->
+              <!--</div>-->
+              <!--<div class="bookInfo flex-box">-->
+                <!--<div class="left">-->
+                  <!--<img src="./../../assets/img/banner-me-2.png" alt="">-->
+                <!--</div>-->
+                <!--<div class="right">-->
+                  <!--<h4 class="media_title">小王子</h4>-->
+                  <!--<p class="media_desc">圣埃克苏佩里</p>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="infor">-->
+              <!--&lt;!&ndash;{{item.content}}&ndash;&gt;-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</li>-->
       </ul>
     </div>
   </div>
@@ -316,7 +313,8 @@
             this.goodBook = data.goodbook
             this.newsBook = data.newsbook
             this.bookResoce = data.bookresoce
-            this.readUser = data.readuser
+            this.readUser = data.readUser
+
             this.comment = data.comment
           }
         })

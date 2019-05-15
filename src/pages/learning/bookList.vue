@@ -21,7 +21,8 @@
     data(){
       return {
         isLoading: true,
-        list: []
+        list: [],
+        type: '',
       }
     },
     components: {
@@ -34,8 +35,13 @@
     },
     methods: {
       getebook(){
-//        let type = this.$route.query.type
-        this.http.get(this.ports.learning.readList,res=>{
+        let type = this.$route.query.type
+        if(type){
+          this.type = type
+        }else{
+          this.type = ''
+        }
+        this.http.get(this.ports.learning.readList+'?type='+this.type,res=>{
           console.log(res)
 
           if(res.status==200){

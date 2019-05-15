@@ -16,6 +16,7 @@
     </div>
     <h1>{{content.title}}</h1>
     <h6>{{content.update}}</h6>
+    <router-link tag="div" to="./score" class="fillText flex-box"><i class="score-tx"></i>写读书心得</router-link>
     <div class="content" >
       <!--<img :src="'http://cqeic.swkj2014.com/'+content.cover_img" alt="">-->
       <p class="contentP" v-html="content.content"></p>
@@ -108,6 +109,17 @@
       color:#afafaf;
       padding:20px;
       padding-top:0;
+    }
+    .fillText{
+      justify-content: flex-end;
+      .score-tx{
+        width:32px;
+        height:32px;
+        background:url(./../../assets/ico/score-tx.png) no-repeat center;
+        background-size:100%;
+        margin-right:15px;
+      }
+      padding:30px 20px;
     }
     .content{
       padding:20px;

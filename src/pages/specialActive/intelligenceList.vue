@@ -3,7 +3,7 @@
     <loading v-if="isLoading"></loading>
     <search-bar></search-bar>
     <!--<div class="teNav">-->
-      <!--<cube-scroll-nav-bar :current="current" :labels="labels" @change="changeHandler"/>-->
+    <!--<cube-scroll-nav-bar :current="current" :labels="labels" @change="changeHandler"/>-->
     <!--</div>-->
     <div class="teContent">
       <div class="infoList2">
@@ -46,19 +46,11 @@
     name: 'teIndex',
     data (){
       return{
-        current: '全部',
         isLoading: true,
         list: [],
         type: 0,
-        labels: [
-          '全部',
-          '政策法规',
-          '技术动态',
-          '基础装备',
-          '电子教仪',
-          '智慧校园'
-        ],
         page: 0,
+        title: '',
       }
     },
     created (){
@@ -69,33 +61,6 @@
       InfiniteLoading
     },
     methods: {
-      changeHandler(cur) {
-        this.current = cur
-        this.page = 0
-        switch (cur){
-          case '全部':
-            this.type = 0
-                break
-          case '政策法规':
-            this.type = 1
-            this.page = 0
-            break
-          case '技术动态':
-            this.type = 2
-            break
-          case '基础装备':
-            this.type = 3
-            break
-          case '电子教仪':
-            this.type = 4
-            break
-          case '智慧校园':
-            this.type = 5
-            break
-        }
-        this.changeFilter()
-
-      },
       onInfinite($state,type) {
         console.log(type)
         this.isLoading = false
@@ -103,10 +68,9 @@
         let pageSize = 8;
         this.page += 1;
         let data = [];
-        this.http.get(this.ports.tEquipment.index+'?page='+this.page+'&&type='+this.type ,res =>{
+        this.http.get(this.ports.specialActive.prograList+'?page='+this.page+'&&title='+this.title ,res =>{
           if(res.status == 200){
-            data = res.data
-            console.log(data)
+            data = res.data.data
             if(data.length){
               for(var i = 0;i < data.length;i++){
                 this.list.push(data[i]);
@@ -128,6 +92,7 @@
       }
     },
     mounted (){
+
     }
   }
 </script>

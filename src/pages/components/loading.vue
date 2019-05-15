@@ -9,20 +9,20 @@
                 </div>
             </div>
         </div>
-        <div class="ajax-toast load-status" v-show="showToast">
-            <div class="toast">
-                <div class="la-line-spin-clockwise-fade">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
-        </div>
+        <!--<div class="ajax-toast load-status" v-show="showToast">-->
+            <!--<div class="toast">-->
+                <!--<div class="la-line-spin-clockwise-fade">-->
+                    <!--<div></div>-->
+                    <!--<div></div>-->
+                    <!--<div></div>-->
+                    <!--<div></div>-->
+                    <!--<div></div>-->
+                    <!--<div></div>-->
+                    <!--<div></div>-->
+                    <!--<div></div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 </template>
 <script>

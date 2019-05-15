@@ -3,7 +3,7 @@
     <loading v-if="isLoading"></loading>
     <search-bar></search-bar>
     <!--<div class="teNav">-->
-      <!--<cube-scroll-nav-bar :current="current" :labels="labels" @change="changeHandler"/>-->
+    <!--<cube-scroll-nav-bar :current="current" :labels="labels" @change="changeHandler"/>-->
     <!--</div>-->
     <div class="teContent">
       <div class="infoList2">
@@ -68,7 +68,7 @@
         let pageSize = 8;
         this.page += 1;
         let data = [];
-        this.http.get(this.ports.specialActive.prograList+'?page='+this.page+'&&title='+this.title ,res =>{
+        this.http.get(this.ports.specialActive.uavList+'?page='+this.page+'&&title='+this.title ,res =>{
           if(res.status == 200){
             data = res.data.data
             if(data.length){

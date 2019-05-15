@@ -15,9 +15,14 @@
           direction="horizontal"
           :options="options">
           <ul class="list-wrapper">
-            <li class="list-item" v-for="(item,index) in sports" :key="item.id">
+            <li class="list-item">
               <router-link tag="div" to="./intelligenceList" class="imgBox">
-                <img :src="$store.state.IMGPATH+item.cover_img" alt="">
+                <img src="./../../assets/ico/sa-t-1.png" alt="">
+              </router-link>
+            </li>
+            <li class="list-item">
+              <router-link tag="div" to="./intelligencesList" class="imgBox">
+                <img src="./../../assets/ico/sa-t-2.png" alt="">
               </router-link>
             </li>
           </ul>
@@ -33,13 +38,13 @@
           <span class="flex-box right-text">更多 <i class="cubeic-arrow"></i></span>
         </router-link>
         <div class="videoImg">
-          <video poster="https://r1.ykimg.com/05420408584A363C6A0A47047DD24931" data-config='{"mediaTitle": "测试视频--视频"}'>
-            <source src="http://www.w3cschool.cc/try/demo_source/mov_bbb.mp4" type="video/mp4">
+          <video :poster="$store.state.IMGPATH+moves.cover_img">
+            <source :src="$store.state.IMGPATH+moves.video" type="video/mp4">
             您的浏览器不支持HTML5视频
           </video>
         </div>
         <ul>
-          <router-link tag="li" :to="'/tEquipment/details?id='+item.id+'&tables='+item.tables" v-for="(item,index) in study" :key="index">
+          <router-link tag="li" :to="'/specialActive/MoviesDetails?id='+item.id+'&tables='+item.tables" v-for="(item,index) in list" :key="index">
             <div class="leftText flex-box">
               <img class="rightImg" :src="$store.state.IMGPATH+item.cover_img" alt="">
               <div class="box-1">
@@ -68,9 +73,19 @@
         <!--<span class="flex-box right-text">更多 <i class="cubeic-arrow"></i></span>-->
       </h2>
       <ul>
-        <router-link tag="li" to="./testList" v-for="item in school" :key="item.id">
-          <img :src="'http://cqeic.swkj2014.com/'+item.cover_img" alt="">
-          <h4 class="media_title">{{item.name}}</h4>
+        <router-link tag="li" to="./classRoomList">
+          <img src="./../../assets/ico/sa-a-1.png" alt="">
+          <h4 class="media_title">创新课堂应用专题</h4>
+          <!--<p>{{item.seenum}}人观看</p>-->
+        </router-link>
+        <router-link tag="li" to="./educationList">
+          <img src="./../../assets/ico/sa-a-2.png" alt="">
+          <h4 class="media_title">创新教育应用专题</h4>
+          <!--<p>{{item.seenum}}人观看</p>-->
+        </router-link>
+        <router-link tag="li" to="./experimentList">
+          <img src="./../../assets/ico/sa-a-3.png" alt="">
+          <h4 class="media_title">创新实验联盟专题</h4>
           <!--<p>{{item.seenum}}人观看</p>-->
         </router-link>
       </ul>
@@ -93,9 +108,11 @@
         sports: [],//竞技与竞赛
         school: [],//教育平台
         movies: [],//直播
+        moves: {},//视频
+        list: [],//列表数据
         study: [], //教育装备
         searchVal: '',
-//        items: [1, 2,3,4],
+//        items: [1, 2],
         direction: "horizontal",
         options: {
 //          scrollbar: {
@@ -121,44 +138,19 @@
       moveInit(){
         zymedia('video', {"preload": "auto"});
       },
-      //教育装备列表
-      geTequipmentData(){
-        this.http.get(this.ports.informatization.equipment,res=>{
-          console.log(res)
+      getSchoolMoves(){
+        this.http.get(this.ports.specialActive.schoolMoves,res=>{
           if(res.status==200){
             const data = res.data
-            this.equipmentList = data
+            this.moves = data.moves
+            this.list = data.data
           }
         })
       },
-      //信息化2.0页面数据
-      getInForAtionData(){
-        this.http.get(this.ports.informatization.inForAtion,res=>{
-          console.log(res)
-          if(res.status==200){
-            const data = res.data
-            this.sports = data.sports
-            this.school = data.school
-            this.movies = data.movies
-            this.study = data.study
-          }
-        })
-      },
-      //智慧校园
-      getWisdomSchoolData(){
-        this.http.get(this.ports.informatization.wisdomSchool+'?type='+1,res=>{
-          console.log(res)
-          if(res.status==200){
-//            const data = res.data
-//            this.inForAtionList = data
-//            console.log(this.inForAtionList)
-          }
-        })
-      }
     },
     mounted(){
-      this.getInForAtionData()
       this.moveInit()
+      this.getSchoolMoves()
     }
   }
 </script>
@@ -179,6 +171,18 @@
           height:32px;
           background:url(./../../assets/ico/info-t-1.png) no-repeat center;
           background-size:100%;
+        }
+      }
+      .scroll-list-wrap{
+        .list-wrapper{
+          li{
+            width:350px;
+            height:195px;
+            margin-left:20px;
+          }
+          li:last-child{
+            margin-left:10px;
+          }
         }
       }
     }
@@ -207,7 +211,7 @@
           li{
             background-color:white;
             /*margin-top:20px;*/
-            padding:20px;
+            padding:30px 20px;
             border-bottom:1px solid #eee;
             align-items: flex-start;
             .leftText{
@@ -320,21 +324,22 @@
       }
       ul{
         overflow: hidden;
-        padding:0 20px;
+        padding:0 10px;
         li{
           box-sizing: border-box;
           float:left;
           width:50%;
-          text-align: left;
+          text-align: center;
           margin-bottom:20px;
           img{
-            width:345px;
-            height:200px;
+            width:362px;
+            height:215px;
           }
           h4{
             font-size:28px;
             margin:10px 0;
             text-align: left;
+            padding:0 10px;
           }
           p{
             color:#909090;
@@ -342,10 +347,10 @@
           }
         }
         li:nth-child(odd){
-          padding-right:10px;
+          padding-right:0;
         }
         li:nth-child(even){
-          padding-left:10px;
+          padding-left:5px;
         }
       }
     }

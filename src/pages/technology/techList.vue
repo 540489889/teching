@@ -3,12 +3,12 @@
     <loading v-if="isLoading"></loading>
     <search-bar></search-bar>
     <!--<div class="teNav">-->
-      <!--<cube-scroll-nav-bar :current="current" :labels="labels" @change="changeHandler"/>-->
+      <!--<cube-scroll-nav-bar :current="current" :labels="labels" @change="changeHandler" />-->
     <!--</div>-->
     <div class="teContent">
       <div class="infoList2">
         <ul>
-          <router-link tag="li" :to="'/specialActive/intelligenceDetails?id='+item.id+'&tables='+item.tables" v-for="(item,index) in list" :key="index">
+          <router-link tag="li" :to="'/technology/details?id='+item.id+'&tables='+item.tables" v-for="(item,index) in list" :key="index">
             <div class="leftText flex-box">
               <img class="rightImg" :src="$store.state.IMGPATH+item.cover_img" alt="">
               <div class="box-1">
@@ -49,8 +49,8 @@
         isLoading: true,
         list: [],
         type: 0,
-        page: 0,
         title: '',
+        page: 0,
       }
     },
     created (){
@@ -61,16 +61,16 @@
       InfiniteLoading
     },
     methods: {
-      onInfinite($state,type) {
-        console.log(type)
+      onInfinite($state) {
         this.isLoading = false
         let _this = this;
         let pageSize = 8;
         this.page += 1;
         let data = [];
-        this.http.get(this.ports.specialActive.prograList+'?page='+this.page+'&&title='+this.title ,res =>{
+        this.http.get(this.ports.technology.activity+'?page='+this.page+'&&title='+this.title ,res =>{
           if(res.status == 200){
             data = res.data.data
+            console.log(data)
             if(data.length){
               for(var i = 0;i < data.length;i++){
                 this.list.push(data[i]);
@@ -92,7 +92,6 @@
       }
     },
     mounted (){
-
     }
   }
 </script>
@@ -108,12 +107,10 @@
       border-bottom:1px solid #eee;
     }
     .teContent{
-      border-top:1px solid #eee;
       .infoList2{
         background-color:white;
-        padding:10px 0;
+        /*padding:10px 0;*/
         padding-bottom:0;
-        padding-top:0;
         .titleBox{
           .left-ico i{
             width:32px;
@@ -141,7 +138,7 @@
               text-align: left;
               .rightImg{
                 width:190px;
-                height:160px;
+                height:130px;
                 margin-right:20px;
                 border-radius: 10px;
               }
@@ -168,6 +165,7 @@
               .media_desc{
                 color:#909090;
                 font-size:28px;
+                -webkit-line-clamp: 1;
               }
               h6{
                 color:#909090;
