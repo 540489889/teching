@@ -2,11 +2,13 @@
   <div class="detailsWrapper recommend-content">
     <h1>{{content.title}}</h1>
     <h6>{{content.update}}</h6>
-    <div class="content" >
+    <div class="content">
       <!--<img :src="'http://cqeic.swkj2014.com/'+content.cover_img" alt="">-->
-      <p v-html="content.content">
+      <p  v-html="content.content">
 
       </p>
+      <!--<p>-->
+      <!--</p>-->
     </div>
   </div>
 </template>
@@ -19,9 +21,9 @@
       }
     },
     methods: {
-      getrescordContent(){
+      getAwardContentData(){
         let id = this.$route.query.id
-        this.http.get(this.ports.resource.rescordContent+'?id='+id,res=>{
+        this.http.get(this.ports.newsX.dynamicsDetails+'?id='+id,res=>{
           console.log(res)
           if(res.status==200){
             const data = res.data
@@ -31,7 +33,7 @@
       },
     },
     mounted(){
-      this.getrescordContent()
+      this.getAwardContentData()
     }
   }
 </script>

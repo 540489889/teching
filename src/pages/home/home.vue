@@ -3,7 +3,7 @@
     <loading v-if="isLoading"></loading>
     <search-bar></search-bar>
     <index-swiper :list="bannerList"></index-swiper>
-    <advert-swiper :list="recomdList"></advert-swiper>
+    <advert-swiper :list="recomdList" :path="advertPath"></advert-swiper>
     <home-list></home-list>
     <!--<nav-bar :selectedNavTitle="selectedNavTitle"></nav-bar>-->
   </div>
@@ -26,6 +26,7 @@
         selectedNavTitle: '首页',
         bannerList: [],//轮播图
         recomdList: [],//广告轮播
+        advertPath:'/home/advertDetails',
       }
     },
     components:{
@@ -44,7 +45,6 @@
     methods: {
       getIndexData(){
         this.http.get(this.ports.home.index, res =>{
-
           if(res.status==200){
             let data = res.data
             this.bannerList = data.banner

@@ -8,6 +8,7 @@ export default new Vuex.Store({
     showNavBar:  localStorage.showNav ? localStorage.showNav : true,
     IMGPATH: 'http://cqeic.swkj2014.com/',
     defaultTitle: '首页',
+    defaultSearchVal:localStorage.defaultSeasrchVal ?  localStorage.defaultSeasrchVal: ''
   },
   mutations: {
     // 修改token，并将token存入localStorage
@@ -22,7 +23,7 @@ export default new Vuex.Store({
     },
     changeShowNav (state, val){
       localStorage.showNav = val
-    }
+    },
   },
   actions: {
     // changeMallInfo(ctx,data){

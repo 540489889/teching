@@ -168,7 +168,7 @@
             <ul class="list-wrapper">
               <li v-for="(item,index) in readUser" :key="item.id" class="list-item">
                 <div class="imgBox" v-if="item.port"><img :src="$store.state.IMGPATH+item.port" alt=""></div>
-                <div class="imgBox" v-else><img src="../../assets/ico/logo-ico-1.png" alt=""></div>
+                <div class="imgBox" v-else><img src="../../assets/img/banner-me-2.png" alt=""></div>
                 <h3 class="media_title" v-if="item.username">{{item.username}}</h3>
                 <h3 class="media_title" v-else>{{item.iphone}}</h3>
                 <p class="media_title">{{item.booknum}}阅读量</p>

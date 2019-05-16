@@ -185,10 +185,11 @@
         background-color:#ffb631;
         color:white;
         height:40px;
-        line-height:40px;
+        line-height:42px;
         display: block;
         padding:0 10px;
         text-align: center;
+        font-size:24px;
       }
       /*.media_desc{*/
       /*height:65px;*/

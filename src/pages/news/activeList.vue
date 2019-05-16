@@ -1,6 +1,6 @@
 <template>
   <div class="fruitsWrapper recommend-content">
-    <search-bar></search-bar>
+    <search-bar @changeSearch="changeInput"></search-bar>
     <div class="fruits-list-1">
       <ul>
         <router-link tag="li" :to="'/news/activeDetails?id='+item.id" v-for="item in list" :key="item.id">
@@ -53,6 +53,11 @@
       noticeList: Array
     },
     methods: {
+      changeInput(val){
+        this.page = 0
+        this.title = val
+        this.changeFilter()
+      },
       onInfinite($state,type) {
         console.log(type)
         this.isLoading = false
@@ -71,12 +76,19 @@
 //              this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');//加载
               $state.loaded();
             }else{
+              $state.loaded();
 //              this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');//停止加载
               $state.complete();
             }
           }
         })
       },
+      changeFilter() {
+        this.list = [];
+        this.$nextTick(() => {
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
+      }
     },
     mounted(){
     }

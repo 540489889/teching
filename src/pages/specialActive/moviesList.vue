@@ -1,6 +1,6 @@
 <template>
   <div class="teIndex recommend-content">
-    <search-bar></search-bar>
+    <search-bar  @changeSearch="changeInput"></search-bar>
     <div class="teNav">
       <cube-scroll-nav-bar :current="current" :labels="labels" @change="changeHandler" />
     </div>
@@ -92,6 +92,11 @@
       InfiniteLoading
     },
     methods: {
+      changeInput(val){
+        this.page = 0
+        this.title = val
+        this.changeFilter()
+      },
       changeHandler(cur) {
         this.current = cur
         this.page = 0
@@ -124,6 +129,7 @@
 //              this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');//加载
               $state.loaded();
             }else{
+              $state.loaded();
 //              this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');//停止加载
               $state.complete();
             }
@@ -147,6 +153,7 @@
 //              this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');//加载
               $state.loaded();
             }else{
+              $state.loaded();
 //              this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');//停止加载
               $state.complete();
             }

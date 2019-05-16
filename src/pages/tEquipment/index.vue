@@ -1,7 +1,7 @@
 <template>
   <div class="teIndex">
     <loading v-if="isLoading"></loading>
-    <search-bar></search-bar>
+    <search-bar @changeSearch="changeInput"></search-bar>
     <div class="teNav">
       <cube-scroll-nav-bar :current="current" :labels="labels" @change="changeHandler" />
     </div>
@@ -59,6 +59,7 @@
           '智慧校园'
         ],
         page: 0,
+        title: ''
       }
     },
     created (){
@@ -68,7 +69,17 @@
       loading,
       InfiniteLoading
     },
+    computed: {
+      changeSarchVal() {
+        return this.$store.state.defaultSearchVal;
+      }
+    },
     methods: {
+      changeInput(val){
+        this.page = 0
+        this.title = val
+        this.changeFilter()
+      },
       changeHandler(cur) {
         this.current = cur
         this.page = 0
@@ -97,13 +108,12 @@
 
       },
       onInfinite($state,type) {
-        console.log(type)
         this.isLoading = false
         let _this = this;
         let pageSize = 8;
         this.page += 1;
         let data = [];
-        this.http.get(this.ports.tEquipment.index+'?page='+this.page+'&&type='+this.type ,res =>{
+        this.http.get(this.ports.tEquipment.index+'?page='+this.page+'&&type='+this.type+'&title='+this.title ,res =>{
           if(res.status == 200){
             data = res.data
             console.log(data)
@@ -115,6 +125,7 @@
               $state.loaded();
             }else{
 //              this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');//停止加载
+              $state.loaded();
               $state.complete();
             }
           }
@@ -128,6 +139,8 @@
       }
     },
     mounted (){
+    },
+    watch :{
     }
   }
 </script>

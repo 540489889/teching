@@ -2,7 +2,7 @@
   <div class="searchWrapper flex-box">
     <div class="leftInput box-1 flex-box">
       <i class="cubeic-search"></i>
-      <input type="text" v-model="searchVal" placeholder="教育技术装备">
+      <input type="text" v-model="searchVal" @input="changeSearch" placeholder="教育技术装备">
     </div>
     <router-link tag="div" to="/release/index" class="rightBtn flex-box" v-if="showSearchBtn">
       <div v-if="showSearchVal==='发布'">
@@ -78,6 +78,12 @@ export default {
     return {
       searchVal: ""
     };
+  },
+  methods: {
+    changeSearch(){
+//      console.log(this.searchVal,1111)
+      this.$emit('changeSearch',this.searchVal)
+    }
   },
   props: {
     showSearchBtn: {
