@@ -10,8 +10,9 @@
       </div>
       <div class="userInfo flex-box">
         <img class="userTx" src="./../../assets/img/party-c-1.png" alt="">
-        <span>栀璃鸢年</span>
-        <router-link tag="span" to="./setUp" class="setUp"><i class="cubeic-setting"></i>设置</router-link>
+        <span v-if="list.username">{{list.username}}</span>
+        <span v-else>{{list.iphone}}</span>
+        <span class="setUp" @click="setUpClick"><i class="cubeic-setting"></i>设置</span>
       </div>
       <div class="meContent">
         <!--<h2 class="flex-box">-->
@@ -36,6 +37,7 @@
             :is="view"
             :experience="experience"
             :ebook="ebook"
+            :live="live"
           ></component>
         </transition>
       </div>
@@ -73,7 +75,9 @@
         searchVal: '',
         isLoading: true,
         ebook: [],
-        experience: []
+        experience: [],
+        live: [],
+        list: {}
       }
     },
     components: {
@@ -92,6 +96,12 @@
       this.getMeData()
     },
     methods:{
+      setUpClick(){
+          let data = {}
+          data.username = this.list.username
+          data.coverImg = this.list.coverImg
+          this.$router.push({path:'/me/setUp', query: { list: JSON.stringify(data)}})
+      },
       clickHandler (label) {
         if(label=='在线阅读'){
           this.view = 'reading'
@@ -105,10 +115,13 @@
       },
       getMeData(){
         this.http.get(this.ports.me.userIndex,res=>{
+          console.log(res)
           if(res.status === 200){
             const data = res.data
             this.ebook = data.ebook
             this.experience = data.experience
+            this.live = data.live
+            this.list = data
           }
         })
       }

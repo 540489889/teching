@@ -1,13 +1,14 @@
 <template>
   <div class="setUp recommend-content">
     <ul>
-      <li class="flex-box">
+      <li @click="toEdit" class="flex-box">
         <span>头像</span>
-        <img src="./../../assets/img/party-c-1.png" alt="">
+        <img v-if="list.coverImg" :src="$store.state.IMGPATH+list.coverImg" alt="">
+        <img v-else src="./../../assets/img/party-c-1.png" alt="">
       </li>
-      <li class="flex-box">
+      <li @click="toEdit" class="flex-box">
         <span>用户名</span>
-        <span class="name">栀璃鸢年</span>
+        <span class="name">{{list.username}}</span>
       </li>
     </ul>
     <div class="outLog" @click="outLogin">
@@ -21,10 +22,19 @@
     name: 'sayValue',
     data (){
       return{
-
+        list: {}
       }
     },
+    created (){
+      this.init()
+    },
     methods: {
+      toEdit(){
+        this.$router.push({path:'/me/edit', query: { list: JSON.stringify(this.list)}})
+      },
+      init(){
+        this.list =  JSON.parse(this.$route.query.list)
+      },
       showToastTxtOnly(text) {
         this.toast = this.$createToast({
           txt: text,

@@ -95,6 +95,20 @@ var router =  new Router({
       component: resolve => require(['@/pages/learning/bookDetails'], resolve) ,
       meta:{index: 4, title: '阅读资源', requireAuth: false}
     },
+    //阅读案例列表
+    {
+      path: '/learning/learList',
+      name: 'LearninglearList',
+      component: resolve => require(['@/pages/learning/learList'], resolve) ,
+      meta:{index: 4, title: '阅读资源', requireAuth: false}
+    },
+    //阅读案例列表详情
+    {
+      path: '/learning/learListDetails',
+      name: 'LearninglearListDetails',
+      component: resolve => require(['@/pages/learning/learListDetails'], resolve) ,
+      meta:{index: 5, title: '阅读资源', requireAuth: false}
+    },
     //填写读书心得
     {
       path: '/learning/score',
@@ -323,6 +337,13 @@ var router =  new Router({
       name: 'MeSetUp',
       component: resolve => require(['@/pages/me/setUp'], resolve) ,
       meta:{index: 5, title: '设置', requireAuth: true}
+    },
+    //设置
+    {
+      path: '/me/edit',
+      name: 'edit',
+      component: resolve => require(['@/pages/me/edit'], resolve) ,
+      meta:{index: 6, title: '编辑资料', requireAuth: true}
     },
   ],
   scrollBehavior (to, from, savedPosition) {

@@ -16,6 +16,7 @@
     padding:20px 0;
     background-color:white;
     margin-top:20px;
+    margin-bottom:80px;
     color:transparent;
     ul{
       padding-top:20px;
@@ -65,6 +66,9 @@
         searchVal: '',
       }
     },
-
+    methods: {
+    },
+    mounted (){
+    }
   }
 </script>

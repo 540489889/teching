@@ -47,6 +47,10 @@
         <!--</div>-->
       <!--</li>-->
     </ul>
+    <div class="noReading" v-if="!experience.length">
+      <img src="./../../../assets/ico/null-rd-ico.png" alt="">
+      <h6>这里还空空如也～</h6>
+    </div>
   </div>
 </template>
 <script>
@@ -69,6 +73,27 @@
   }
 </script>
 <style lang="less" scoped>
+  .noReading{
+    padding:50px;
+    background-color:white;
+    text-align: center;
+    img{
+      width:272px;
+      height:272px;
+    }
+    h6{
+      margin:20px 0;
+    }
+    .goReading{
+      width:200px;
+      height:80px;
+      line-height:80px;
+      color:white;
+      border-radius: 40px;
+      background-color:#029b46;
+      margin:0 auto;
+    }
+  }
   .superBox{
     background-color:white;
     margin-bottom:100px;

@@ -103,6 +103,7 @@
             padding:0 4px;
             color:#d6001e;
             margin-right:10px;
+            font-size:24px;
           }
         }
       }

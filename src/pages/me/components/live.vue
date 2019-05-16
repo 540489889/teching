@@ -2,31 +2,7 @@
   <div class="roomContent">
     <div class="infoList2">
       <ul>
-        <li>
-          <a>
-            <div class="leftText flex-box">
-              <div class="img">
-                <img class="rightImg" src="./../../../assets/img/banner-me-2.png" alt>
-              </div>
-              <div class="box-1">
-                <h4 class="flex-box">
-                  <p class="box-1 media_desc">故事是以小王子和心爱的玫瑰花吵架而离开自己的星球...
-                  </p>
-                </h4>
-                <h6 class="flex-box">
-                    <span>
-                      <i class="bf-ico-1"></i>
-                    </span>
-                  <span>
-                      <i class="cubeic-person"></i>
-                      99
-                    </span>
-                </h6>
-              </div>
-            </div>
-          </a>
-        </li>
-        <li>
+        <li v-for="item in live" :key="item.id">
           <a>
             <div class="leftText flex-box">
               <div class="img">
@@ -51,16 +27,24 @@
           </a>
         </li>
       </ul>
+      <div class="noReading">
+        <img src="./../../../assets/ico/null-rd-ico.png" alt="">
+        <h6>这里还空空如也～</h6>
+      </div>
     </div>
   </div>
 </template>
 <script>
+
   export default {
     name: 'sayValue',
     data (){
       return{
 
       }
+    },
+    props: {
+      live: Array
     },
     methods: {
 
@@ -71,6 +55,31 @@
   }
 </script>
 <style lang="less" scoped>
+  .noReading{
+    padding:50px;
+    background-color:white;
+    text-align: center;
+    img{
+      width:272px;
+      height:272px;
+    }
+    h6{
+      margin:20px 0;
+    }
+    .goReading{
+      width:200px;
+      height:80px;
+      line-height:80px;
+      color:white;
+      border-radius: 40px;
+      background-color:#029b46;
+      margin:0 auto;
+    }
+  }
+  .nullLive{
+    text-align: center;
+    padding:50px 0;
+  }
   .roomContent{
     margin-bottom:100px;
     .infoList2 {

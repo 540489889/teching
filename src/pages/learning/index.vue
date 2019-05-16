@@ -133,16 +133,16 @@
     </div>
     <div class="infoList3">
       <div class="textBox">
-        <router-link tag="div" :to="'/resource/videoList?type='+1" class="leftImg">
+        <router-link tag="div" :to="'./learList?type='+1" class="leftImg">
           <img src="../../assets/ico/lear-la-1.png" alt="">
         </router-link>
-        <router-link tag="div" :to="'/resource/videoList?type='+2" class="rightImg">
+        <router-link tag="div" :to="'./learList?type='+2"  class="rightImg">
           <img src="../../assets/ico/lear-la-2.png" alt="">
         </router-link>
-        <router-link tag="div" :to="'/resource/videoList?type='+1" class="leftImg">
+        <router-link tag="div" :to="'./learList?type='+3"  class="leftImg">
           <img src="../../assets/ico/lear-la-3.png" alt="">
         </router-link>
-        <router-link tag="div" :to="'/resource/videoList?type='+2" class="rightImg">
+        <router-link tag="div" :to="'./learList?type='+4"  class="rightImg">
           <img src="../../assets/ico/lear-la-4.png" alt="">
         </router-link>
       </div>

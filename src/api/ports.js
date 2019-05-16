@@ -137,5 +137,6 @@ export default {
   },
   me:{
     userIndex: '/home/Indexd/UserIndex',//用户首页
+    editUserInfo: '/home/Indexd/editUserInfo',//用户首页
   }
 }

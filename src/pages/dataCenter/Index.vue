@@ -66,7 +66,7 @@ export default {
     gotoQuestion(detailId, isrunning) {
       if (isrunning) {
         this.$router.push({
-          path: "/dataCenter/questionnaire",
+          path: "/dataCenter/Questionnaire",
           query: { id: detailId }
         });
       }

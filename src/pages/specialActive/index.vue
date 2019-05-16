@@ -146,6 +146,7 @@
             const data = res.data
             this.moves = data.moves
             this.list = data.data
+            this.moveInit()
           }
         })
       },

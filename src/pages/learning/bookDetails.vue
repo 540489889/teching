@@ -16,7 +16,7 @@
     </div>
     <h1>{{content.title}}</h1>
     <h6>{{content.update}}</h6>
-    <div class="inside" v-if="comments.nickname">
+    <div class="inside" v-if="comments">
       <h2 class="flex-box">
         <img class="tx-ico" src="./../../assets/ico/me-p-ico.png" alt="">
         <b>{{comments.nickname}}</b>
