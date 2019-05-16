@@ -1,5 +1,6 @@
 <template>
   <div class="roomIndex recommend-content">
+    <loading v-if="isLoading"></loading>
     <div class="banner">
       <bannerSwiper :list="bannerList"></bannerSwiper>
       <div class="search">
@@ -69,6 +70,7 @@
   </div>
 </template>
 <script>
+import loading from '../components/loading.vue'
 import searchBar from "../components/searchBar.vue";
 import bannerSwiper from "../classroom/BannerSwiper.vue";
 export default {
@@ -80,20 +82,24 @@ export default {
       live: [],
       willLive: [],
       latestLive: {},
-      searchLive: []
+      searchLive: [],
+      isLoading: true
     };
   },
   components: {
     searchBar,
-    bannerSwiper
+    bannerSwiper,
+    loading
+  },
+  created (){
+    setTimeout(() => {
+      this.isLoading = false
+    }, 500)
   },
   methods: {
     // 请求页面数据
     changeHandler() {
       this.http.get(this.ports.home.Classroom, res => {
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 1000);
         if (res.status == 200) {
           let data = res.data;
           this.bannerList = data.banner;
@@ -199,7 +205,7 @@ a {
       top: 12px;
       left: 20px;
       color: #999;
-      z-index: 100000;
+      z-index: 9;
       i {
         position: absolute;
         top: 50%;

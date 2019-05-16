@@ -6,7 +6,6 @@
           <img class="swiper-img"  @click="handleClickHref(item.herf)" :src="'http://cqeic.swkj2014.com/'+item.img_url" alt="">
         </a>
       </swiper-slide>
-      </swiper-slide>
       <div class="swiper-pagination"  slot="pagination"></div>
     </swiper>
   </div>

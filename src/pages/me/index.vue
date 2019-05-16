@@ -1,5 +1,6 @@
 <template>
   <div class="meWrapper recommend-content">
+    <loading v-if="isLoading"></loading>
     <div class="">
       <div class="meTitle flex-box">
         <!--<router-link tag="h6" to="/reg/login" class="mePsBg">-->
@@ -33,6 +34,8 @@
         <transition name="component-fade" mode="out-in">
           <component
             :is="view"
+            :experience="experience"
+            :ebook="ebook"
           ></component>
         </transition>
       </div>
@@ -45,6 +48,7 @@
 </template>
 
 <script>
+  import loading from '../components/loading.vue'
   import navBar from './../components/navBar.vue'
   import reading from './components/reading.vue'
   import live from './components/live.vue'
@@ -67,16 +71,22 @@
           icon: 'cub3'
         }, ],
         searchVal: '',
+        isLoading: true,
+        ebook: [],
+        experience: []
       }
     },
     components: {
+      loading,
       navBar,
       reading,
       live,
       experience
     },
     created (){
-
+      setTimeout(() => {
+        this.isLoading = false
+      }, 500)
     },
     mounted (){
       this.getMeData()
@@ -95,7 +105,11 @@
       },
       getMeData(){
         this.http.get(this.ports.me.userIndex,res=>{
-          console.log(res)
+          if(res.status === 200){
+            const data = res.data
+            this.ebook = data.ebook
+            this.experience = data.experience
+          }
         })
       }
     }

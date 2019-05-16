@@ -1,51 +1,51 @@
 <template>
   <div class="superBox">
     <ul>
-      <li>
+      <li v-for="item in experience" :key="item.id">
         <div class="oneBox">
           <div class="tpVideo">
             <div class="textInfo box-1">
-              <p>故事是以小王子和心爱的玫瑰花吵架而离开自己的星球之后的旅途为主线的，小王子在各个星球间旅行，遇见了许多形形色色的人，最后小王子来到了地球，遇见了一个童心未泯的飞行员和聪明善良的小狐...
+              <p>{{item.content}}
               </p>
             </div>
             <div class="bookInfo flex-box">
               <div class="left">
-                <img src="./../../../assets/img/banner-me-2.png" alt="">
+                <img :src="$store.state.IMGPATH+item.cover_img" alt="">
               </div>
               <div class="right">
-                <h4 class="media_title">小王子</h4>
-                <p class="media_desc">圣埃克苏佩里</p>
+                <h4 class="media_title">{{item.bookname}}</h4>
+                <p class="media_desc">{{item.author}}</p>
               </div>
             </div>
           </div>
-          <div class="dState"><span>审核中...</span></div>
+          <div class="dState" v-if="item.status===1"><span>审核中...</span></div>
           <div class="infor">
             <!--{{item.content}}-->
           </div>
         </div>
       </li>
-      <li>
-        <div class="oneBox">
-          <div class="tpVideo">
-            <div class="textInfo box-1">
-              <p>故事是以小王子和心爱的玫瑰花吵架而离开自己的星球之后的旅途为主线的，小王子在各个星球间旅行，遇见了许多形形色色的人，最后小王子来到了地球，遇见了一个童心未泯的飞行员和聪明善良的小狐...
-              </p>
-            </div>
-            <div class="bookInfo flex-box">
-              <div class="left">
-                <img src="./../../../assets/img/banner-me-2.png" alt="">
-              </div>
-              <div class="right">
-                <h4 class="media_title">小王子</h4>
-                <p class="media_desc">圣埃克苏佩里</p>
-              </div>
-            </div>
-          </div>
-          <div class="infor">
-            <!--{{item.content}}-->
-          </div>
-        </div>
-      </li>
+      <!--<li>-->
+        <!--<div class="oneBox">-->
+          <!--<div class="tpVideo">-->
+            <!--<div class="textInfo box-1">-->
+              <!--<p>故事是以小王子和心爱的玫瑰花吵架而离开自己的星球之后的旅途为主线的，小王子在各个星球间旅行，遇见了许多形形色色的人，最后小王子来到了地球，遇见了一个童心未泯的飞行员和聪明善良的小狐...-->
+              <!--</p>-->
+            <!--</div>-->
+            <!--<div class="bookInfo flex-box">-->
+              <!--<div class="left">-->
+                <!--<img src="./../../../assets/img/banner-me-2.png" alt="">-->
+              <!--</div>-->
+              <!--<div class="right">-->
+                <!--<h4 class="media_title">小王子</h4>-->
+                <!--<p class="media_desc">圣埃克苏佩里</p>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="infor">-->
+            <!--&lt;!&ndash;{{item.content}}&ndash;&gt;-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</li>-->
     </ul>
   </div>
 </template>
@@ -56,6 +56,9 @@
       return{
 
       }
+    },
+    props:{
+      experience: Array
     },
     methods: {
 

@@ -1,6 +1,6 @@
 <template>
-  <div class="data-center">
-    <loading-bar v-show="isLoading"></loading-bar>
+  <div class="data-center recommend-content">
+    <loading v-if="isLoading"></loading>
     <search-bar :placeholder="placeholder" @changeValue="changeValue"></search-bar>
     <div class="line"></div>
     <div class="data-head flex-box">
@@ -37,20 +37,25 @@
 
 <script>
 import searchBar from "../components/searchBar.vue";
-import loadingBar from "../components/loading.vue";
+import loading from "../components/loading.vue";
 export default {
   name: "dataCenter",
   data() {
     return {
-      isLoading: false,
+      isLoading: true,
       placeholder: "调查调研",
       searchValue: "",
-      item: []
+      item: [],
     };
   },
   components: {
     searchBar,
-    loadingBar
+    loading
+  },
+  created (){
+    setTimeout(() => {
+      this.isLoading = false
+    }, 500)
   },
   methods: {
     changeValue(val) {
@@ -69,9 +74,6 @@ export default {
     // 数据接口
     getIndexData() {
       this.http.get(this.ports.dataCenter.index, res => {
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 1000);
         if (res.status === 200) {
           this.item = res.data.data;
           this.isRunning();
