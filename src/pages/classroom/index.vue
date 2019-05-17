@@ -100,6 +100,7 @@ export default {
     // 请求页面数据
     changeHandler() {
       this.http.get(this.ports.home.Classroom, res => {
+        console.log(res)
         if (res.status == 200) {
           let data = res.data;
           this.bannerList = data.banner;
