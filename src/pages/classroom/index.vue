@@ -12,19 +12,21 @@
     <div class="newsVideo">
       <h3 class="text-left">直播预告</h3>
       <ul>
-        <li>
+        <li  v-if="new Date(item.begin_time*1000) > new Date()"  v-for="(item,index) in live" :key="item.id">
+          {{fromTime(new Date())}}
           <div class="thisVideo flex-box">
             <div class="leftImg">
-              <img :src="latestLive.picture" alt>
+              <img :src="item.picture" alt>
             </div>
             <div class="textCenter box-1">
-              <h4 class="media_title">{{latestLive.title}}</h4>
+              <h4 class="media_title">{{item.title}}</h4>
               <p class="flex-box">
                 <span class="flex-box">
                   <i></i>
-                  {{latestLive.begin_time}}
+                  <!--{{item.begin_time}}-->
+                  {{new Date(item.begin_time*1000) | formatDate}}
                 </span>
-                {{latestLive.teacher}}
+                {{item.teacher}}
               </p>
             </div>
             <div class="right-ico">
@@ -32,6 +34,7 @@
             </div>
           </div>
         </li>
+        <li v-else-if="index==0">暂无直播预告...</li>
       </ul>
     </div>
     <!--直播课堂-->
@@ -41,7 +44,7 @@
           <span class="left-ico flex-box">直播课堂</span>
         </h2>
         <ul>
-          <li v-for="(item) in searchLive" :key="item.id">
+          <li  v-if="new Date(item.begin_time*1000) < new Date()" v-for="(item,index) in live" :key="item.id">
             <a :href="item.hrefs">
               <div class="leftText flex-box">
                 <div class="img">
@@ -64,6 +67,7 @@
               </div>
             </a>
           </li>
+          <li v-else-if="index==0">暂无直播课堂...</li>
         </ul>
       </div>
     </div>
@@ -71,8 +75,9 @@
 </template>
 <script>
 import loading from '../components/loading.vue'
-import searchBar from "../components/searchBar.vue";
-import bannerSwiper from "../classroom/BannerSwiper.vue";
+import searchBar from "../components/searchBar.vue"
+import bannerSwiper from "../classroom/BannerSwiper.vue"
+import {formatDate} from '../../assets/js/formTime.js'
 export default {
   name: "sayValue",
   data() {
@@ -91,12 +96,21 @@ export default {
     bannerSwiper,
     loading
   },
+  filters: {
+    formatDate(time) {
+      var date = new Date(time);
+      return formatDate(date, 'yyyy-MM-dd-hh:mm:ss');
+    }
+  },
   created (){
     setTimeout(() => {
       this.isLoading = false
     }, 500)
   },
   methods: {
+    fromTime (val){
+      return formatDate(val, 'yyyy-MM-dd-hh:mm:ss');
+    },
     // 请求页面数据
     changeHandler() {
       this.http.get(this.ports.home.Classroom, res => {
@@ -105,8 +119,8 @@ export default {
           let data = res.data;
           this.bannerList = data.banner;
           this.live = data.live;
-          this.checkWillLive(this.live);
-          this.newLive(this.willLive);
+//          this.checkWillLive(this.live);
+//          this.newLive(this.willLive);
         }
       });
     },
