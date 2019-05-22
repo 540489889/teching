@@ -3,8 +3,12 @@
     <ul>
       <li @click="toEdit" class="flex-box">
         <span>头像</span>
-        <img v-if="list.coverImg" :src="$store.state.IMGPATH+list.coverImg" alt="">
-        <img v-else src="./../../assets/img/party-c-1.png" alt="">
+        <div v-if="list.coverImg">
+          <img :src="$store.state.IMGPATH+list.coverImg" alt="">
+        </div>
+        <div v-else>
+          <img src="./../../assets/ico/me-p-ico.png" alt="">
+        </div>
       </li>
       <li @click="toEdit" class="flex-box">
         <span>用户名</span>

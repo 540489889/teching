@@ -16,7 +16,7 @@
     padding:20px 0;
     background-color:white;
     margin-top:20px;
-    margin-bottom:80px;
+    margin-bottom:50px;
     color:transparent;
     ul{
       padding-top:20px;

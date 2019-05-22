@@ -1,8 +1,10 @@
 <template>
   <div class="homeWrapper recommend-content">
     <loading v-if="isLoading"></loading>
-    <search-bar></search-bar>
-    <index-swiper :list="bannerList"></index-swiper>
+    <!--<search-bar></search-bar>-->
+    <div class="swiperBox">
+      <index-swiper :list="bannerList"></index-swiper>
+    </div>
     <advert-swiper :list="recomdList" :path="advertPath"></advert-swiper>
     <home-list></home-list>
     <!--<nav-bar :selectedNavTitle="selectedNavTitle"></nav-bar>-->
@@ -64,5 +66,9 @@
   .homeWrapper{
     background-color:#f5f5f5;
     font-size:24px;
+    .swiperBox{
+      padding-top:20px;
+      background-color:white;
+    }
   }
 </style>

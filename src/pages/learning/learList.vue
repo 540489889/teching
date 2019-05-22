@@ -73,7 +73,7 @@
         let pageSize = 8;
         this.page += 1;
         let data = [];
-        this.http.get(this.ports.specialActive.classroom+'?page='+this.page+'&&title='+this.title ,res =>{
+        this.http.get(this.ports.learning.teaching+'?page='+this.page+'&&title='+this.title+'&&type='+this.$route.query.type,res =>{
           if(res.status == 200){
             data = res.data.data
             if(data.length){

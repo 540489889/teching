@@ -27,7 +27,7 @@
           </a>
         </li>
       </ul>
-      <div class="noReading">
+      <div class="noReading" v-if="!live.length">
         <img src="./../../../assets/ico/null-rd-ico.png" alt="">
         <h6>这里还空空如也～</h6>
       </div>

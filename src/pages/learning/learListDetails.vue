@@ -24,7 +24,7 @@
       getContent(){
         let id = this.$route.query.id
         let tables = this.$route.query.tables
-        this.http.get(this.ports.specialActive.classroomContent+'?id='+id+'&tables='+tables,res=>{
+        this.http.get(this.ports.learning.teachingContent+'?id='+id+'&tables='+tables,res=>{
           console.log(res)
           if(res.status==200){
             const data = res.data

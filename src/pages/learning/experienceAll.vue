@@ -29,9 +29,9 @@
                   <!--些阴暗品质，作者通过完美的隐喻来展现出来，形成一本...-->
                 <!--</p>-->
               <!--</div>-->
-              <!--<div class="speak flex-box">-->
-                <!--<i class="speak-ico"></i>54-->
-              <!--</div>-->
+              <div class="speak flex-box">
+                <router-link tag="i" :to="'./sayValue?eid='+ebook.id+'&&qid='+quescoment.id+'&&score='+0"  class="speak-ico"></router-link>
+              </div>
             </div>
           </div>
         </li>
@@ -69,16 +69,16 @@
                 <list-item :list="item.children"></list-item>
               </div>
 
-              <!--<div class="speak flex-box">-->
-                <!--<i class="speak-ico"></i>{{0}}-->
-              <!--</div>-->
+              <div class="speak flex-box">
+                <router-link tag="i" :to="'./sayValue?eid='+item.bookid+'&&qid='+item.id+'&&score='+0"  class="speak-ico"></router-link>
+              </div>
             </div>
           </div>
         </li>
       </ul>
       <div class="nocom" v-if="!comment.length">暂时还没有评论哟...</div>
     </div>
-    <router-link tag="div" to="./sayValue" class="sayInput">
+    <router-link tag="div" :to="'./sayValue?eid='+ebook.id+'&&qid='+quescoment.id+'&&score='+0" class="sayInput">
       说点什么吧...
     </router-link>
   </div>

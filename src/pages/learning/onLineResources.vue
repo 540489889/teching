@@ -1,14 +1,14 @@
 <template>
   <div class="fruitsWrapper recommend-content">
-    <search-bar></search-bar>
-    <div class="fruits-list-1">
+    <search-bar @changeSearch="changeInput"></search-bar>
+    <div class="fruits-list-1" v-for="item in link" :key="item.id">
       <h2 class="titleBox flex-box">
         <span class="left-ico flex-box">
           <!--<i class="ds-ico"></i>-->
           资源链接</span>
       </h2>
       <ul>
-        <router-link tag="li" :to="'/news/activeDetails?id='+item.id" v-for="item in list" :key="item.id">
+        <router-link tag="li" :to="'/learning/resourcesDetails?id='+item.id">
           <div class="leftText flex-box">
             <img class="rightImg" :src="$store.state.IMGPATH+item.cover_img" alt="">
             <div class="box-1">
@@ -19,12 +19,38 @@
             </div>
           </div>
         </router-link>
-        <infinite-loading
-          :on-infinite="onInfinite"
-          spinner="spiral"
-          ref="infiniteLoading">
-          <span slot="no-more" class="no-more">我也是有底线的</span>
-        </infinite-loading>
+        <!--<infinite-loading-->
+          <!--:on-infinite="onInfinite"-->
+          <!--spinner="spiral"-->
+          <!--ref="infiniteLoading">-->
+          <!--<span slot="no-more" class="no-more">我也是有底线的</span>-->
+        <!--</infinite-loading>-->
+      </ul>
+    </div>
+    <div class="fruits-list-1" v-for="item in publicresoce" :key="item.id">
+      <h2 class="titleBox flex-box">
+        <span class="left-ico flex-box">
+          <!--<i class="ds-ico"></i>-->
+          九龙教育资源库</span>
+      </h2>
+      <ul>
+        <router-link tag="li" :to="'/learning/resourcesDetails?id='+item.id">
+          <div class="leftText flex-box">
+            <img class="rightImg" :src="$store.state.IMGPATH+item.cover_img" alt="">
+            <div class="box-1">
+              <h4 class="flex-box">
+                <p class="box-1 media_desc">{{item.title}}</p>
+                <!--<span class="style1">教育装备</span>-->
+              </h4>
+            </div>
+          </div>
+        </router-link>
+        <!--<infinite-loading-->
+        <!--:on-infinite="onInfinite"-->
+        <!--spinner="spiral"-->
+        <!--ref="infiniteLoading">-->
+        <!--<span slot="no-more" class="no-more">我也是有底线的</span>-->
+        <!--</infinite-loading>-->
       </ul>
     </div>
   </div>
@@ -47,7 +73,9 @@
         scrollX: true,
         scrollY: false,
         page: 0,
-        title: ''
+        title: '',
+        link: [],
+        publicresoce:[]
       }
     },
     components: {
@@ -58,6 +86,20 @@
       noticeList: Array
     },
     methods: {
+      changeInput(val){
+        this.page = 0
+        this.title = val
+        this.getListData()
+      },
+      getListData(){
+        this.http.get(this.ports.learning.presoceList+'?title='+this.title ,res =>{
+          console.log(res)
+          if(res.status == 200){
+            this.link = res.data.link
+            this.publicresoce = res.data.publicresoce
+          }
+        })
+      },
       onInfinite($state,type) {
         console.log(type)
         this.isLoading = false
@@ -65,7 +107,7 @@
         let pageSize = 8;
         this.page += 1;
         let data = [];
-        this.http.get(this.ports.newsX.dynamicsList+'?page='+this.page+'&&title='+this.title ,res =>{
+        this.http.get(this.ports.learning.dynamicsList+'?page='+this.page+'&&title='+this.title ,res =>{
           console.log(data)
           if(res.status == 200){
             data = res.data.data
@@ -84,6 +126,7 @@
       },
     },
     mounted(){
+      this.getListData()
     }
   }
 </script>

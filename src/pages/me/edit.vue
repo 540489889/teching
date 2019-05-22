@@ -7,13 +7,13 @@
           ref="upload"
           v-model="files"
           :action="action"
-          :simultaneous-uploads="1"
           @files-added="addedHandler"
           @file-error="errHandler">
-          <div class="clear-fix">
+          <div class="clear-fix" >
+            <cube-upload-file v-for="(file, i) in files" :file="file" :key="i"></cube-upload-file>
             <cube-upload-btn :multiple="false">
-              <div>
-                <img src="./../../assets/img/party-c-1.png" alt="">
+              <div style="font-size:30px;">
+                +
               </div>
             </cube-upload-btn>
           </div>
@@ -31,13 +31,14 @@
   </div>
 </template>
 <script>
+  import '../../assets/style/cubeNews.css'
   export default {
     name: 'edit',
     data (){
       return {
         name: '',
         coverImg: '',
-        action: '',
+        action: 'home/Indexd/editUserInfo',
         files: [],
         max: 1,
         multiple:false,
@@ -65,7 +66,7 @@
         let params = {}
         let _this = this
         params.username = this.name
-        params.upFile = this.upFile
+        params.upFile = this.files[0]
         this.http.post(this.ports.me.editUserInfo,params,res=>{
           this.showToastTxtOnly(res.message)
           if(res.status===200){
@@ -78,9 +79,7 @@
       },
       addedHandler() {
         const file = this.files[0]
-        this.upFile = this.files[0]
-        console.log(file)
-//        file && this.$refs.upload.removeFile(file)
+        file && this.$refs.upload.removeFile(file)
       },
       errHandler(file) {
         // const msg = file.response.message
@@ -92,11 +91,12 @@
       }
     },
     mounted (){
-      this.addedHandler()
+
     }
   }
 </script>
 <style lang="less" scoped>
+
   .edit{
     .btnEdit{
       padding:20px;

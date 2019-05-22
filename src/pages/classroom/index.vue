@@ -12,11 +12,10 @@
     <div class="newsVideo">
       <h3 class="text-left">直播预告</h3>
       <ul>
-        <li  v-if="new Date(item.begin_time*1000) > new Date()"  v-for="(item,index) in live" :key="item.id">
-          {{fromTime(new Date())}}
+        <li @click="toMovies(item)" v-if="new Date(item.begin_time*1000) > new Date()"  v-for="(item,index) in live" :key="item.id">
           <div class="thisVideo flex-box">
             <div class="leftImg">
-              <img :src="item.picture" alt>
+              <img :src="$store.state.IMGPATH+item.picture" alt>
             </div>
             <div class="textCenter box-1">
               <h4 class="media_title">{{item.title}}</h4>
@@ -44,11 +43,11 @@
           <span class="left-ico flex-box">直播课堂</span>
         </h2>
         <ul>
-          <li  v-if="new Date(item.begin_time*1000) < new Date()" v-for="(item,index) in live" :key="item.id">
+          <li  @click="toMovies(item)" v-if="new Date(item.begin_time*1000) < new Date()" v-for="(item,index) in live" :key="item.id">
             <a :href="item.hrefs">
               <div class="leftText flex-box">
                 <div class="img">
-                  <img class="rightImg" :src="item.picture" alt>
+                  <img class="rightImg" :src="$store.state.IMGPATH+item.picture" alt>
                 </div>
                 <div class="box-1">
                   <h4 class="flex-box">
@@ -67,7 +66,7 @@
               </div>
             </a>
           </li>
-          <li v-else-if="index==0">暂无直播课堂...</li>
+          <!--<li v-else-if="index==0">暂无直播课堂...</li>-->
         </ul>
       </div>
     </div>
@@ -111,10 +110,21 @@ export default {
     fromTime (val){
       return formatDate(val, 'yyyy-MM-dd-hh:mm:ss');
     },
+    toMovies(item){
+
+      let l_id = item.id;
+      this.http.get(this.ports.home.LiveRecod+'?l_id='+l_id, res => {
+        console.log(res)
+        if(res.status===200){
+//          alert(123)
+
+          location.href = item.herfs
+        }
+      })
+    },
     // 请求页面数据
     changeHandler() {
       this.http.get(this.ports.home.Classroom, res => {
-        console.log(res)
         if (res.status == 200) {
           let data = res.data;
           this.bannerList = data.banner;

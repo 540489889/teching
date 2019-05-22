@@ -2,7 +2,7 @@
   <div class="partyWrapper recommend-content aboutUs">
     <loading v-if="isLoading"></loading>
     <div class="searchDiv">
-      <search-bar></search-bar>
+      <!--<search-bar></search-bar>-->
     </div>
     <div class="partyBanner">
       <!--<img src="./../../assets/img/party-b-1.png" alt="">-->

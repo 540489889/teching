@@ -10,7 +10,7 @@
         @input="changeVal"
       ></cube-textarea>
       <div class="sendDiv">
-        <button class="sendOut">发送</button>
+        <button class="sendOut" @click="sendOut">发送</button>
       </div>
     </div>
 
@@ -31,6 +31,52 @@
       }
     },
     methods: {
+      showToastTxt(text) {
+        this.toast = this.$createToast({
+          txt: text,
+          type: 'txt',
+          $events: {
+            timeout: () => {
+            }
+          }
+        })
+        this.toast.show()
+      },
+      showToastTxtOnly(text) {
+        this.toast = this.$createToast({
+          txt: text,
+          type: 'txt',
+          $events: {
+            timeout: () => {
+              this.$router.go(-1);
+            }
+          }
+        })
+        this.toast.show()
+      },
+      sendOut(){
+        let eid = this.$route.query.eid
+        let score = 0
+        let qid = this.$route.query.qid
+        let params = {}
+        params.eid = eid
+        params.score = score
+        params.qid = qid
+        params.content = this.value
+        if(this.value===''){
+          this.showToastTxtOnly('评论不能为空')
+          return false
+        }else{
+          this.http.post(this.ports.learning.addToComment,params, res =>{
+            if(res.status==200){
+              this.showToastTxtOnly(res.message)
+            }else{
+              this.showToastTxt(res.message)
+
+            }
+          })
+        }
+      },
       changeVal(){
         if(this.value!==''){
           $('.sendOut').css({

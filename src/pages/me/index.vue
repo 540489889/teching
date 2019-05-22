@@ -9,7 +9,13 @@
         <!--</router-link>-->
       </div>
       <div class="userInfo flex-box">
-        <img class="userTx" src="./../../assets/img/party-c-1.png" alt="">
+        <div v-if="list.port">
+          <img class="userTx"  :src="$store.state.IMGPATH+list.port" alt="">
+
+        </div>
+        <div v-else>
+          <img class="userTx"  src="./../../assets/img/party-c-1.png" alt="">
+        </div>
         <span v-if="list.username">{{list.username}}</span>
         <span v-else>{{list.iphone}}</span>
         <span class="setUp" @click="setUpClick"><i class="cubeic-setting"></i>设置</span>

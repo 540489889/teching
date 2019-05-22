@@ -1,7 +1,7 @@
 <template>
   <div class="infoWrapper recommend-content">
     <loading v-if="isLoading"></loading>
-    <search-bar></search-bar>
+    <!--<search-bar></search-bar>-->
     <div class="infoList1 meWrapper">
       <h2 class="titleBox flex-box">
         <span class="left-ico flex-box">
@@ -98,8 +98,8 @@
   import loading from './../components/loading'
   import searchBar from '../components/searchBar.vue'
   import indexSwiper from '../components/indexSwiper.vue'
-  import './../../assets/style/zy.media.min.css'
-  import './../../assets/js/zy.media.min.js'
+  import '../../assets/style/zy.media.min.css'
+  import '../../assets/js/zy.media.min.js'
   export default {
     name: 'InformatizationIndex',
     data () {
@@ -131,7 +131,7 @@
       indexSwiper,
       loading
     },
-    created (){
+    created(){
       setTimeout(() => {
         this.isLoading = false
       }, 500)
@@ -146,14 +146,21 @@
             const data = res.data
             this.moves = data.moves
             this.list = data.data
-            this.moveInit()
           }
         })
       },
     },
     mounted(){
-      this.moveInit()
       this.getSchoolMoves()
+      this.moveInit()
+    },
+    watch :{
+      moves(){
+        this.$nextTick(() => {
+          console.log(this.moves)
+          this.moveInit()
+        });
+      }
     }
   }
 </script>

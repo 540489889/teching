@@ -144,6 +144,13 @@ var router =  new Router({
       component: resolve => require(['@/pages/learning/onLineResources'], resolve) ,
       meta:{index: 3, title: '在线资源', requireAuth: false}
     },
+    //学习园地 在线资源
+    {
+      path: '/learning/resourcesDetails',
+      name: 'resourcesDetails',
+      component: resolve => require(['@/pages/learning/resourcesDetails'], resolve) ,
+      meta:{index: 4, title: '在线资源', requireAuth: false}
+    },
     //专题活动首页
     {
       path: '/specialActive/index',

@@ -1,8 +1,8 @@
 <template>
   <div class="inside">
-    <p v-for="it in list">
+    <p v-for="it in list" :key="it.id">
       <span>{{it.nickname}}：</span>
-      {{it.content}}
+      <b @click="replyClick(it)">{{it.content}}</b>
       <list-item v-if="it.children.length" :list="it.children"></list-item>
     </p>
   </div>
@@ -22,10 +22,14 @@
       frist: Boolean
     },
     methods: {
-
+      replyClick(val){
+        let eid = val.bookid
+        let score = 0;
+        let qid = val.qid
+        this.$router.push({path: '/learning/sayValue', query: {eid,score,qid}});
+      }
     },
     mounted(){
-      console.log(this.list)
     }
   }
 </script>

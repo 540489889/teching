@@ -5,7 +5,8 @@ export default {
   //首页
   home: {
     index: '/home/Indexd/index',//系统轮播图热点展示
-    Classroom:'/home/Indexd/intheAir'//
+    Classroom:'/home/Indexd/intheAir',//
+    LiveRecod:'/home/Indexd/LiveRecod',//直播记录
   },
   // 数据中心
   dataCenter: {
@@ -37,6 +38,11 @@ export default {
     commentList: '/home/Indexd/commentList', //评论列表
     commentDetails: '/home/Indexd/commentDetails', //评论列表详情
     addComment: '/home/Indexd/addComment', //添加以及评论
+    teaching: '/home/Indexd/teaching',//1,教学案例2,图书交流3课题研究4培训交流
+    teachingContent: '/home/Indexd/teachingContent',//教学详情
+    addToComment: '/home/Indexd/addToComment',//添加无限级评论
+    presoceList: '/home/Indexd/presoceList',//在线资源列表
+    presoceContent: '/home/Indexd/presoceContent',//在线资源列表详情
   },
   //专题活动
   specialActive: {

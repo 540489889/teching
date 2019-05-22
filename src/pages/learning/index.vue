@@ -192,20 +192,23 @@
         <li v-for="item in comment">
           <div class="oneBox">
             <div class="tpVideo">
-              <div v-if="item.port" class="leftImg flex-box">
-                <img :src="$store.state.IMGPATH+item.port" alt="">
-                <h4 class="media_title">{{item.nickname}}</h4>
-              </div>
-              <div class="leftImg flex-box" v-else>
-                <img src="../../assets/ico/video-ico-3.png" alt="">
-                <h4 class="media_title">{{item.nickname}}</h4>
-              </div>
-              <div class="textInfo box-1">
-                <p>
-                  {{item.content}}
-                </p>
-              </div>
-              <router-link tag="div" :to="'./bookDetails?eid='+item.id"  class="bookInfo flex-box" >
+              <router-link tag="div" :to="'./experienceAll?qid='+item.id+'&eid='+item.bookid">
+                <div v-if="item.port" class="leftImg flex-box">
+                  <img :src="$store.state.IMGPATH+item.port" alt="">
+                  <h4 class="media_title">{{item.nickname}}</h4>
+                </div>
+                <div class="leftImg flex-box" v-else>
+                  <img src="../../assets/ico/me-p-ico.png" alt="">
+                  <h4 class="media_title">{{item.nickname}}</h4>
+                </div>
+                <div class="textInfo box-1">
+                  <p>
+                    {{item.content}}
+                  </p>
+                </div>
+              </router-link>
+
+              <router-link tag="div" :to="'./bookDetails?eid='+item.bookid"  class="bookInfo flex-box" >
                 <div class="left">
                   <img :src="$store.state.IMGPATH+item.cover_img" alt="">
                 </div>
