@@ -3,14 +3,14 @@
     <div class="infoList2">
       <ul>
         <li v-for="item in live" :key="item.id">
-          <a>
+          <a :href="item.herfs">
             <div class="leftText flex-box">
               <div class="img">
-                <img class="rightImg" src="./../../../assets/img/banner-me-2.png" alt>
+                <img class="rightImg" :src="$store.state.IMGPATH+item.picture" alt>
               </div>
               <div class="box-1">
                 <h4 class="flex-box">
-                  <p class="box-1 media_desc">故事是以小王子和心爱的玫瑰花吵架而离开自己的星球...
+                  <p class="box-1 media_desc">{{item.title}}
                   </p>
                 </h4>
                 <h6 class="flex-box">

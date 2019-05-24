@@ -9,13 +9,8 @@
         <!--</router-link>-->
       </div>
       <div class="userInfo flex-box">
-        <div v-if="list.port">
-          <img class="userTx"  :src="$store.state.IMGPATH+list.port" alt="">
-
-        </div>
-        <div v-else>
-          <img class="userTx"  src="./../../assets/img/party-c-1.png" alt="">
-        </div>
+        <img v-if="list.port" class="userTx"  :src="$store.state.IMGPATH+list.port" alt="">
+        <img v-else class="userTx"  src="./../../assets/ico/me-p-ico.png" alt="">
         <span v-if="list.username">{{list.username}}</span>
         <span v-else>{{list.iphone}}</span>
         <span class="setUp" @click="setUpClick"><i class="cubeic-setting"></i>设置</span>
@@ -105,7 +100,7 @@
       setUpClick(){
           let data = {}
           data.username = this.list.username
-          data.coverImg = this.list.coverImg
+          data.coverImg = this.list.port
           this.$router.push({path:'/me/setUp', query: { list: JSON.stringify(data)}})
       },
       clickHandler (label) {

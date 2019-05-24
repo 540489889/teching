@@ -105,7 +105,7 @@
       //获取验证码
       codeBtnAction () {
         console.log(999)
-        let tellReg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+        let tellReg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[0-9]|18[0-9]|14[57]|19[0-9]|16[0-9])[0-9]{8}$/;
         if(!tellReg.test(this.inputTell)){
           this.showToastTxtOnly('请填写正确的手机号!');
           return false

@@ -92,10 +92,15 @@
         line-height:50px;
         overflow: hidden;
         text-align: left;
+        a{
+          display: block;
+          height:50px;
+          line-height:50px;
+        }
         .media_title{
           display: block;
           padding-left:15px;
-          font-size:26px;
+          font-size:28px;
           color:black;
           span{
             border:1px solid #d6001e;

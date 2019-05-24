@@ -5,7 +5,7 @@
       <bannerSwiper :list="bannerList"></bannerSwiper>
       <div class="search">
         <i class="cubeic-search"></i>
-        <input type="text" v-model="searchVal" placeholder="直播课堂">
+        <input @input="changeSearch" type="text" v-model="searchVal" placeholder="直播课堂">
       </div>
     </div>
     <!--直播预告-->
@@ -87,7 +87,8 @@ export default {
       willLive: [],
       latestLive: {},
       searchLive: [],
-      isLoading: true
+      isLoading: true,
+      title: ''
     };
   },
   components: {
@@ -107,24 +108,34 @@ export default {
     }, 500)
   },
   methods: {
+    changeSearch(){
+      this.title = this.searchVal
+      this.changeHandler()
+    },
     fromTime (val){
       return formatDate(val, 'yyyy-MM-dd-hh:mm:ss');
     },
+    showToastTxtOnly(text) {
+      this.toast = this.$createToast({
+        txt: text,
+        type: 'txt'
+      })
+      this.toast.show()
+    },
     toMovies(item){
-
       let l_id = item.id;
       this.http.get(this.ports.home.LiveRecod+'?l_id='+l_id, res => {
-        console.log(res)
+        console.log(res.message)
         if(res.status===200){
-//          alert(123)
-
           location.href = item.herfs
+        }else{
+          this.showToastTxtOnly(res.message)
         }
       })
     },
     // 请求页面数据
     changeHandler() {
-      this.http.get(this.ports.home.Classroom, res => {
+      this.http.get(this.ports.home.Classroom+'?title='+this.title, res => {
         if (res.status == 200) {
           let data = res.data;
           this.bannerList = data.banner;

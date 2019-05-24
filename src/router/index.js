@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
 var router =  new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     //首页
     {
@@ -144,13 +144,6 @@ var router =  new Router({
       component: resolve => require(['@/pages/learning/onLineResources'], resolve) ,
       meta:{index: 3, title: '在线资源', requireAuth: false}
     },
-    //学习园地 在线资源
-    {
-      path: '/learning/resourcesDetails',
-      name: 'resourcesDetails',
-      component: resolve => require(['@/pages/learning/resourcesDetails'], resolve) ,
-      meta:{index: 4, title: '在线资源', requireAuth: false}
-    },
     //专题活动首页
     {
       path: '/specialActive/index',
@@ -180,6 +173,12 @@ var router =  new Router({
       meta:{index: 4, title: '人工智能', requireAuth: false}
     },
 
+    {
+      path: '/specialActive/educationListDetails',
+      name: 'educationListDetails',
+      component: resolve => require(['@/pages/specialActive/educationListDetails'], resolve) ,
+      meta:{index: 4, title: '人工智能', requireAuth: false}
+    },
     //创新实验
     {
       path: '/specialActive/testList',
@@ -224,6 +223,12 @@ var router =  new Router({
       name: 'Questionnaire',
       component: resolve => require(['@/pages/dataCenter/Questionnaire'], resolve) ,
       meta:{index: 4, title: '数据中心', requireAuth: false}
+    },
+    {
+      path: '/dataCenter/onLineResources',
+      name: 'dataCenterOnLineResources',
+      component: resolve => require(['@/pages/dataCenter/onLineResources'], resolve) ,
+      meta:{index: 3, title: '在线资源', requireAuth: false}
     },
     //校园影视列表
     {
@@ -362,7 +367,7 @@ var router =  new Router({
 router.beforeEach((to, from, next) => {
   //重置title
   if (to.meta.title) {
-    document.title = to.meta.title
+    // document.title = to.meta.title
   }
   let path = to.path
   let token = localStorage.getItem('Authorization');

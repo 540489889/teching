@@ -13,7 +13,7 @@
       <!--<swiper-slide  >-->
         <!--<img class="swiper-img" src="./../../assets/img/index-b-1.png" alt="">-->
       <!--</swiper-slide>-->
-      <div class="swiper-pagination"  slot="pagination"></div>
+      <div class="swiper-pagination swiper-pagination-white"  slot="pagination"></div>
     </swiper>
   </div>
 </template>
@@ -75,6 +75,9 @@
 <style lang="less" scoped>
   .indexSwiper{
     background-color:white;
+    .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
+      bottom:50px;
+    }
     .swiper-pagination-bullet{
       width:12px;
       height:6px;
@@ -90,8 +93,8 @@
       }
     }
     .swiper-slide img{
-      width:650px;
-      height:390px;
+      width:655px;
+      height:422px;
       border-radius: 10px;
     }
   }

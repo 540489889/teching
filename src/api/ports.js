@@ -10,10 +10,10 @@ export default {
   },
   // 数据中心
   dataCenter: {
-    index: 'home/indexd/investigation', //调查调研
-    islogin: 'home/indexd/investiLogin', //提交登录
-    detail: 'home/indexd/gationDetal', //问卷详情页
-    answer: 'home/indexd/gationAnswer' //提交答案
+    index: '/home/indexd/investigation', //调查调研
+    islogin: '/home/indexd/investiLogin', //提交登录
+    detail: '/home/indexd/gationDetal', //问卷详情页
+    answer: '/home/indexd/gationAnswer' //提交答案
   },
   //技术装备
   tEquipment: {
@@ -49,6 +49,7 @@ export default {
     schoolMoves: '/home/Indexd/schoolMoves',//专题活动首页
     prograList: '/home/Indexd/prograList',//计算机编程列表
     uavList: '/home/Indexd/uavList',//计算机编程列表
+    uavContent: '/home/Indexd/uavContent',//计算机编程列表详情
     classroom: '/home/Indexd/classroom',//创新课堂列表
     education: '/home/Indexd/education',//创新教育应用专题
     experiment: '/home/Indexd/experiment',//创新实验联盟

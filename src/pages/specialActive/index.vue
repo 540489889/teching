@@ -10,23 +10,18 @@
         <!--<span class="flex-box right-text">更多 <i class="cubeic-arrow"></i></span>-->
       </h2>
       <div class="scroll-list-wrap">
-        <cube-scroll
-          ref="scroll"
-          direction="horizontal"
-          :options="options">
-          <ul class="list-wrapper">
-            <li class="list-item">
-              <router-link tag="div" to="./intelligenceList" class="imgBox">
-                <img src="./../../assets/ico/sa-t-1.png" alt="">
-              </router-link>
-            </li>
-            <li class="list-item">
-              <router-link tag="div" to="./intelligencesList" class="imgBox">
-                <img src="./../../assets/ico/sa-t-2.png" alt="">
-              </router-link>
-            </li>
-          </ul>
-        </cube-scroll>
+        <ul class="list-wrapper">
+          <li class="list-item" style="height:initial;">
+            <router-link tag="div" to="./intelligenceList" class="imgBox">
+              <img src="./../../assets/ico/sa-tt-1.png" alt="">
+            </router-link>
+          </li>
+          <li class="list-item" style="height:initial;">
+            <router-link tag="div" to="./intelligencesList" class="imgBox">
+              <img src="./../../assets/ico/sa-tt-2.png" alt="">
+            </router-link>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="teContent">
@@ -37,9 +32,9 @@
             校园影视</span>
           <span class="flex-box right-text">更多 <i class="cubeic-arrow"></i></span>
         </router-link>
-        <div class="videoImg">
-          <video :poster="$store.state.IMGPATH+moves.cover_img">
-            <source :src="$store.state.IMGPATH+moves.video" type="video/mp4">
+        <div class="videoImg" v-for="item in movies">
+          <video :poster="$store.state.IMGPATH+item.cover_img">
+            <source :src="$store.state.IMGPATH+item.video" type="video/mp4">
             您的浏览器不支持HTML5视频
           </video>
         </div>
@@ -56,7 +51,7 @@
                 <h6 class="flex-box">
                   <span>{{item.update}}</span>
                   <span v-if="item.clicknum"><i class="cubeic-person"></i> {{item.clicknum}}</span>
-                  <span v-else><i class="cubeic-person"></i>0</span>
+                  <span v-else><i class="cubeic-person"></i>{{item.looknum}}</span>
                 </h6>
               </div>
             </div>
@@ -142,22 +137,23 @@
       },
       getSchoolMoves(){
         this.http.get(this.ports.specialActive.schoolMoves,res=>{
+          console.log(res)
           if(res.status==200){
             const data = res.data
             this.moves = data.moves
+            this.movies.push(this.moves)
             this.list = data.data
+//            this.moveInit()
           }
         })
       },
     },
     mounted(){
       this.getSchoolMoves()
-      this.moveInit()
     },
     watch :{
-      moves(){
+      movies(){
         this.$nextTick(() => {
-          console.log(this.moves)
           this.moveInit()
         });
       }
@@ -189,6 +185,9 @@
             width:350px;
             height:195px;
             margin-left:20px;
+          }
+          li:first-child{
+            margin-left:15px;
           }
           li:last-child{
             margin-left:10px;

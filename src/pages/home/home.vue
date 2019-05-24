@@ -67,7 +67,7 @@
     background-color:#f5f5f5;
     font-size:24px;
     .swiperBox{
-      padding-top:20px;
+      padding-top:30px;
       background-color:white;
     }
   }

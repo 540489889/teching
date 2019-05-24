@@ -38,7 +38,7 @@
       return {
         name: '',
         coverImg: '',
-        action: 'home/Indexd/editUserInfo',
+        action: 'http://cqeic.swkj2014.com/home/Indexd/editUserInfo',
         files: [],
         max: 1,
         multiple:false,
@@ -107,6 +107,7 @@
       background-color:white;
       margin-bottom:20px;
       li{
+        overflow: hidden;
         height:80px;
         justify-content: space-between;
         padding:20px 0;
@@ -125,6 +126,9 @@
           -webkit-appearance: none;
           -moz-appearance: none;
           appearance: none;
+        }
+        input:active,input:hover,input:focus{
+          border:none !important;
         }
       }
       li:last-child{

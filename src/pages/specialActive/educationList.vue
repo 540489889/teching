@@ -8,7 +8,7 @@
     <div class="teContent">
       <div class="infoList2">
         <ul>
-          <router-link tag="li" :to="'/specialActive/intelligenceDetails?id='+item.id+'&tables='+item.tables" v-for="(item,index) in list" :key="index">
+          <router-link tag="li" :to="'/specialActive/educationListDetails?id='+item.id+'&tables='+item.tables" v-for="(item,index) in list" :key="index">
             <div class="leftText flex-box">
               <img class="rightImg" :src="$store.state.IMGPATH+item.cover_img" alt="">
               <div class="box-1">

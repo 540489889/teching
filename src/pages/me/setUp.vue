@@ -1,18 +1,27 @@
 <template>
   <div class="setUp recommend-content">
     <ul>
-      <li @click="toEdit" class="flex-box">
+      <li class="flex-box">
         <span>头像</span>
-        <div v-if="list.coverImg">
-          <img :src="$store.state.IMGPATH+list.coverImg" alt="">
-        </div>
-        <div v-else>
-          <img src="./../../assets/ico/me-p-ico.png" alt="">
-        </div>
+        <cube-upload
+          ref="upload"
+          v-model="files"
+          :action="action"
+          @files-added="addedHandler"
+          @file-error="errHandler">
+          <div class="clear-fix" >
+            <cube-upload-file v-for="(file, i) in files" :file="file" :key="i"></cube-upload-file>
+            <cube-upload-btn :multiple="false">
+              <div class="addLabel" style="font-size:30px;">
+                +
+              </div>
+            </cube-upload-btn>
+          </div>
+        </cube-upload>
       </li>
-      <li @click="toEdit" class="flex-box">
+      <li class="flex-box">
         <span>用户名</span>
-        <span class="name">{{list.username}}</span>
+        <input class="name" @change="changeSearch" v-model="userName"/>
       </li>
     </ul>
     <div class="outLog" @click="outLogin">
@@ -26,7 +35,14 @@
     name: 'sayValue',
     data (){
       return{
-        list: {}
+        list: {},
+        coverImg: '',
+        action: 'http://cqeic.swkj2014.com/home/Indexd/editUserInfo',
+        files: [],
+        max: 1,
+        multiple:false,
+        upFile: '',
+        userName: ''
       }
     },
     created (){
@@ -38,6 +54,8 @@
       },
       init(){
         this.list =  JSON.parse(this.$route.query.list)
+        console.log(this.list)
+        this.userName = this.list.username
       },
       showToastTxtOnly(text) {
         this.toast = this.$createToast({
@@ -45,6 +63,50 @@
           type: 'txt'
         })
         this.toast.show()
+      },
+      changeSearch(){
+        let params = {}
+        let _this = this
+        params.username = this.userName
+        params.upFile = this.files[0]
+        this.http.post(this.ports.me.editUserInfo,params,res=>{
+          this.showToastTxtOnly(res.message)
+//          if(res.status===200){
+//            setTimeout(function () {
+//              _this.$router.push({ path: '/me/index' });
+//            },2000)
+//          }
+        })
+      },
+      editClick(){
+        let params = {}
+        let _this = this
+        params.username = this.name
+        params.upFile = this.files[0]
+        this.http.post(this.ports.me.editUserInfo,params,res=>{
+          this.showToastTxtOnly(res.message)
+          if(res.status===200){
+            setTimeout(function () {
+              _this.$router.push({ path: '/me/index' });
+            },2000)
+          }
+
+        })
+      },
+      addedHandler() {
+        this.showToastTxtOnly('头像修改成功')
+        $('.addLabel').hide()
+        $('.cube-upload-btn').hide()
+        const file = this.files[0]
+        file && this.$refs.upload.removeFile(file)
+      },
+      errHandler(file) {
+        // const msg = file.response.message
+        this.$createToast({
+          type: 'warn',
+          txt: 'Upload fail',
+          time: 1000
+        }).show()
       },
       ...mapMutations(['changeLogin']),
       outLogin (){
@@ -84,6 +146,7 @@
         justify-content: space-between;
         padding:20px 0;
         border-bottom:1px solid #eee;
+        overflow: hidden;
         img{
           width:70px;
           height:70px;
@@ -91,6 +154,18 @@
         }
         .name{
           color:#bbbbbb;
+        }
+        input{
+          border:none;
+          text-align: right;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          width:initial;
+          display: inline-block;
+        }
+        input:active,input:hover,input:focus{
+          border:none !important;
         }
       }
       li:last-child{

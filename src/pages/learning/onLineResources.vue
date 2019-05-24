@@ -8,8 +8,8 @@
           资源链接</span>
       </h2>
       <ul>
-        <router-link tag="li" :to="'/learning/resourcesDetails?id='+item.id">
-          <div class="leftText flex-box">
+        <li>
+          <a :href="item.herf" class="leftText flex-box">
             <img class="rightImg" :src="$store.state.IMGPATH+item.cover_img" alt="">
             <div class="box-1">
               <h4 class="flex-box">
@@ -17,8 +17,8 @@
                 <!--<span class="style1">教育装备</span>-->
               </h4>
             </div>
-          </div>
-        </router-link>
+          </a>
+        </li>
         <!--<infinite-loading-->
           <!--:on-infinite="onInfinite"-->
           <!--spinner="spiral"-->
@@ -34,8 +34,8 @@
           九龙教育资源库</span>
       </h2>
       <ul>
-        <router-link tag="li" :to="'/learning/resourcesDetails?id='+item.id">
-          <div class="leftText flex-box">
+        <li>
+          <a :href="item.herf" class="leftText flex-box">
             <img class="rightImg" :src="$store.state.IMGPATH+item.cover_img" alt="">
             <div class="box-1">
               <h4 class="flex-box">
@@ -43,8 +43,8 @@
                 <!--<span class="style1">教育装备</span>-->
               </h4>
             </div>
-          </div>
-        </router-link>
+          </a>
+        </li>
         <!--<infinite-loading-->
         <!--:on-infinite="onInfinite"-->
         <!--spinner="spiral"-->

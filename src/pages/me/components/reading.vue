@@ -7,18 +7,18 @@
         direction="horizontal"
         :options="options">
         <ul class="list-wrapper">
-          <li v-for="item in ebook" class="list-item">
+          <router-link tag="li" :to="'/learning/bookDetails?eid='+item.id" v-for="item in ebook" class="list-item" :key="item.id">
             <div class="imgBox"><img :src="$store.state.IMGPATH+item.cover_img" alt=""></div>
             <h3 class="media_desc">{{item.title}}</h3>
             <p class="media_title">{{item.author}}</p>
-          </li>
+          </router-link>
         </ul>
       </cube-scroll>
     </div>
     <div class="noReading" v-if="!ebook.length">
       <img src="./../../../assets/ico/null-rd-ico.png" alt="">
       <h6>这里还空空如也～</h6>
-      <div class="goReading">去阅读</div>
+      <router-link tag="div" to="/learning/index" class="goReading">去阅读</router-link>
     </div>
   </div>
 </template>

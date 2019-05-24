@@ -46,7 +46,7 @@
                 <h6 class="flex-box">
                   <span>{{item.update}}</span>
                   <span v-if="item.clicknum"><i class="cubeic-person"></i> {{item.clicknum}}</span>
-                  <span v-else><i class="cubeic-person"></i>0</span>
+                  <span v-else><i class="cubeic-person"></i>{{item.looknum}}</span>
                 </h6>
               </div>
             </div>

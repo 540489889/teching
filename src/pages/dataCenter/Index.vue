@@ -3,7 +3,7 @@
     <loading v-if="isLoading"></loading>
     <search-bar :placeholder="placeholder" @changeValue="changeValue"></search-bar>
     <div class="line"></div>
-    <div class="data-head flex-box">
+    <div class="data-head flex-box" @click="changeClick">
       <img src="./../../assets/img/data-head.png" alt>
       <span>教育数据</span>
       <span>可视化界面、教学数据、装备数据</span>
@@ -58,6 +58,16 @@ export default {
     }, 500)
   },
   methods: {
+    showToastTxtOnly(text) {
+      this.toast = this.$createToast({
+        txt: text,
+        type: 'txt'
+      })
+      this.toast.show()
+    },
+    changeClick(){
+      this.showToastTxtOnly('正在建设中...')
+    },
     changeValue(val) {
       this.searchValue = val;
     },
