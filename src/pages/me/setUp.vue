@@ -135,6 +135,9 @@
   }
 </script>
 <style lang="less" scoped>
+  .cube-upload-file-def>.cubeic-wrong{
+    display: none;
+  }
   .setUp{
     font-size:28px;
     ul{
