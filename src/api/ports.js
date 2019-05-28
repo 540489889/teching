@@ -133,10 +133,10 @@ export default {
     partyActiveContent: '/home/Index/partyActiveContent', //党建活动/党员详情
   },
   reg: {
-    register: '/home/Index/register',//用户注册
-    telCode: '/home/Index/telCode',//发送验证码
-    outLogin: '/home/Index/outLogin',//注销登录
-    UserLogin: '/home/Index/UserLogin',//用户登录
+    register: '/home/Indexd/register',//用户注册
+    telCode: '/home/Indexd/telCode',//发送验证码
+    outLogin: '/home/Indexd/outLogin',//注销登录
+    UserLogin: '/home/Indexd/UserLogin',//用户登录
   },
   //社区
   community: {

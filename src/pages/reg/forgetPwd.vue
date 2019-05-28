@@ -54,7 +54,7 @@
         autofocus: true,
         autocomplete: true,
         eye: {
-          open: true,
+          open: false,
           reverse: false
         },
         inputName: '',

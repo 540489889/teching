@@ -168,7 +168,7 @@
             <ul class="list-wrapper">
               <li v-for="(item,index) in readUser" :key="item.id" class="list-item">
                 <div class="imgBox" v-if="item.port"><img :src="$store.state.IMGPATH+item.port" alt=""></div>
-                <div class="imgBox" v-else><img src="../../assets/ico/me-p-ico.png" alt=""></div>
+                <div class="imgBox" v-else><img src="../../assets/ico/mrtx.jpg" alt=""></div>
                 <h3 class="media_title" v-if="item.username">{{item.username}}</h3>
                 <h3 class="media_title" v-else>{{item.iphone}}</h3>
                 <p class="media_title">{{item.booknum}}阅读量</p>
@@ -193,14 +193,16 @@
           <div class="oneBox">
             <div class="tpVideo">
               <router-link tag="div" :to="'./experienceAll?qid='+item.id+'&eid='+item.bookid">
-                <div v-if="item.port" class="leftImg flex-box">
-                  <img :src="$store.state.IMGPATH+item.port" alt="">
-                  <h4 class="media_title">{{item.nickname}}</h4>
+                <div class="leftImg flex-box">
+                  <img  v-if="item.port"  :src="$store.state.IMGPATH+item.port" alt="">
+                  <img v-else src="../../assets/ico/mrtx.jpg" alt="">
+                  <h4 v-if="item.nickname" class="media_title">{{item.nickname}}</h4>
+                  <h4 v-else class="media_title">{{item.account}}</h4>
                 </div>
-                <div class="leftImg flex-box" v-else>
-                  <img src="../../assets/ico/me-p-ico.png" alt="">
-                  <h4 class="media_title">{{item.nickname}}</h4>
-                </div>
+                <!--<div class="leftImg flex-box" v-else>-->
+          <!---->
+                  <!--<h4 class="media_title">{{item.account}}</h4>-->
+                <!--</div>-->
                 <div class="textInfo box-1">
                   <p>
                     {{item.content}}

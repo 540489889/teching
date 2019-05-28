@@ -10,7 +10,7 @@
       </div>
       <div class="userInfo flex-box">
         <img v-if="list.port" class="userTx"  :src="$store.state.IMGPATH+list.port" alt="">
-        <img v-else class="userTx"  src="./../../assets/ico/me-p-ico.png" alt="">
+        <img v-else class="userTx"  src="./../../assets/ico/mrtx.jpg" alt="">
         <span v-if="list.username">{{list.username}}</span>
         <span v-else>{{list.iphone}}</span>
         <span class="setUp" @click="setUpClick"><i class="cubeic-setting"></i>设置</span>

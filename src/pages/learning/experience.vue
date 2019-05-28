@@ -11,8 +11,10 @@
           <div class="oneBox">
             <div class="tpVideo">
               <div class="leftImg flex-box">
-                <img :src="$store.state.IMGPATH+item.cover_img" alt="">
-                <h4 class="media_title">{{item.nickname}}</h4>
+                <img v-if="item.cover_img" class="userTx"  :src="$store.state.IMGPATH+item.cover_img" alt="">
+                <img v-else class=""  src="./../../assets/ico/mrtx.jpg" alt="">
+                <h4 v-if="item.nickname" class="media_title">{{item.nickname}}</h4>
+                <h4 v-else class="media_title">{{item.account}}</h4>
               </div>
               <div class="textInfo box-1">
                 <p>{{item.content}}

@@ -13,7 +13,7 @@
       </div>
       <div class="bummenSelect flex-box">
         <i class="password-ico"></i>
-        <cube-input class="box-1" v-model="password" placeholder="请输入密码" :clearable="clearable"></cube-input>
+        <cube-input class="box-1" v-model="password" :type="type" :eye="eye" placeholder="请输入密码" :clearable="clearable"></cube-input>
         <!--<i class="bumen-ico"></i>-->
         <!--<cube-select-->
           <!--class="box-1"-->
@@ -43,6 +43,7 @@
     name:'Sign',
     data (){
       return{
+        type: 'password',
         isLoading: false,
         inputTell: '',
         password: '',
@@ -55,7 +56,11 @@
         title: '请选择单位部门',
         placeholder: '单位部门',
         autoPop: false,
-        disabled: false
+        disabled: false,
+        eye: {
+          open: false,
+          reverse: false
+        },
       }
     },
     components: {

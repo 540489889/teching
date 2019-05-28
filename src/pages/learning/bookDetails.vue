@@ -4,7 +4,8 @@
     <div class="topBook flex-box">
       <div class="flex-box">
         <div class="imgLeft">
-          <img :src="$store.state.IMGPATH+content.cover_img" alt="">
+          <img  v-if="content.cover_img"  :src="$store.state.IMGPATH+content.cover_img" alt="">
+          <img v-else class="" src="../../assets/ico/mrtx.jpg" alt="">
         </div>
         <div class="textRight">
           <h2 class="media_title">{{content.bookname}}</h2>

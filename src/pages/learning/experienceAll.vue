@@ -6,8 +6,10 @@
           <div class="oneBox">
             <div class="tpVideo">
               <div class="leftImg flex-box">
-                <img :src="$store.state.IMGPATH+ebook.cover_img" alt="">
-                <h4 class="media_title flex-box box-1"><p class="box-1">{{quescoment.nickname}} </p><span>{{ebook.update}}</span></h4>
+                <img v-if="ebook.cover_img" class="userTx"  :src="$store.state.IMGPATH+ebook.cover_img" alt="">
+                <img v-else class=""  src="./../../assets/ico/mrtx.jpg" alt="">
+                <h4 v-if="quescoment.nickname" class="media_title flex-box box-1"><p class="box-1">{{quescoment.nickname}} </p><span>{{ebook.update}}</span></h4>
+                <h4 v-else class="media_title flex-box box-1"><p class="box-1">{{quescoment.account}} </p><span>{{ebook.update}}</span></h4>
               </div>
               <div class="textInfo box-1">
                 <p>{{quescoment.content}}
