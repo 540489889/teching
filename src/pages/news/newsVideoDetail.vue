@@ -6,7 +6,7 @@
       <div class="vdInfo">
         <div class="tpVideo flex-box">
           <div class="leftImg">
-            <img :src="'http://cqeic.swkj2014.com/'+item.cover_img" alt="">
+            <img :src="$store.state.IMGPATH+item.cover_img" alt="">
           </div>
           <div class="textInfo box-1">
             <h4 class="media_title">{{item.title}}</h4>

@@ -5,7 +5,7 @@
       <router-link tag="li" :to="'/learning/bookDetails?eid='+item.id" :key="item.id" v-for="(item,index) in list" class="list-item">
         <div class="boxBook">
           <div class="imgBox">
-            <img :src="'http://cqeic.swkj2014.com/'+item.cover_img" alt="">
+            <img :src="$store.state.IMGPATH+item.cover_img" alt="">
           </div>
           <h3 class="media_desc">{{item.title}}</h3>
           <p class="media_title">{{item.author}}</p>

@@ -3,7 +3,7 @@
     <!--视频-->
     <div class="newsVideo" v-if="videoD">
       <a v-if="live" :href="live.href" class="thisVideo flex-box">
-        <img class="leftImg" :src="'http://cqeic.swkj2014.com/'+live.picture" alt="">
+        <img class="leftImg" :src="$store.state.IMGPATH+live.picture" alt="">
         <div class="textCenter box-1">
           <h4 class="media_title">{{live.title}}</h4>
           <p class="flex-box"><span class="flex-box"><i></i>直播中</span></p>
@@ -20,7 +20,7 @@
         <li v-for="item in list" :key="item.id">
           <router-link tag="div" v-if="videoD" :to="'./newsVideoDetail?id='+item.id" class="tpVideo flex-box">
             <div class="leftImg">
-              <img :src="'http://cqeic.swkj2014.com/'+item.cover_img" alt="">
+              <img :src="$store.state.IMGPATH+item.cover_img" alt="">
             </div>
             <div class="textInfo box-1">
               <h4 class="media_title">{{item.title}}</h4>
@@ -35,8 +35,8 @@
               <!--Your browser does not support the video tag.-->
             <!--</video>-->
             <div class="js-video">
-              <video class="js-media" :poster="'http://cqeic.swkj2014.com/'+item.cover_img">
-                <source :src="'http://cqeic.swkj2014.com/'+item.video" />
+              <video class="js-media" :poster="$store.state.IMGPATH+item.cover_img">
+                <source :src="$store.state.IMGPATH+item.video" />
                 <p>你的浏览器不支持 HTML5 Video。</p>
               </video>
               <i data-playPause class="playPause fa fa-play ui-icon"><span></span></i>

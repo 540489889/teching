@@ -60,7 +60,7 @@
           <ul class="list-wrapper flex-box" style="align-items: flex-start">
             <router-link tag="li" :to="'/technology/inforActive?id='+item.id" :key="item.id" v-for="item in branch" class="list-item">
               <div class="">
-                <div class="imgBox"><img :src="'http://cqeic.swkj2014.com/'+item.cover_img" alt=""></div>
+                <div class="imgBox"><img :src="$store.state.IMGPATH+item.cover_img" alt=""></div>
                 <div class="resitionBox">
                   <span class="label">{{item.position}}</span>
                   <h2 class="text-left media_title">{{item.author}}</h2>

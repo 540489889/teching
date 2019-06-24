@@ -12,7 +12,7 @@
                 </p>
                 <h6>{{item.update}}<span>{{item.seenum}} 阅读</span></h6>
               </div>
-              <img class="rightImg" :src="'http://cqeic.swkj2014.com/'+item.cover_img" alt="">
+              <img class="rightImg" :src="$store.state.IMGPATH+item.cover_img" alt="">
             </div>
           </router-link>
           <li v-if="!list.length">

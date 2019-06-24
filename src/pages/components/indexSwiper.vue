@@ -4,7 +4,7 @@
       <!-- slides -->
       <swiper-slide  v-for="(item,index) in list" :key="item.id" v-if="showSwiper" >
         <a :href="item.href">
-          <img class="swiper-img"  @click="handleClickHref(item.herf)" :src="'http://cqeic.swkj2014.com/'+item.img_url" alt="">
+          <img class="swiper-img"  @click="handleClickHref(item.herf)" :src="$store.state.IMGPATH+item.img_url" alt="">
         </a>
       </swiper-slide>
       <!--<swiper-slide  >-->
@@ -59,7 +59,6 @@
       },
     },
     computed: {
-
       showSwiper () {
         return this.list.length
       },

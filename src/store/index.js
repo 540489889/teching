@@ -6,7 +6,7 @@ export default new Vuex.Store({
     // 存储token
     Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
     showNavBar:  localStorage.showNav ? localStorage.showNav : true,
-    IMGPATH: 'http://cqeic.swkj2014.com/',
+    IMGPATH: 'http://www.jlpjzzx.com/',
     defaultTitle: '首页',
     defaultSearchVal:localStorage.defaultSeasrchVal ?  localStorage.defaultSeasrchVal: ''
   },
