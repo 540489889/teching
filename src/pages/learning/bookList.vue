@@ -2,15 +2,25 @@
   <div class="bookList">
 
     <ul class="list-wrapper">
-      <router-link tag="li" :to="'/learning/bookDetails?eid='+item.id" :key="item.id" v-for="(item,index) in list" class="list-item">
-        <div class="boxBook">
-          <div class="imgBox">
-            <img :src="$store.state.IMGPATH+item.cover_img" alt="">
+      <!--<router-link -->
+        <!--tag="li" -->
+        <!--:to="'/learning/bookDetails?eid='+item.id" -->
+        <!--:key="item.id"-->
+        <!--v-for="(item,index) in list"-->
+        <!--class="list-item">-->
+        <li :key="item.id"
+            @click="goBook(item.bookurl)"
+            v-for="(item,index) in list"
+            class="list-item">
+          <div class="boxBook">
+            <div class="imgBox">
+              <img :src="$store.state.IMGPATH+item.cover_img" alt="">
+            </div>
+            <h3 class="media_desc">{{item.title}}</h3>
+            <p class="media_title">{{item.author}}</p>
           </div>
-          <h3 class="media_desc">{{item.title}}</h3>
-          <p class="media_title">{{item.author}}</p>
-        </div>
-      </router-link>
+        </li>
+      <!--</router-link>-->
     </ul>
   </div>
 </template>
@@ -34,6 +44,9 @@
       }, 500)
     },
     methods: {
+      goBook(url){
+        location.href = url
+      },
       getebook(){
         let type = this.$route.query.type
         if(type){

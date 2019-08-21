@@ -3,10 +3,10 @@
     <loading v-if="isLoading"></loading>
     <div class="banner">
       <bannerSwiper :list="bannerList"></bannerSwiper>
-      <div class="search">
-        <i class="cubeic-search"></i>
-        <input @input="changeSearch" type="text" v-model="searchVal" placeholder="直播课堂">
-      </div>
+      <!--<div class="search">-->
+        <!--<i class="cubeic-search"></i>-->
+        <!--<input @input="changeSearch" type="text" v-model="searchVal" placeholder="直播课堂">-->
+      <!--</div>-->
     </div>
     <!--直播预告-->
     <div class="newsVideo">

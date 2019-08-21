@@ -99,7 +99,7 @@ export default {
         );
       });
       for (let i of this.item) {
-        i.cover_img = "http://cqeic.swkj2014.com" + i.cover_img;
+        i.cover_img = this.$store.state.IMGPATH + i.cover_img;
         let startTime = new Date(i.start_time).getTime();
         let endTime = new Date(i.end_time).getTime();
         if (startTime < Date.now() && Date.now() < endTime) {

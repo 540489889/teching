@@ -23,12 +23,12 @@
     </div>
     <!--好书推荐-->
     <div class="airBox">
-      <router-link tag="h2" to="/resource/airRoom" class="titleBox flex-box">
+      <h2 class="titleBox flex-box">
         <span class="left-ico flex-box">
           <!--<i class="ds-ico"></i>-->
           好书推荐</span>
         <!--<span class="flex-box right-text">更多 <i class="cubeic-arrow"></i></span>-->
-      </router-link>
+      </h2>
       <div class="airContent flex-box" v-for="item in goodBook" :key="item.id">
         <div class="imgLeft">
           <img :src="$store.state.IMGPATH+item.cover_img"  alt="">
@@ -42,7 +42,8 @@
           <h5 class="media_zz">读者2019年第三期(电子杂志)</h5>
           <!--<h5 class="flex-box"><span><i class="res-ico-2"></i>讲师：{{item.teacher}}老师</span> <b>{{item.online_num}}观看</b></h5>-->
           <h6 class="media_desc">{{item.title}}</h6>
-          <router-link tag="button" :to="'/learning/bookDetails?eid='+item.id" class="lookBook">阅读</router-link>
+          <!--<router-link tag="button" :to="'/learning/bookDetails?eid='+item.id" class="lookBook">阅读</router-link>-->
+          <button @click="goBook(item.bookurl)" class="lookBook">阅读</button>
         </div>
       </div>
     </div>
@@ -54,15 +55,22 @@
           direction="horizontal"
           :options="options">
           <ul class="list-wrapper">
-            <router-link tag="li" :key="item.id" :to="'/learning/bookDetails?eid='+item.id" v-for="(item,index) in goodBook" class="list-item">
-              <div class="imgBox">
-                <span class="rmSpan" v-if="index==0">热门</span>
-                <span class="rzSpan" v-if="index==1">推荐</span>
-                <img :src="$store.state.IMGPATH+item.cover_img" alt="">
-              </div>
-              <h3 class="media_desc">{{item.bookname}}</h3>
-              <p class="media_title">{{item.title}}</p>
-            </router-link>
+            <!--<router-link -->
+              <!--tag="li" -->
+              <!--:key="item.id" -->
+              <!--:to="'/learning/bookDetails?eid='+item.id"-->
+              <!--v-for="(item,index) in goodBook"-->
+              <!--class="list-item">-->
+              <li v-for="(item,index) in goodBook" :key="item.id"  class="list-item" @click="goBook(item.bookurl)">
+                <div class="imgBox">
+                  <span class="rmSpan" v-if="index==0">热门</span>
+                  <span class="rzSpan" v-if="index==1">推荐</span>
+                  <img :src="$store.state.IMGPATH+item.cover_img" alt="">
+                </div>
+                <h3 class="media_desc">{{item.bookname}}</h3>
+                <p class="media_title">{{item.title}}</p>
+              </li>
+            <!--</router-link>-->
           </ul>
         </cube-scroll>
       </div>
@@ -77,7 +85,8 @@
       </router-link>
       <div class="hotContent">
         <ul>
-          <router-link tag="li" :to="'./bookDetails?eid='+item.id" class="flex-box" v-if="newsBook.length" v-for="item in newsBook" :key="item.id">
+          <!--<router-link tag="li" :to="'./bookDetails?eid='+item.id" class="flex-box" v-if="newsBook.length" v-for="item in newsBook" :key="item.id">-->
+          <li class="flex-box" v-if="newsBook.length" v-for="item in newsBook" :key="item.id"  @click="goBook(item.bookurl)">
             <div class="left">
               <img :src="$store.state.IMGPATH+item.cover_img" alt="">
             </div>
@@ -85,17 +94,8 @@
               <h4 class="media_title">{{item.title}}</h4>
               <p class="media_desc">{{item.title}}</p>
             </div>
-          </router-link>
-          <!--<li class="flex-box">-->
-            <!--<div class="left">-->
-              <!--<img src="./../../assets/img/banner-me-2.png" alt="">-->
-            <!--</div>-->
-            <!--<div class="right box-1">-->
-              <!--<h4 class="media_title">没伞的孩子，必须努力奔跑必须努力奔跑</h4>-->
-              <!--<p class="media_desc"> 一块石头，一半做成了佛，一半做成了台阶。人-->
-                <!--们都踩着台阶去拜佛。台阶不服气地问佛：“我...</p>-->
-            <!--</div>-->
-          <!--</li>-->
+          </li>
+          <!--</router-link>-->
         </ul>
       </div>
     </div>
@@ -110,15 +110,26 @@
       </router-link>
       <div class="scroll-list-wrap">
         <ul class="list-wrapper">
-          <router-link tag="li" :key="item.id" :to="'/learning/bookDetails?eid='+item.id" v-for="(item,index) in bookResoce" class="list-item">
-            <div class="imgBox">
-              <span class="rmSpan" v-if="index==0">热门</span>
-              <span class="rzSpan" v-if="index==1">推荐</span>
-              <img :src="$store.state.IMGPATH+item.cover_img" alt="">
-            </div>
-            <h3 class="media_desc">{{item.bookname}}</h3>
-            <p class="media_title">{{item.title}}</p>
-          </router-link>
+          <!--<router-link-->
+            <!--tag="li"-->
+            <!--:key="item.id"-->
+            <!--:to="'/learning/bookDetails?eid='+item.id"-->
+            <!--v-for="(item,index) in bookResoce"-->
+            <!--class="list-item">-->
+            <li
+              v-for="(item,index) in bookResoce"
+              @click="goBook(item.bookurl)"
+              class="list-item"
+              :key="item.id">
+              <div class="imgBox">
+                <span class="rmSpan" v-if="index==0">热门</span>
+                <span class="rzSpan" v-if="index==1">推荐</span>
+                <img :src="$store.state.IMGPATH+item.cover_img" alt="">
+              </div>
+              <h3 class="media_desc">{{item.bookname}}</h3>
+              <p class="media_title">{{item.title}}</p>
+            </li>
+          <!--</router-link>-->
         </ul>
       </div>
         <!--<ul class="list-wrapper">-->
@@ -285,6 +296,10 @@
       }, 500)
     },
     methods: {
+      //连接
+      goBook(url){
+        location.href = url
+      },
       getData (){
         this.http.get(this.ports.learning.Garden, res =>{
           console.log(res)

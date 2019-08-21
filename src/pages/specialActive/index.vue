@@ -32,7 +32,7 @@
             校园影视</span>
           <span class="flex-box right-text">更多 <i class="cubeic-arrow"></i></span>
         </router-link>
-        <div class="videoImg" v-for="item in movies">
+        <div v-if="item!=null" class="videoImg" v-for="item in movies" :key="item.id">
           <video :poster="$store.state.IMGPATH+item.cover_img">
             <source :src="$store.state.IMGPATH+item.video" type="video/mp4">
             您的浏览器不支持HTML5视频
@@ -142,6 +142,7 @@
             const data = res.data
             this.moves = data.moves
             this.movies.push(this.moves)
+            console.log(this.movies,3333)
             this.list = data.data
 //            this.moveInit()
           }

@@ -2,6 +2,9 @@
    通用样式
   */
 /*遮罩层*/
+.detailsWrapper img{
+  max-width:100%;
+}
 .popup_layer,.mask{
     position:fixed;
     left: 0;
